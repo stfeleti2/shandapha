@@ -1,0 +1,30 @@
+[
+  {
+    "id": "datatable",
+    "name": "Advanced DataTable",
+    "packageName": "@shandapha/module-datatable",
+    "description": "Client/server table workflows with saved views, pinning, resizing, and export.",
+    "premium": true
+  },
+  {
+    "id": "charts",
+    "name": "Charts",
+    "packageName": "@shandapha/module-charts",
+    "description": "Scaffolded charting module seam for future opt-in visualizations.",
+    "premium": true
+  },
+  {
+    "id": "richtext",
+    "name": "Rich Text",
+    "packageName": "@shandapha/module-richtext",
+    "description": "Scaffolded rich text editing seam for future content workflows.",
+    "premium": true
+  },
+  {
+    "id": "seo",
+    "name": "SEO",
+    "packageName": "@shandapha/module-seo",
+    "description": "Scaffolded SEO helpers for metadata, sitemap, and schema support.",
+    "premium": false
+  }
+]

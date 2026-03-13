@@ -1,0 +1,1 @@
+export { billingClient } from "../index";

@@ -1,0 +1,1 @@
+export { ShandaphaProvider } from "../index";

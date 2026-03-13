@@ -1,0 +1,1 @@
+export { driftCheck } from "../index";

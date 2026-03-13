@@ -1,0 +1,21 @@
+{
+  "name": "@shandapha/wc",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "description": "Web Components baseline.",
+  "sideEffects": false,
+  "scripts": {
+    "build": "tsc --project tsconfig.json",
+    "typecheck": "tsc --project tsconfig.json",
+    "lint": "biome check --config-path ../../configs/biome.json src",
+    "test": "vitest run"
+  },
+  "dependencies": {
+    "@shandapha/runtime": "workspace:*"
+  },
+  "devDependencies": {},
+  "exports": {
+    ".": "./src/index.ts"
+  }
+}

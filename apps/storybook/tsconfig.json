@@ -1,0 +1,6 @@
+{
+  "extends": "../../configs/tsconfig.base.json",
+  "compilerOptions": {},
+  "include": ["src/**/*", ".storybook/**/*"],
+  "exclude": ["node_modules"]
+}

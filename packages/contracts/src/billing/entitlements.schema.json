@@ -1,0 +1,21 @@
+{
+  "type": "object",
+  "required": ["id", "name", "price", "includes"],
+  "properties": {
+    "id": {
+      "type": "string"
+    },
+    "name": {
+      "type": "string"
+    },
+    "price": {
+      "type": "string"
+    },
+    "includes": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    }
+  }
+}

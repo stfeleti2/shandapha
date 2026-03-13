@@ -1,0 +1,1 @@
+export { defineAll } from "./index";

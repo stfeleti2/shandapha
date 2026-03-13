@@ -1,0 +1,1 @@
+export { useEntitlements } from "../index";

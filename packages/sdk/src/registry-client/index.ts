@@ -1,0 +1,1 @@
+export { registryClient } from "../index";

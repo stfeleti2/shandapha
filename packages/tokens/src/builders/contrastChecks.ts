@@ -1,0 +1,1 @@
+export { checkContrast } from "../index";

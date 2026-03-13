@@ -1,0 +1,29 @@
+[
+  {
+    "id": "normal",
+    "slug": "normal",
+    "name": "Normal",
+    "tier": "free",
+    "tagline": "Clean depth, calm surfaces, and a premium default that stays trusted.",
+    "description": "Normal is the default premium baseline for teams that want semantic tokens, balanced contrast, and minimal visual noise.",
+    "knobs": ["contrast-safe palette", "steady motion", "balanced radii"]
+  },
+  {
+    "id": "glass",
+    "slug": "glass",
+    "name": "Glass",
+    "tier": "premium",
+    "tagline": "Translucent layers, softer edges, and tasteful motion that stays opt-in.",
+    "description": "Glass layers blur, translucency, and subtle sheen on top of the same component contracts without forking the runtime.",
+    "knobs": ["frost intensity", "shadow softness", "sheen level"]
+  },
+  {
+    "id": "neon",
+    "slug": "neon",
+    "name": "Neon",
+    "tier": "premium",
+    "tagline": "High-energy accents, editorial type contrast, and bold presentation.",
+    "description": "Neon pushes the token system toward expressive product launches and dashboards while preserving accessibility and reduced-motion fallbacks.",
+    "knobs": ["glow strength", "headline contrast", "accent saturation"]
+  }
+]

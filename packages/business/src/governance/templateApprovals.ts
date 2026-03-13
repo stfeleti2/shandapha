@@ -1,0 +1,1 @@
+export const templateApprovals = true;

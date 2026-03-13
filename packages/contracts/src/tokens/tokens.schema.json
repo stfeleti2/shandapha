@@ -1,0 +1,26 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Shandapha tokens",
+  "type": "object",
+  "properties": {
+    "color": {
+      "type": "object"
+    },
+    "surface": {
+      "type": "object"
+    },
+    "typography": {
+      "type": "object"
+    },
+    "radius": {
+      "type": "object"
+    },
+    "motion": {
+      "type": "object"
+    },
+    "density": {
+      "type": "string"
+    }
+  },
+  "required": ["color", "surface", "typography", "radius", "motion", "density"]
+}

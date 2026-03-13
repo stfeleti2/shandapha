@@ -1,0 +1,14 @@
+{
+  "type": "object",
+  "properties": {
+    "templatesPerExport": {
+      "type": "number"
+    },
+    "workspaces": {
+      "type": "number"
+    },
+    "apiKeys": {
+      "type": "number"
+    }
+  }
+}

@@ -1,0 +1,39 @@
+# Dependencies
+node_modules/
+.pnpm-store/
+
+# Environment files
+.env
+.env.*
+!.env.example
+
+# Build and cache output
+.next/
+.turbo/
+.cache/
+.vite/
+dist/
+build/
+coverage/
+storybook-static/
+playwright-report/
+test-results/
+.source/
+.contentlayer/
+.parcel-cache/
+
+# TypeScript
+*.tsbuildinfo
+
+# Logs
+*.log
+npm-debug.log*
+pnpm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# OS and editor files
+.DS_Store
+Thumbs.db
+.idea/
+.vscode/

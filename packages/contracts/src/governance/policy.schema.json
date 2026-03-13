@@ -1,0 +1,14 @@
+{
+  "type": "object",
+  "properties": {
+    "approvalsRequired": {
+      "type": "boolean"
+    },
+    "retentionDays": {
+      "type": "number"
+    },
+    "exportReview": {
+      "type": "boolean"
+    }
+  }
+}

@@ -1,0 +1,25 @@
+{
+  "name": "@shandapha/platform-api",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "description": "Modular monolith API for auth, workspaces, billing, entitlements, registry, exports, audit, telemetry, and notifications.",
+  "sideEffects": false,
+  "scripts": {
+    "dev": "tsx watch src/index.ts",
+    "build": "tsc --project tsconfig.json",
+    "typecheck": "tsc --project tsconfig.json",
+    "lint": "biome check --config-path ../../configs/biome.json src",
+    "test": "vitest run",
+    "start": "node --import tsx src/index.ts"
+  },
+  "dependencies": {
+    "@shandapha/entitlements": "workspace:*",
+    "@shandapha/generator": "workspace:*",
+    "@shandapha/registry": "workspace:*"
+  },
+  "devDependencies": {},
+  "exports": {
+    ".": "./src/index.ts"
+  }
+}

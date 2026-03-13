@@ -1,0 +1,15 @@
+{
+  "type": "object",
+  "required": ["packs", "templates", "modules"],
+  "properties": {
+    "packs": {
+      "type": "array"
+    },
+    "templates": {
+      "type": "array"
+    },
+    "modules": {
+      "type": "array"
+    }
+  }
+}

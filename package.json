@@ -1,0 +1,35 @@
+{
+  "name": "shandapha",
+  "version": "0.1.0",
+  "private": true,
+  "packageManager": "pnpm@10.30.3",
+  "scripts": {
+    "dev": "turbo run dev --parallel --filter=@shandapha/web --filter=@shandapha/studio --filter=@shandapha/platform-api",
+    "build": "turbo run build",
+    "lint": "biome check --config-path ./configs/biome.json apps packages services tools data README.md ARCHITECTURE.md PRINCIPLES.md POSITIONING.md MONETIZATION.md TIERS.md SECURITY.md PRIVACY.md CONTRIBUTING.md package.json pnpm-workspace.yaml turbo.json && node ./tools/scripts/verify-package-boundaries.mjs",
+    "typecheck": "turbo run typecheck",
+    "test": "vitest --config ./configs/vitest.workspace.ts run",
+    "test:watch": "vitest --config ./configs/vitest.workspace.ts",
+    "test:e2e": "playwright test --config ./configs/playwright.config.ts",
+    "contracts": "node ./tools/scripts/lint-contracts.mjs",
+    "tokens": "node ./tools/scripts/lint-tokens.mjs",
+    "drift": "node ./tools/scripts/drift-check.mjs",
+    "size": "node ./tools/scripts/size-report.mjs",
+    "release:health": "node ./tools/scripts/release-health.mjs",
+    "changeset": "changeset",
+    "version": "changeset version",
+    "release": "changeset publish"
+  },
+  "devDependencies": {
+    "@biomejs/biome": "^2.4.6",
+    "@changesets/cli": "^2.30.0",
+    "@playwright/test": "^1.58.2",
+    "@types/node": "^25.5.0",
+    "@types/react": "^19.2.14",
+    "@types/react-dom": "^19.2.3",
+    "tsx": "^4.21.0",
+    "turbo": "^2.8.16",
+    "typescript": "^5.9.3",
+    "vitest": "^4.1.0"
+  }
+}
