@@ -24,9 +24,5 @@
     "@shandapha/registry": "workspace:*",
     "@shandapha/templates": "workspace:*",
     "@shandapha/tokens": "workspace:*"
-  },
-  "devDependencies": {},
-  "exports": {
-    ".": "./src/index.ts"
   }
 }

@@ -14,6 +14,15 @@
   "dependencies": {
     "@shandapha/contracts": "workspace:*"
   },
+  "shandapha": {
+    "moduleManifest": {
+      "id": "richtext",
+      "name": "Rich Text",
+      "packageName": "@shandapha/module-richtext",
+      "description": "Scaffolded rich text editing seam for future content workflows.",
+      "premium": true
+    }
+  },
   "devDependencies": {},
   "exports": {
     ".": "./src/index.ts"

@@ -1,21 +1,45 @@
 import { readdir, readFile } from "node:fs/promises";
 import { join } from "node:path";
 
-async function collectPackages(base) {
-  try {
-    const entries = await readdir(base, { withFileTypes: true });
-    return entries
-      .filter((entry) => entry.isDirectory())
-      .map((entry) => join(base, entry.name, "package.json"));
-  } catch {
-    return [];
+async function collectPackageFiles(base) {
+  const packageFiles = [];
+
+  async function walk(current) {
+    let entries;
+
+    try {
+      entries = await readdir(current, { withFileTypes: true });
+    } catch {
+      return;
+    }
+
+    for (const entry of entries) {
+      if (entry.name === "node_modules" || entry.name === ".next") {
+        continue;
+      }
+
+      const fullPath = join(current, entry.name);
+
+      if (entry.isDirectory()) {
+        await walk(fullPath);
+        continue;
+      }
+
+      if (entry.isFile() && entry.name === "package.json") {
+        packageFiles.push(fullPath);
+      }
+    }
   }
+
+  await walk(base);
+  return packageFiles;
 }
 
 const packageFiles = [
-  ...(await collectPackages("apps")),
-  ...(await collectPackages("services")),
-  ...(await collectPackages("packages")),
+  ...(await collectPackageFiles("apps")),
+  ...(await collectPackageFiles("services")),
+  ...(await collectPackageFiles("packages")),
+  ...(await collectPackageFiles("examples")),
 ];
 
 for (const file of packageFiles) {

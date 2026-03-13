@@ -16,7 +16,10 @@
     "includes": [
       "**",
       "!**/.next/**",
-      "!**/coverage/**"
+      "!**/.turbo/**",
+      "!**/coverage/**",
+      "!**/dist/**",
+      "!**/storybook-static/**"
     ]
   }
 }

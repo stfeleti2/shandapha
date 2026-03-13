@@ -10,3 +10,11 @@ export const policyReports = [
   "drift detection",
   "audit export",
 ] as const;
+
+export type { AuditEntry } from "./audit/auditTrail";
+export {
+  createAuditEntry,
+  createAuditTimeline,
+  exportAuditTrailMarkdown,
+  summarizeAuditTrail,
+} from "./audit/auditTrail";

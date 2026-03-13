@@ -1,3 +1,13 @@
+import { getPlatformStore } from "../../../db/store";
+
 export function exportsRepository() {
-  return { storage: "module-local" };
+  const store = getPlatformStore();
+
+  return {
+    listExports(workspaceId: string) {
+      return store.exports.records.filter(
+        (record) => record.workspaceId === workspaceId,
+      );
+    },
+  };
 }

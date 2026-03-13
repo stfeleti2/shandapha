@@ -14,6 +14,15 @@
   "dependencies": {
     "@shandapha/contracts": "workspace:*"
   },
+  "shandapha": {
+    "moduleManifest": {
+      "id": "datatable",
+      "name": "Advanced DataTable",
+      "packageName": "@shandapha/module-datatable",
+      "description": "Client/server table workflows with saved views, pinning, resizing, and export.",
+      "premium": true
+    }
+  },
   "devDependencies": {},
   "exports": {
     ".": "./src/index.ts"

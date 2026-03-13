@@ -14,6 +14,15 @@
   "dependencies": {
     "@shandapha/contracts": "workspace:*"
   },
+  "shandapha": {
+    "moduleManifest": {
+      "id": "seo",
+      "name": "SEO",
+      "packageName": "@shandapha/module-seo",
+      "description": "Scaffolded SEO helpers for metadata, sitemap, and schema support.",
+      "premium": false
+    }
+  },
   "devDependencies": {},
   "exports": {
     ".": "./src/index.ts"

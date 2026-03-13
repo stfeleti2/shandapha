@@ -1,6 +1,10 @@
-import type { DoctorCheck, GenerationInput, GenerationPlan } from "@shandapha/contracts";
-import type { EntitlementPlan } from "@shandapha/contracts";
-import type { RegistryManifest } from "@shandapha/contracts";
+import type {
+  DoctorCheck,
+  EntitlementPlan,
+  GenerationInput,
+  GenerationPlan,
+} from "@shandapha/contracts";
+import type { registryBridge } from "./registryBridge";
 
 interface CommandDependencies {
   createGenerationPlan: (input: GenerationInput) => GenerationPlan;
@@ -10,10 +14,34 @@ interface CommandDependencies {
     hasTokens: boolean;
     packLocked: boolean;
   }) => DoctorCheck[];
-  buildRegistry: () => RegistryManifest;
+  registry: ReturnType<typeof registryBridge>;
   resolveEntitlements: (planId: "free" | "premium" | "business") => {
     plan: EntitlementPlan;
     features: string[];
+  };
+}
+
+function resolveSelection(
+  bridge: ReturnType<typeof registryBridge>,
+  kind: "pack" | "template" | "module",
+  requested: string,
+) {
+  const match = bridge.find(kind, requested);
+
+  if (match) {
+    return {
+      added: requested,
+      kind,
+      available: bridge.list(kind).slice(0, 5),
+    };
+  }
+
+  return {
+    added: null,
+    kind,
+    requested,
+    available: bridge.list(kind),
+    message: `Unknown ${kind} "${requested}".`,
   };
 }
 
@@ -41,11 +69,15 @@ export function runCommand(
         modules: args.includes("--datatable") ? ["datatable"] : [],
       });
     case "add-template":
-      return { added: args[0] ?? "dashboard-home" };
+      return resolveSelection(
+        deps.registry,
+        "template",
+        args[0] ?? "dashboard-home",
+      );
     case "add-pack":
-      return { added: args[0] ?? "normal" };
+      return resolveSelection(deps.registry, "pack", args[0] ?? "normal");
     case "add-module":
-      return { added: args[0] ?? "datatable" };
+      return resolveSelection(deps.registry, "module", args[0] ?? "datatable");
     case "doctor":
       return deps.runDoctor({
         hasProvider: true,
@@ -54,8 +86,21 @@ export function runCommand(
         packLocked: true,
       });
     case "upgrade":
-      return deps.resolveEntitlements("premium");
+      return {
+        ...deps.resolveEntitlements("premium"),
+        registryCounts: deps.registry.describe(),
+      };
     default:
-      return `Unknown command: ${command}`;
+      return {
+        message: `Unknown command: ${command}`,
+        availableCommands: [
+          "init",
+          "add-template",
+          "add-pack",
+          "add-module",
+          "doctor",
+          "upgrade",
+        ],
+      };
   }
 }

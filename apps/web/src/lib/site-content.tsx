@@ -13,6 +13,7 @@ import { getPackBySlug, packs } from "@shandapha/packs";
 import { buildRegistry, getTemplateBySlug } from "@shandapha/registry";
 import Link from "next/link";
 import type { ReactNode } from "react";
+import { HeroCard } from "@/components/marketing/hero-card";
 
 const registry = buildRegistry();
 const docsContent = {
@@ -145,14 +146,17 @@ export function renderMarketingPage(id: keyof typeof marketingPages) {
             {page.summary}
           </p>
           <GridPreset preset="marketing">
-            <Surface title="Why this architecture">
-              <Stack gap={12}>
-                <Badge>Enterprise boundaries, founder economics</Badge>
-                <span>Wizard + CLI share the generator core.</span>
-                <span>Templates and packs stay first-class.</span>
-                <span>Heavy modules remain opt-in.</span>
-              </Stack>
-            </Surface>
+            <HeroCard
+              eyebrow="Founder economics"
+              title="Enterprise boundaries without enterprise burn."
+              body="The moat sits in tokens, packs, templates, registry, and generator logic while operations stay centralized in one backend and two focused apps."
+              highlights={[
+                "shared generator",
+                "registry-first",
+                "reversible patch install",
+              ]}
+              ctaLabel="Open Studio"
+            />
             <Surface title="What ships first">
               <Stack gap={12}>
                 <span>Landing, docs, catalog, and playground.</span>

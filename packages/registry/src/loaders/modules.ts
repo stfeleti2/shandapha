@@ -1,1 +1,3 @@
-export { datatableManifest } from "@shandapha/module-datatable";
+import modules from "../data/modules.json";
+
+export const moduleManifests = modules;

@@ -16,6 +16,7 @@
     "next": "^16.1.6",
     "react": "^19.2.4",
     "react-dom": "^19.2.4",
+    "@shandapha/business": "workspace:*",
     "@shandapha/core": "workspace:*",
     "@shandapha/entitlements": "workspace:*",
     "@shandapha/generator": "workspace:*",
@@ -24,9 +25,5 @@
     "@shandapha/react": "workspace:*",
     "@shandapha/registry": "workspace:*",
     "@shandapha/templates": "workspace:*"
-  },
-  "devDependencies": {},
-  "exports": {
-    ".": "./src/index.ts"
   }
 }

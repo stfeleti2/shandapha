@@ -1,13 +1,11 @@
 import type { PlatformRoute } from "../../../server/routes";
+import { getTelemetrySummary } from "../application/telemetry.service";
 
 export const telemetryRoutes: PlatformRoute[] = [
   {
     method: "GET",
     path: "/api/telemetry/summary",
-    handler: () => ({
-      module: "telemetry",
-      summary: "Privacy-safe usage and doctor telemetry.",
-      layers: ["domain", "application", "infrastructure", "api"],
-    }),
+    handler: ({ query }) =>
+      getTelemetrySummary(query.get("workspaceId") ?? "acme"),
   },
 ];

@@ -1,14 +1,19 @@
 import type { PlatformRoute } from "../../../server/routes";
+import {
+  getExportPlanPreview,
+  getExportsSummary,
+} from "../application/exports.service";
 
 export const exportsRoutes: PlatformRoute[] = [
   {
     method: "GET",
     path: "/api/exports/summary",
-    handler: () => ({
-      module: "exports",
-      summary:
-        "Starter zip, patch install, theme-only output, and uninstall manifests.",
-      layers: ["domain", "application", "infrastructure", "api"],
-    }),
+    handler: ({ query }) =>
+      getExportsSummary(query.get("workspaceId") ?? "acme"),
+  },
+  {
+    method: "GET",
+    path: "/api/exports/plan",
+    handler: () => getExportPlanPreview(),
   },
 ];

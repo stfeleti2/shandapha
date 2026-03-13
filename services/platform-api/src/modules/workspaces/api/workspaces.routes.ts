@@ -1,13 +1,19 @@
 import type { PlatformRoute } from "../../../server/routes";
+import {
+  getWorkspaceDetail,
+  getWorkspacesSummary,
+} from "../application/workspaces.service";
 
 export const workspacesRoutes: PlatformRoute[] = [
   {
     method: "GET",
     path: "/api/workspaces/summary",
-    handler: () => ({
-      module: "workspaces",
-      summary: "Workspace lifecycle, saved themes, exports, and members.",
-      layers: ["domain", "application", "infrastructure", "api"],
-    }),
+    handler: () => getWorkspacesSummary(),
+  },
+  {
+    method: "GET",
+    path: "/api/workspaces/detail",
+    handler: ({ query }) =>
+      getWorkspaceDetail(query.get("workspaceId") ?? "acme"),
   },
 ];

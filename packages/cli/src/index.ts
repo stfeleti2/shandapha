@@ -1,14 +1,14 @@
 import { resolveEntitlements } from "@shandapha/entitlements";
 import { createGenerationPlan, runDoctor } from "@shandapha/generator";
-import { buildRegistry } from "@shandapha/registry";
 import { runCommand } from "./shared/generatorBridge";
+import { registryBridge } from "./shared/registryBridge";
 
 const [command = "init", ...args] = process.argv.slice(2);
 
 const output = runCommand(command, args, {
   createGenerationPlan,
   runDoctor,
-  buildRegistry,
+  registry: registryBridge(),
   resolveEntitlements,
 });
 

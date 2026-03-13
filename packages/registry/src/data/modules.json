@@ -1,16 +1,16 @@
 [
   {
-    "id": "datatable",
-    "name": "Advanced DataTable",
-    "packageName": "@shandapha/module-datatable",
-    "description": "Client/server table workflows with saved views, pinning, resizing, and export.",
-    "premium": true
-  },
-  {
     "id": "charts",
     "name": "Charts",
     "packageName": "@shandapha/module-charts",
     "description": "Scaffolded charting module seam for future opt-in visualizations.",
+    "premium": true
+  },
+  {
+    "id": "datatable",
+    "name": "Advanced DataTable",
+    "packageName": "@shandapha/module-datatable",
+    "description": "Client/server table workflows with saved views, pinning, resizing, and export.",
     "premium": true
   },
   {

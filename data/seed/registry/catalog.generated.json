@@ -1,0 +1,239 @@
+{
+  "packs": [
+    {
+      "id": "normal",
+      "slug": "normal",
+      "name": "Normal",
+      "tier": "free",
+      "tagline": "Clean depth, calm surfaces, and a premium default that stays trusted.",
+      "description": "Normal is the default premium baseline for teams that want semantic tokens, balanced contrast, and minimal visual noise.",
+      "knobs": ["contrast-safe palette", "steady motion", "balanced radii"]
+    },
+    {
+      "id": "glass",
+      "slug": "glass",
+      "name": "Glass",
+      "tier": "premium",
+      "tagline": "Translucent layers, softer edges, and tasteful motion that stays opt-in.",
+      "description": "Glass layers blur, translucency, and subtle sheen on top of the same component contracts without forking the runtime.",
+      "knobs": ["frost intensity", "shadow softness", "sheen level"]
+    },
+    {
+      "id": "neon",
+      "slug": "neon",
+      "name": "Neon",
+      "tier": "premium",
+      "tagline": "High-energy accents, editorial type contrast, and bold presentation.",
+      "description": "Neon pushes the token system toward expressive product launches and dashboards while preserving accessibility and reduced-motion fallbacks.",
+      "knobs": ["glow strength", "headline contrast", "accent saturation"]
+    }
+  ],
+  "templates": [
+    {
+      "slug": "dashboard-home",
+      "name": "Dashboard Home",
+      "group": "saas",
+      "summary": "Overview shell with KPI rails, activity cards, and action slots.",
+      "states": ["loading", "empty", "error", "success", "no access"],
+      "variants": ["executive", "ops", "support"]
+    },
+    {
+      "slug": "list-filters",
+      "name": "List Filters",
+      "group": "saas",
+      "summary": "Index page with dense filters, table slot, and saved-view affordances.",
+      "states": ["loading", "empty", "error", "success", "no access"],
+      "variants": ["simple", "advanced"]
+    },
+    {
+      "slug": "detail-tabs-timeline",
+      "name": "Detail Tabs Timeline",
+      "group": "saas",
+      "summary": "Entity detail screen with tabs, timeline, and related activity.",
+      "states": ["loading", "empty", "error", "success", "no access"],
+      "variants": ["client-service", "b2b account"]
+    },
+    {
+      "slug": "form-create-edit",
+      "name": "Form Create Edit",
+      "group": "saas",
+      "summary": "Structured create/edit flows with helper copy and action rails.",
+      "states": ["loading", "empty", "error", "success", "no access"],
+      "variants": ["single column", "sectioned"]
+    },
+    {
+      "slug": "settings-sectioned",
+      "name": "Settings Sectioned",
+      "group": "saas",
+      "summary": "Settings shell with grouped controls and policy messaging.",
+      "states": ["loading", "empty", "error", "success", "no access"],
+      "variants": ["workspace", "account"]
+    },
+    {
+      "slug": "team-roles-starter",
+      "name": "Team Roles Starter",
+      "group": "saas",
+      "summary": "Membership management starter with roles, invites, and states.",
+      "states": ["loading", "empty", "error", "success", "no access"],
+      "variants": ["internal team", "customer admin"]
+    },
+    {
+      "slug": "billing-plans-starter",
+      "name": "Billing Plans Starter",
+      "group": "saas",
+      "summary": "Pricing and usage starter with entitlements framing and trust copy.",
+      "states": ["loading", "empty", "error", "success", "no access"],
+      "variants": ["founder", "enterprise"]
+    },
+    {
+      "slug": "onboarding-3-step",
+      "name": "Onboarding 3 Step",
+      "group": "saas",
+      "summary": "Three-step activation flow that leads into the wizard or export.",
+      "states": ["loading", "empty", "error", "success", "no access"],
+      "variants": ["self-serve", "team"]
+    },
+    {
+      "slug": "auth/sign-in",
+      "name": "Auth Sign In",
+      "group": "saas",
+      "summary": "Sign in screen with trust copy, social placeholders, and help states.",
+      "states": ["loading", "empty", "error", "success", "no access"],
+      "variants": ["email-first"]
+    },
+    {
+      "slug": "auth/sign-up",
+      "name": "Auth Sign Up",
+      "group": "saas",
+      "summary": "Sign up flow with value framing and workspace defaults.",
+      "states": ["loading", "empty", "error", "success", "no access"],
+      "variants": ["invite", "self-serve"]
+    },
+    {
+      "slug": "auth/forgot",
+      "name": "Auth Forgot Password",
+      "group": "saas",
+      "summary": "Recovery flow with email feedback and reassurance copy.",
+      "states": ["loading", "empty", "error", "success", "no access"],
+      "variants": ["email-only"]
+    },
+    {
+      "slug": "auth/reset",
+      "name": "Auth Reset Password",
+      "group": "saas",
+      "summary": "Reset form with inline validation and success state.",
+      "states": ["loading", "empty", "error", "success", "no access"],
+      "variants": ["single-step"]
+    },
+    {
+      "slug": "landing-section-based",
+      "name": "Landing Section Based",
+      "group": "marketing",
+      "summary": "Modular marketing shell for hero-to-CTA launches.",
+      "states": ["loading", "empty", "error", "success", "no access"],
+      "variants": ["product launch", "enterprise"]
+    },
+    {
+      "slug": "pricing-basic",
+      "name": "Pricing Basic",
+      "group": "marketing",
+      "summary": "Simple pricing surface with trust copy and FAQ handoff.",
+      "states": ["loading", "empty", "error", "success", "no access"],
+      "variants": ["self-serve", "hybrid"]
+    },
+    {
+      "slug": "faq",
+      "name": "FAQ",
+      "group": "marketing",
+      "summary": "FAQ accordion with conversion support slots.",
+      "states": ["loading", "empty", "error", "success", "no access"],
+      "variants": ["product", "security"]
+    },
+    {
+      "slug": "contact",
+      "name": "Contact",
+      "group": "marketing",
+      "summary": "Contact page with sales paths and trust framing.",
+      "states": ["loading", "empty", "error", "success", "no access"],
+      "variants": ["sales", "support"]
+    },
+    {
+      "slug": "legal-layout",
+      "name": "Legal Layout",
+      "group": "marketing",
+      "summary": "Legal content layout with side navigation and trust accents.",
+      "states": ["loading", "empty", "error", "success", "no access"],
+      "variants": ["privacy", "terms", "security"]
+    },
+    {
+      "slug": "docs-home",
+      "name": "Docs Home",
+      "group": "docs",
+      "summary": "Documentation landing page with category rails and quickstarts.",
+      "states": ["loading", "empty", "error", "success", "no access"],
+      "variants": ["product", "developer"]
+    },
+    {
+      "slug": "docs-article",
+      "name": "Docs Article",
+      "group": "docs",
+      "summary": "Article layout with metadata, code samples, and sibling nav.",
+      "states": ["loading", "empty", "error", "success", "no access"],
+      "variants": ["api", "concept"]
+    },
+    {
+      "slug": "blog-index",
+      "name": "Blog Index",
+      "group": "docs",
+      "summary": "Journal index for product updates and launch stories.",
+      "states": ["loading", "empty", "error", "success", "no access"],
+      "variants": ["product", "culture"]
+    },
+    {
+      "slug": "blog-article",
+      "name": "Blog Article",
+      "group": "docs",
+      "summary": "Editorial article template with pull quotes and metadata.",
+      "states": ["loading", "empty", "error", "success", "no access"],
+      "variants": ["announcement", "essay"]
+    },
+    {
+      "slug": "changelog",
+      "name": "Changelog",
+      "group": "docs",
+      "summary": "Release note stream with upgrade guidance and issue tracking hooks.",
+      "states": ["loading", "empty", "error", "success", "no access"],
+      "variants": ["product", "package"]
+    }
+  ],
+  "modules": [
+    {
+      "id": "charts",
+      "name": "Charts",
+      "packageName": "@shandapha/module-charts",
+      "description": "Scaffolded charting module seam for future opt-in visualizations.",
+      "premium": true
+    },
+    {
+      "id": "datatable",
+      "name": "Advanced DataTable",
+      "packageName": "@shandapha/module-datatable",
+      "description": "Client/server table workflows with saved views, pinning, resizing, and export.",
+      "premium": true
+    },
+    {
+      "id": "richtext",
+      "name": "Rich Text",
+      "packageName": "@shandapha/module-richtext",
+      "description": "Scaffolded rich text editing seam for future content workflows.",
+      "premium": true
+    },
+    {
+      "id": "seo",
+      "name": "SEO",
+      "packageName": "@shandapha/module-seo",
+      "description": "Scaffolded SEO helpers for metadata, sitemap, and schema support.",
+      "premium": false
+    }
+  ]
+}

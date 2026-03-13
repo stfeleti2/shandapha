@@ -1,3 +1,16 @@
+import { buildRegistry } from "@shandapha/registry";
+import { getPlatformStore } from "../../../db/store";
+
 export function registryRepository() {
-  return { storage: "module-local" };
+  const store = getPlatformStore();
+  const registry = buildRegistry();
+
+  return {
+    getRegistry() {
+      return registry;
+    },
+    listSyncJobs() {
+      return store.registry.syncJobs;
+    },
+  };
 }

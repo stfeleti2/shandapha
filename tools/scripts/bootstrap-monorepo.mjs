@@ -1919,17 +1919,17 @@ packages:
   addFile(
     files,
     "packages/tokens/src/presets/normal/README.md",
-    `# Normal preset\n`,
+    `# Normal preset\n\nNormal is the trusted baseline pack preset: balanced surfaces, calm contrast, and a premium default that belongs in the free tier.\n`,
   );
   addFile(
     files,
     "packages/tokens/src/presets/glass-lite/README.md",
-    `# Glass lite preset\n`,
+    `# Glass lite preset\n\nGlass lite previews the translucent premium direction without changing the component contract. Use it to validate blur, sheen, and surface layering in a safe baseline.\n`,
   );
   addFile(
     files,
     "packages/tokens/src/presets/neon-lite/README.md",
-    `# Neon lite preset\n`,
+    `# Neon lite preset\n\nNeon lite previews the expressive premium direction with stronger accent energy and headline contrast while staying accessible.\n`,
   );
   addFile(
     files,
@@ -3745,9 +3745,13 @@ packages:
   addFile(
     files,
     "apps/web/src/content/docs/getting-started.md",
-    `# Getting started\n`,
+    `# Getting started\n\nShandapha is a UI platform, not just a component pack. Start in Studio, choose a runtime, tune the brand kit, select templates, and export either a starter or a reversible patch install.\n`,
   );
-  addFile(files, "apps/web/src/content/blog/launch.md", `# Launch\n`);
+  addFile(
+    files,
+    "apps/web/src/content/blog/launch.md",
+    `# Launch\n\nShandapha launches with two apps, one modular API, and the real moat in packages. That keeps operating cost low while tokens, packs, templates, registry, and generator logic keep compounding.\n`,
+  );
   addFile(files, "apps/web/public/images/.gitkeep", ``);
   addFile(files, "apps/web/public/og/.gitkeep", ``);
   addFile(files, "apps/web/public/icons/.gitkeep", ``);
@@ -3782,7 +3786,7 @@ packages:
     addFile(
       files,
       `apps/web/src/marketing/landing/sections/${section}/README.md`,
-      `# ${section}\n`,
+      `# ${section}\n\nDocument the purpose, trust goals, and success criteria for this landing section so the marketing surface stays intentional instead of turning into placeholder copy.\n`,
     );
   }
 
@@ -4169,13 +4173,20 @@ packages:
     packageJson({
       name: "@shandapha/storybook",
       description:
-        "Storybook scaffold for foundations, templates, modules, and packs.",
+        "Story catalog workspace for foundations, templates, modules, and packs.",
       scripts: {
-        dev: `node -e "console.log('Storybook scaffolded. Install addons when the visual review surface is ready.')"`,
-        build: `node -e "console.log('Storybook scaffolded. Stories live in apps/storybook/src/stories.')"`,
+        dev: "node --import tsx ./src/dev.ts",
+        build: "tsc --project tsconfig.json",
         typecheck: "tsc --project tsconfig.json",
         lint: "biome check --config-path ../../configs/biome.json src .storybook",
-        test: `node -e "console.log('No Storybook tests configured yet.')"`,
+        test: "vitest run",
+      },
+      dependencies: {
+        "@shandapha/core": "workspace:*",
+        "@shandapha/layouts": "workspace:*",
+        "@shandapha/module-datatable": "workspace:*",
+        "@shandapha/packs": "workspace:*",
+        "@shandapha/templates": "workspace:*",
       },
     }),
   );
@@ -4189,42 +4200,42 @@ packages:
   addFile(
     files,
     "apps/storybook/.storybook/main.ts",
-    `export default { stories: ["../src/stories/**/*.mdx", "../src/stories/**/*.stories.@(ts|tsx)"] };\n`,
+    `const config = {\n  stories: ["../src/stories/**/*.mdx", "../src/stories/**/*.stories.@(ts|tsx)"],\n  docs: { autodocs: "tag" },\n  core: { disableTelemetry: true },\n};\n\nexport default config;\n`,
   );
   addFile(
     files,
     "apps/storybook/.storybook/preview.ts",
-    `export default { parameters: { layout: "fullscreen" } };\n`,
+    `const preview = {\n  parameters: {\n    layout: "fullscreen",\n    controls: { expanded: true, sort: "requiredFirst" },\n  },\n};\n\nexport default preview;\n`,
   );
   addFile(
     files,
     "apps/storybook/src/stories/foundations/README.md",
-    `# Foundations stories\n`,
+    `# Foundations stories\n\nUse this group to review semantic tokens, density, motion, and visible focus rules before looking at component-level polish.\n`,
   );
   addFile(
     files,
     "apps/storybook/src/stories/core/README.md",
-    `# Core stories\n`,
+    `# Core stories\n\nCore stories cover the free shippable baseline: form controls, feedback states, and table basics.\n`,
   );
   addFile(
     files,
     "apps/storybook/src/stories/layouts/README.md",
-    `# Layout stories\n`,
+    `# Layout stories\n\nLayout stories exercise the anti-grid-drift layer so spacing and shell structure stay disciplined.\n`,
   );
   addFile(
     files,
     "apps/storybook/src/stories/templates/README.md",
-    `# Template stories\n`,
+    `# Template stories\n\nTemplate stories prove that pages are first-class product assets and should cover their major state variants.\n`,
   );
   addFile(
     files,
     "apps/storybook/src/stories/modules/README.md",
-    `# Module stories\n`,
+    `# Module stories\n\nModule stories are for opt-in heavy features that should stay isolated from the free core.\n`,
   );
   addFile(
     files,
     "apps/storybook/src/stories/packs/README.md",
-    `# Pack stories\n`,
+    `# Pack stories\n\nPack stories compare how the same UI contract shifts under Normal, Glass, and Neon.\n`,
   );
 
   addFile(
@@ -4371,32 +4382,32 @@ packages:
   addFile(
     files,
     "services/platform-api/src/db/schema/README.md",
-    `# Database schema placeholder\n`,
+    `# Database schema\n\nAdd schema definitions here once persistence moves beyond in-memory scaffolding. Keep tables aligned to the modular monolith boundaries instead of inventing service-specific schemas too early.\n`,
   );
   addFile(
     files,
     "services/platform-api/src/db/migrations/README.md",
-    `# Migrations placeholder\n`,
+    `# Migrations\n\nStore ordered, replayable migrations here. Keep changes scoped to one domain concern where practical and make them reversible when possible.\n`,
   );
   addFile(
     files,
     "services/platform-api/src/db/seeds/README.md",
-    `# Seeds placeholder\n`,
+    `# Seeds\n\nSeed starter workspaces, entitlement fixtures, registry snapshots, and brand kits here so API and generator tests stay deterministic.\n`,
   );
   addFile(
     files,
     "services/platform-api/src/jobs/export-builds/README.md",
-    `# Export jobs placeholder\n`,
+    `# Export build jobs\n\nUse this directory for asynchronous starter exports, patch packaging, and uninstall manifest generation. Jobs should stay idempotent.\n`,
   );
   addFile(
     files,
     "services/platform-api/src/jobs/emails/README.md",
-    `# Email jobs placeholder\n`,
+    `# Email jobs\n\nPut transactional notifications here, such as export-ready messages, invites, and billing reminders. Copy should follow the same trust rules as the product.\n`,
   );
   addFile(
     files,
     "services/platform-api/src/jobs/registry-sync/README.md",
-    `# Registry sync placeholder\n`,
+    `# Registry sync jobs\n\nRegistry sync keeps the website, Studio, docs, and CLI aligned on the same metadata. Prefer snapshot generation over ad hoc mutation.\n`,
   );
   addFile(
     files,
@@ -4451,7 +4462,7 @@ packages:
     addFile(
       files,
       `examples/${example}/README.md`,
-      `# ${example}\n\nStarter or integration example placeholder.\n`,
+      `# ${example}\n\nReference notes for the ${example} example. Document the runtime wiring, theme asset loading, and the generator checks this example is meant to validate.\n`,
     );
   }
 
@@ -4470,18 +4481,30 @@ packages:
     "infra/docker/api.Dockerfile",
     `FROM node:24-alpine\nWORKDIR /app\nCOPY . .\nRUN corepack enable && pnpm install && pnpm --filter @shandapha/platform-api build\nCMD ["pnpm", "--filter", "@shandapha/platform-api", "start"]\n`,
   );
-  addFile(files, "infra/fly/README.md", `# Fly deployment notes\n`);
-  addFile(files, "infra/railway/README.md", `# Railway deployment notes\n`);
-  addFile(files, "infra/render/README.md", `# Render deployment notes\n`);
+  addFile(
+    files,
+    "infra/fly/README.md",
+    `# Fly deployment notes\n\nUse Fly for small-footprint regional deployments of web, studio, and platform-api when you want low ops burden and simple health checks.\n`,
+  );
+  addFile(
+    files,
+    "infra/railway/README.md",
+    `# Railway deployment notes\n\nRailway is a good founder-default when the priority is shipping speed over custom infrastructure.\n`,
+  );
+  addFile(
+    files,
+    "infra/render/README.md",
+    `# Render deployment notes\n\nRender works well for conservative hosted deployments with managed web services and background jobs.\n`,
+  );
   addFile(
     files,
     "infra/github/environments/README.md",
-    `# GitHub environments\n`,
+    `# GitHub environments\n\nRecommended environment names are preview, staging, and production. Keep secrets minimal and use environment protection rules for deploy safety.\n`,
   );
   addFile(
     files,
     "infra/github/branch-protection/README.md",
-    `# Branch protection\n`,
+    `# Branch protection\n\nProtect the default branch with required lint, typecheck, test, and build checks plus pull-request review.\n`,
   );
 
   addJson(files, "data/seed/registry/catalog.json", {

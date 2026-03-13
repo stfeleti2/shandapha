@@ -1,3 +1,13 @@
+import { getPlatformStore } from "../../../db/store";
+
 export function notificationsRepository() {
-  return { storage: "module-local" };
+  const store = getPlatformStore();
+
+  return {
+    listNotifications(workspaceId: string) {
+      return store.notifications.items.filter(
+        (notification) => notification.workspaceId === workspaceId,
+      );
+    },
+  };
 }

@@ -9,10 +9,30 @@
       "dependsOn": [
         "^build"
       ],
+      "outputs": []
+    },
+    "@shandapha/web#build": {
+      "dependsOn": [
+        "^build"
+      ],
       "outputs": [
-        ".next/**",
-        "storybook-static/**",
-        "coverage/**"
+        ".next/**"
+      ]
+    },
+    "@shandapha/studio#build": {
+      "dependsOn": [
+        "^build"
+      ],
+      "outputs": [
+        ".next/**"
+      ]
+    },
+    "@shandapha/storybook#build": {
+      "dependsOn": [
+        "^build"
+      ],
+      "outputs": [
+        "storybook-static/**"
       ]
     },
     "typecheck": {

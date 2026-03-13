@@ -3,17 +3,30 @@
   "version": "0.1.0",
   "private": true,
   "type": "module",
-  "description": "Storybook scaffold for foundations, templates, modules, and packs.",
+  "description": "Story catalog workspace for foundations, templates, modules, and packs.",
   "sideEffects": false,
   "scripts": {
-    "dev": "node -e \"console.log('Storybook scaffolded. Install addons when the visual review surface is ready.')\"",
-    "build": "node -e \"console.log('Storybook scaffolded. Stories live in apps/storybook/src/stories.')\"",
+    "dev": "storybook dev -p 6006 --ci",
+    "build": "storybook build",
     "typecheck": "tsc --project tsconfig.json",
     "lint": "biome check --config-path ../../configs/biome.json src .storybook",
-    "test": "node -e \"console.log('No Storybook tests configured yet.')\""
+    "test": "vitest run"
   },
-  "dependencies": {},
-  "devDependencies": {},
+  "dependencies": {
+    "@shandapha/core": "workspace:*",
+    "@shandapha/layouts": "workspace:*",
+    "@shandapha/module-datatable": "workspace:*",
+    "@shandapha/packs": "workspace:*",
+    "@shandapha/templates": "workspace:*",
+    "react": "^19.2.4",
+    "react-dom": "^19.2.4"
+  },
+  "devDependencies": {
+    "@storybook/addon-docs": "^10.2.19",
+    "@storybook/react-vite": "^10.2.19",
+    "storybook": "^10.2.19",
+    "vite": "^7.3.1"
+  },
   "exports": {
     ".": "./src/index.ts"
   }
