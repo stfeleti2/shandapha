@@ -1,6 +1,13 @@
 import type { RegistryManifest } from "@shandapha/contracts";
 import { getPackBySlug, packs } from "@shandapha/packs";
 import { getTemplateBySlug, templates } from "@shandapha/templates";
+import {
+  blockManifests,
+  chartManifests,
+  componentManifests,
+  shellManifests,
+  workspaceManifests,
+} from "./data/catalog";
 import modules from "./data/modules.json";
 
 export function buildRegistry(): RegistryManifest {
@@ -8,6 +15,11 @@ export function buildRegistry(): RegistryManifest {
     packs,
     templates,
     modules,
+    components: componentManifests,
+    blocks: blockManifests,
+    charts: chartManifests,
+    shells: shellManifests,
+    workspaces: workspaceManifests,
   };
 }
 

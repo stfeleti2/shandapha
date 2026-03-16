@@ -10,6 +10,11 @@ describe("registry", () => {
     const registry = buildRegistry();
     expect(registry.packs.length).toBeGreaterThanOrEqual(3);
     expect(registry.templates.length).toBeGreaterThan(0);
+    expect(registry.components.length).toBeGreaterThan(30);
+    expect(registry.blocks.length).toBeGreaterThan(5);
+    expect(registry.charts.length).toBeGreaterThan(0);
+    expect(registry.shells.length).toBeGreaterThan(3);
+    expect(registry.workspaces.length).toBeGreaterThan(2);
   });
 
   it("keeps module data aligned with workspace module packages", async () => {

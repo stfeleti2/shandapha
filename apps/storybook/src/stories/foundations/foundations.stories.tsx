@@ -14,7 +14,7 @@ type Story = StoryObj<typeof meta>;
 
 export const PackThemes: Story = {
   render: () => (
-    <div style={{ padding: 24 }}>
+    <div className="p-6">
       <Stack gap={20}>
         {packs.map((pack) => {
           const theme = createPackTheme(pack.id);
@@ -22,42 +22,26 @@ export const PackThemes: Story = {
           return (
             <Surface key={pack.id} title={pack.name}>
               <Stack gap={14}>
-                <p style={{ margin: 0, lineHeight: 1.7 }}>{pack.description}</p>
+                <p className="text-sm leading-7 text-muted-foreground">{pack.description}</p>
                 <Inline gap={10}>
-                  <Badge>{pack.tier}</Badge>
-                  <Badge>{theme.tokens.density}</Badge>
-                  <Badge>{theme.tokens.motion.duration}</Badge>
+                  <Badge variant="outline">{pack.tier}</Badge>
+                  <Badge variant="secondary">{theme.tokens.density}</Badge>
+                  <Badge variant="secondary">{theme.tokens.motion.normal}</Badge>
                 </Inline>
-                <div
-                  style={{
-                    display: "grid",
-                    gridTemplateColumns: "repeat(4, minmax(0, 1fr))",
-                    gap: 12,
-                  }}
-                >
+                <div className="grid gap-3 sm:grid-cols-2 xl:grid-cols-4">
                   {[
-                    ["Primary", theme.tokens.color.primary],
-                    ["Accent", theme.tokens.color.accent],
-                    ["Canvas", theme.tokens.surface.canvas],
-                    ["Raised", theme.tokens.surface.raised],
+                    ["Primary", theme.scale.primary],
+                    ["Accent", theme.scale.accent],
+                    ["Canvas", theme.scale.background],
+                    ["Raised", theme.scale.surface],
                   ].map(([label, value]) => (
-                    <div
-                      key={label}
-                      style={{
-                        display: "grid",
-                        gap: 8,
-                      }}
-                    >
+                    <div key={label} className="grid gap-2">
                       <div
-                        style={{
-                          height: 72,
-                          borderRadius: 18,
-                          border: "1px solid rgba(15, 23, 42, 0.1)",
-                          background: value,
-                        }}
+                        className="h-[72px] rounded-xl border"
+                        style={{ background: value }}
                       />
-                      <strong>{label}</strong>
-                      <span>{value}</span>
+                      <strong className="text-sm font-medium">{label}</strong>
+                      <span className="text-xs text-muted-foreground">{value}</span>
                     </div>
                   ))}
                 </div>

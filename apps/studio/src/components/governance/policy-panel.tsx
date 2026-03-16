@@ -22,32 +22,16 @@ export function PolicyPanel({
         {rules.map((rule) => (
           <div
             key={rule.id}
-            style={{
-              display: "grid",
-              gap: 8,
-              padding: "0.9rem 1rem",
-              borderRadius: 18,
-              background: "rgba(15, 23, 42, 0.22)",
-              border: "1px solid rgba(148, 163, 184, 0.16)",
-            }}
+            className="grid gap-3 rounded-lg border bg-muted/30 p-4"
           >
-            <div
-              style={{
-                display: "flex",
-                alignItems: "center",
-                gap: 10,
-                justifyContent: "space-between",
-              }}
-            >
-              <strong>{rule.title}</strong>
-              <Badge>
+            <div className="flex items-center justify-between gap-3">
+              <strong className="text-sm font-medium">{rule.title}</strong>
+              <Badge variant={rule.status === "healthy" ? "secondary" : "outline"}>
                 {rule.status === "healthy" ? "Healthy" : "Needs attention"}
               </Badge>
             </div>
-            <span style={{ color: "rgba(226, 232, 240, 0.84)" }}>
-              {rule.detail}
-            </span>
-            <span style={{ color: "rgba(148, 163, 184, 0.88)" }}>
+            <span className="text-sm leading-6 text-muted-foreground">{rule.detail}</span>
+            <span className="text-xs font-medium uppercase tracking-[0.18em] text-muted-foreground">
               Owner: {rule.owner}
             </span>
           </div>

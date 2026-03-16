@@ -1,4 +1,13 @@
-import { Badge, Button } from "@shandapha/core";
+import {
+  Badge,
+  Button,
+  Card,
+  CardContent,
+  CardDescription,
+  CardFooter,
+  CardHeader,
+  CardTitle,
+} from "@shandapha/core";
 import { Inline, Stack } from "@shandapha/layouts";
 
 interface HeroCardProps {
@@ -17,50 +26,30 @@ export function HeroCard({
   ctaLabel,
 }: HeroCardProps) {
   return (
-    <article
-      style={{
-        display: "grid",
-        gap: 18,
-        padding: "1.35rem",
-        borderRadius: 28,
-        border: "1px solid rgba(15, 23, 42, 0.1)",
-        background:
-          "linear-gradient(160deg, rgba(255,255,255,0.92), rgba(255,244,228,0.88))",
-        boxShadow: "0 24px 80px rgba(15, 23, 42, 0.08)",
-      }}
-    >
-      <Stack gap={10}>
-        <Badge>{eyebrow}</Badge>
-        <h3 style={{ margin: 0, fontSize: "clamp(1.4rem, 3vw, 2rem)" }}>
-          {title}
-        </h3>
-        <p
-          style={{
-            margin: 0,
-            lineHeight: 1.7,
-            color: "var(--sh-color-text-muted, #475569)",
-          }}
-        >
-          {body}
-        </p>
-      </Stack>
-      <Inline gap={10}>
-        {highlights.map((highlight) => (
-          <span
-            key={highlight}
-            style={{
-              padding: "0.35rem 0.7rem",
-              borderRadius: 999,
-              background: "rgba(15, 118, 110, 0.1)",
-              color: "var(--sh-color-primary, #0f766e)",
-              fontWeight: 700,
-            }}
-          >
-            {highlight}
-          </span>
-        ))}
-      </Inline>
-      <Button type="button">{ctaLabel}</Button>
+    <article className="h-full">
+      <Card className="h-full justify-between gap-5">
+        <CardHeader className="gap-3">
+          <Badge variant="outline">{eyebrow}</Badge>
+          <Stack gap={8}>
+            <CardTitle className="text-2xl sm:text-3xl">{title}</CardTitle>
+            <CardDescription className="max-w-prose text-base leading-7">
+              {body}
+            </CardDescription>
+          </Stack>
+        </CardHeader>
+        <CardContent className="pt-0">
+          <Inline gap={8}>
+            {highlights.map((highlight) => (
+              <Badge key={highlight} variant="secondary">
+                {highlight}
+              </Badge>
+            ))}
+          </Inline>
+        </CardContent>
+        <CardFooter className="pt-0">
+          <Button type="button">{ctaLabel}</Button>
+        </CardFooter>
+      </Card>
     </article>
   );
 }

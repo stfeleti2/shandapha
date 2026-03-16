@@ -1,4 +1,4 @@
-import { Badge } from "@shandapha/core";
+import { Badge, cn } from "@shandapha/core";
 import { Container, Inline, PageHeader, Stack } from "@shandapha/layouts";
 import Link from "next/link";
 import type { ReactNode } from "react";
@@ -33,50 +33,28 @@ export function ProductShell({
   utility,
 }: ProductShellProps) {
   return (
-    <main
-      style={{
-        minHeight: "100vh",
-        background:
-          "radial-gradient(circle at top, rgba(45, 212, 191, 0.14), transparent 26%), linear-gradient(180deg, #0b1524 0%, #102542 100%)",
-        color: "#f8fafc",
-      }}
-    >
-      <Container>
-        <header
-          style={{
-            display: "grid",
-            gap: 20,
-            padding: "1.5rem 0 0.75rem",
-          }}
-        >
+    <main className="min-h-screen bg-background text-foreground">
+      <header className="border-b bg-background">
+        <Container>
+          <div className="grid gap-6 py-6">
           <Inline gap={16}>
             <Link
               href="/wizard"
-              style={{
-                textDecoration: "none",
-                color: "inherit",
-                fontWeight: 800,
-                letterSpacing: "0.08em",
-                textTransform: "uppercase",
-              }}
+              className="font-display text-lg font-semibold tracking-tight"
             >
               Shandapha Studio
             </Link>
-            <Badge>Wizard + control plane</Badge>
-            <div style={{ marginLeft: "auto" }}>{utility}</div>
+            <Badge variant="outline">Wizard + control plane</Badge>
+            {utility ? <div className="ml-auto">{utility}</div> : null}
           </Inline>
-          <Inline gap={12}>
+          <Inline gap={10} className="text-sm text-muted-foreground">
             {navItems.map((item) => (
               <Link
                 key={item.href}
                 href={item.href}
-                style={{
-                  textDecoration: "none",
-                  color: "inherit",
-                  padding: "0.45rem 0.8rem",
-                  borderRadius: 999,
-                  background: "rgba(148, 163, 184, 0.12)",
-                }}
+                className={cn(
+                  "rounded-full px-3 py-1.5 transition-colors hover:bg-accent hover:text-accent-foreground",
+                )}
               >
                 {item.label}
               </Link>
@@ -86,22 +64,16 @@ export function ProductShell({
             <Stack gap={12}>
               <PageHeader title={title} eyebrow={eyebrow} actions={actions} />
               {subtitle ? (
-                <p
-                  style={{
-                    margin: 0,
-                    maxWidth: 760,
-                    lineHeight: 1.7,
-                    color: "rgba(226, 232, 240, 0.86)",
-                  }}
-                >
+                <p className="max-w-3xl text-base leading-7 text-muted-foreground">
                   {subtitle}
                 </p>
               ) : null}
             </Stack>
           ) : null}
-        </header>
-        {children}
-      </Container>
+          </div>
+        </Container>
+      </header>
+      <Container className="py-6">{children}</Container>
     </main>
   );
 }

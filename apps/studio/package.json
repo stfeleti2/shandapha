@@ -24,6 +24,7 @@
     "@shandapha/packs": "workspace:*",
     "@shandapha/react": "workspace:*",
     "@shandapha/registry": "workspace:*",
-    "@shandapha/templates": "workspace:*"
+    "@shandapha/templates": "workspace:*",
+    "@shandapha/tokens": "workspace:*"
   }
 }

@@ -26,9 +26,9 @@ export function BillingSummary({
     <Stack gap={20}>
       <Surface title="Billing posture">
         <Stack gap={12}>
-          <Badge>Current plan: {currentPlanId}</Badge>
-          <p style={{ margin: 0, lineHeight: 1.65 }}>{usageHeadline}</p>
-          <span style={{ color: "rgba(226, 232, 240, 0.8)" }}>
+          <Badge variant="outline">Current plan: {currentPlanId}</Badge>
+          <p className="text-sm leading-6 text-muted-foreground">{usageHeadline}</p>
+          <span className="text-sm text-muted-foreground">
             Next invoice: {nextInvoiceLabel}
           </span>
         </Stack>
@@ -37,14 +37,21 @@ export function BillingSummary({
         {plans.map((plan) => (
           <Surface key={plan.id} title={plan.name}>
             <Stack gap={12}>
-              <strong style={{ fontSize: "1.8rem" }}>{plan.price}</strong>
-              <p style={{ margin: 0, lineHeight: 1.65 }}>{plan.summary}</p>
-              <ul style={{ margin: 0, paddingLeft: "1.15rem" }}>
+              <strong className="text-3xl font-semibold tracking-tight">
+                {plan.price}
+              </strong>
+              <p className="text-sm leading-6 text-muted-foreground">{plan.summary}</p>
+              <ul className="grid gap-2 pl-5 text-sm text-muted-foreground">
                 {plan.includes.map((item) => (
-                  <li key={item}>{item}</li>
+                  <li key={item} className="list-disc">
+                    {item}
+                  </li>
                 ))}
               </ul>
-              <Button type="button">
+              <Button
+                type="button"
+                variant={plan.id === currentPlanId ? "secondary" : "default"}
+              >
                 {plan.id === currentPlanId
                   ? "Current plan"
                   : `Move to ${plan.name}`}

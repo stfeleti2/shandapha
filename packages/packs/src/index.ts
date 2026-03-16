@@ -1,7 +1,8 @@
-import type { BrandKit, PackId, PackManifest } from "@shandapha/contracts";
+import type { BrandKit, PackId, PackManifest, ThemeMode } from "@shandapha/contracts";
 import {
   createTokenSet,
   defaultBrandKit,
+  resolveThemeScale,
   toCssVariables,
 } from "@shandapha/tokens";
 
@@ -12,10 +13,10 @@ export const packs: PackManifest[] = [
     name: "Normal",
     tier: "free",
     tagline:
-      "Clean depth, calm surfaces, and a premium default that stays trusted.",
+      "Neutral, editorial, and calm. The clearest expression of the shared Shandapha baseline.",
     description:
-      "Normal is the default premium baseline for teams that want semantic tokens, balanced contrast, and minimal visual noise.",
-    knobs: ["contrast-safe palette", "steady motion", "balanced radii"],
+      "Normal is the default premium-feeling baseline with restrained contrast, balanced spacing, and the full shared UI surface.",
+    knobs: ["neutral surface depth", "balanced radii", "steady motion"],
   },
   {
     id: "glass",
@@ -23,10 +24,10 @@ export const packs: PackManifest[] = [
     name: "Glass",
     tier: "premium",
     tagline:
-      "Translucent layers, softer edges, and tasteful motion that stays opt-in.",
+      "Same component contracts, with softer surfaces and lower-contrast separation.",
     description:
-      "Glass layers blur, translucency, and subtle sheen on top of the same component contracts without forking the runtime.",
-    knobs: ["frost intensity", "shadow softness", "sheen level"],
+      "Glass keeps the shared baseline intact while easing surface contrast and dividers for a quieter premium feel.",
+    knobs: ["surface softness", "divider contrast", "motion softness"],
   },
   {
     id: "neon",
@@ -34,10 +35,10 @@ export const packs: PackManifest[] = [
     name: "Neon",
     tier: "premium",
     tagline:
-      "High-energy accents, editorial type contrast, and bold presentation.",
+      "Higher accent contrast and darker canvases without leaving the shared ownership model.",
     description:
-      "Neon pushes the token system toward expressive product launches and dashboards while preserving accessibility and reduced-motion fallbacks.",
-    knobs: ["glow strength", "headline contrast", "accent saturation"],
+      "Neon raises chart and action contrast while staying inside the same semantic-token, layout, and component grammar.",
+    knobs: ["accent emphasis", "chart contrast", "surface depth"],
   },
 ] as PackManifest[];
 
@@ -52,12 +53,16 @@ export function getPackById(packId: PackId) {
 export function createPackTheme(
   packId: PackId,
   brandKit: BrandKit = defaultBrandKit,
+  mode: ThemeMode = "light",
 ) {
   const pack = getPackById(packId) ?? packs[0];
   const tokens = createTokenSet(brandKit, pack.id);
+  const resolvedMode = mode === "system" ? "light" : mode;
+
   return {
     pack,
     tokens,
+    scale: resolveThemeScale(tokens, resolvedMode),
     cssVariables: toCssVariables(tokens),
   };
 }

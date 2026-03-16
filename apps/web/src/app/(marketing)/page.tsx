@@ -1,5 +1,5 @@
-import { renderMarketingPage } from "@/lib/site-content";
+import { renderBaselineHomePage } from "@/lib/site-baseline";
 
 export default function Page() {
-  return renderMarketingPage("home");
+  return renderBaselineHomePage();
 }

@@ -13,17 +13,17 @@
     "slug": "glass",
     "name": "Glass",
     "tier": "premium",
-    "tagline": "Translucent layers, softer edges, and tasteful motion that stays opt-in.",
-    "description": "Glass layers blur, translucency, and subtle sheen on top of the same component contracts without forking the runtime.",
-    "knobs": ["frost intensity", "shadow softness", "sheen level"]
+    "tagline": "Softer surface contrast and gentler separation that stay opt-in.",
+    "description": "Glass keeps the shared component contracts intact while easing surface contrast and divider weight for a quieter premium feel.",
+    "knobs": ["surface softness", "divider contrast", "motion softness"]
   },
   {
     "id": "neon",
     "slug": "neon",
     "name": "Neon",
     "tier": "premium",
-    "tagline": "High-energy accents, editorial type contrast, and bold presentation.",
-    "description": "Neon pushes the token system toward expressive product launches and dashboards while preserving accessibility and reduced-motion fallbacks.",
-    "knobs": ["glow strength", "headline contrast", "accent saturation"]
+    "tagline": "Higher accent contrast and darker canvases inside the same baseline.",
+    "description": "Neon raises chart and action contrast while preserving accessibility, reduced-motion fallbacks, and the shared semantic token model.",
+    "knobs": ["accent emphasis", "chart contrast", "surface depth"]
   }
 ]
