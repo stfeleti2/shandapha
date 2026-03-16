@@ -17,7 +17,6 @@ import {
   Section,
   Stack,
 } from "@shandapha/layouts";
-import { buildRegistry } from "@shandapha/registry";
 import {
   ChartSurfaceCard,
   ContrastWarningPanel,
@@ -35,8 +34,9 @@ import {
 import { defaultBrandKit } from "@shandapha/tokens";
 import Link from "next/link";
 import { useDeferredValue, useEffect, useState } from "react";
+import { getSiteCatalog } from "@/lib/registry";
 
-const registry = buildRegistry();
+const registry = getSiteCatalog().manifest;
 
 export function ThemePlayground() {
   const { brandKit, packId, setBrandKit } = useTheme();

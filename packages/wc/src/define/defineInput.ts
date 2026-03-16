@@ -1,1 +1,1 @@
-export const inputTagName = "shandapha-input";
+export { defineInput, inputTagName } from "../index";

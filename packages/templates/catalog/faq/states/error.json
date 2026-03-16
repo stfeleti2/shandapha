@@ -1,0 +1,8 @@
+{
+  "template": "faq",
+  "state": "error",
+  "headline": "FAQ error",
+  "summary": "FAQ accordion with conversion support slots and legal/trust framing.",
+  "surfaces": ["accordion", "alerts", "contact cards"],
+  "slots": ["faqList", "contactStrip"]
+}

@@ -1,0 +1,8 @@
+{
+  "template": "faq",
+  "state": "no access",
+  "headline": "FAQ no access",
+  "summary": "FAQ accordion with conversion support slots and legal/trust framing.",
+  "surfaces": ["accordion", "alerts", "contact cards"],
+  "slots": ["faqList", "contactStrip"]
+}

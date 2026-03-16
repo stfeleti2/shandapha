@@ -14,7 +14,9 @@
   "dependencies": {
     "@shandapha/contracts": "workspace:*",
     "@shandapha/entitlements": "workspace:*",
-    "@shandapha/registry": "workspace:*"
+    "@shandapha/packs": "workspace:*",
+    "@shandapha/registry": "workspace:*",
+    "@shandapha/tokens": "workspace:*"
   },
   "devDependencies": {},
   "exports": {

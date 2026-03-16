@@ -1,0 +1,10 @@
+{
+  "template": "contact",
+  "sample": "contact.json",
+  "entities": {
+    "contactPath": "contactPath-1",
+    "region": "region-2"
+  },
+  "slots": ["contactOptions", "form", "trustNotes"],
+  "outputs": ["contact page"]
+}

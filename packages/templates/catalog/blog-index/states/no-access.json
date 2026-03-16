@@ -1,0 +1,8 @@
+{
+  "template": "blog-index",
+  "state": "no access",
+  "headline": "Blog Index no access",
+  "summary": "Journal index for product updates, launch stories, and registry notes.",
+  "surfaces": ["cards", "filters", "empty state"],
+  "slots": ["hero", "filters", "postGrid"]
+}

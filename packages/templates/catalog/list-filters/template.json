@@ -1,0 +1,52 @@
+{
+  "version": 1,
+  "slug": "list-filters",
+  "name": "List Filters",
+  "group": "saas",
+  "shell": "AdminShell",
+  "summary": "Dense index page with filters, saved views, bulk actions, and table affordances.",
+  "states": ["loading", "empty", "error", "success", "no access"],
+  "variants": ["simple", "advanced"],
+  "blocks": ["datatable-basic", "toolbar-filters", "bulk-actions"],
+  "related": ["dashboard-home", "detail-tabs-timeline"],
+  "surfaces": ["data toolbar", "table baseline", "bulk action bar"],
+  "featuredPackIds": ["normal", "glass"],
+  "dataContract": {
+    "entities": ["record", "savedView", "filterOption"],
+    "slots": ["toolbar", "table", "secondaryPanel"],
+    "outputs": ["filtered list", "saved view metadata"],
+    "samples": ["records.json", "filters.json"]
+  },
+  "frameworks": [
+    {
+      "adapter": "react-vite",
+      "support": "supported",
+      "notes": "Reference adapter and fastest path for local starters.",
+      "requiredCapabilities": []
+    },
+    {
+      "adapter": "next-app-router",
+      "support": "supported",
+      "notes": "Reference SSR-capable adapter for product starters.",
+      "requiredCapabilities": ["server-components"]
+    },
+    {
+      "adapter": "wc-universal",
+      "support": "experimental",
+      "notes": "Portable surface area is still being rebuilt around the WC baseline.",
+      "requiredCapabilities": ["custom-elements"]
+    },
+    {
+      "adapter": "blazor-wc",
+      "support": "experimental",
+      "notes": "Blazor currently installs through the WC bridge rather than a native adapter.",
+      "requiredCapabilities": ["custom-elements", "wc-interop"]
+    }
+  ],
+  "install": {
+    "requiredPackages": [],
+    "requiredRoutes": [],
+    "themeDependencies": ["theme.css", "tokens.json"],
+    "sampleDataBindings": ["records.json", "filters.json"]
+  }
+}

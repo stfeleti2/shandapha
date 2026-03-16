@@ -1,0 +1,7 @@
+{
+  "template": "billing-plans-starter",
+  "variant": "founder",
+  "title": "Billing Plans Starter - founder",
+  "related": ["team-roles-starter", "dashboard-home"],
+  "featuredPackIds": ["normal", "glass", "neon"]
+}

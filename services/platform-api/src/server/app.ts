@@ -34,10 +34,31 @@ export function createServer(routes: PlatformRoute[] = createRoutes()) {
     }
 
     try {
+      const bodyText = await new Promise<string>((resolve, reject) => {
+        let payload = "";
+
+        request.setEncoding("utf8");
+        request.on("data", (chunk) => {
+          payload += chunk;
+        });
+        request.on("end", () => resolve(payload));
+        request.on("error", reject);
+      });
+      const body =
+        bodyText.length === 0
+          ? undefined
+          : request.headers["content-type"]?.includes("application/json")
+            ? JSON.parse(bodyText)
+            : bodyText;
       const payload = await route.handler({
+        body,
         pathname: url.pathname,
         query: url.searchParams,
-        request: new Request(url, { method: request.method }),
+        request: new Request(url, {
+          method: request.method,
+          body: bodyText.length > 0 ? bodyText : undefined,
+          headers: request.headers as HeadersInit,
+        }),
         requestId,
       });
       response.writeHead(200, {

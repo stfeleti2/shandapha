@@ -1,10 +1,16 @@
-import type { ModuleManifest } from "@shandapha/contracts";
+import { defineModuleManifest } from "@shandapha/contracts";
 
-export const richtextManifest: ModuleManifest = {
+export const richtextManifest = defineModuleManifest({
   id: "richtext",
   name: "Rich Text",
   packageName: "@shandapha/module-richtext",
   description:
-    "Scaffolded rich text editing seam for future content workflows.",
+    "Deferred rich text seam kept parked until there is a real install path.",
   premium: true,
-} as ModuleManifest;
+  minimumPlan: "premium",
+  status: "deferred",
+  capabilities: {
+    premium: ["deferred"],
+  },
+  install: {},
+});

@@ -1,0 +1,8 @@
+{
+  "template": "legal-layout",
+  "state": "no access",
+  "headline": "Legal Layout no access",
+  "summary": "Legal content layout with side navigation, trust accents, and article framing.",
+  "surfaces": ["docs shell", "sidebar", "article layout"],
+  "slots": ["sidebar", "article", "metaRail"]
+}

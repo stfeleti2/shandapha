@@ -1,0 +1,218 @@
+{
+  "version": 1,
+  "source": {
+    "id": "acme-internal",
+    "kind": "file",
+    "label": "Acme internal catalog",
+    "enabled": true,
+    "namespace": "org/acme",
+    "workspaceIds": ["acme", "studio-labs"],
+    "allowedNamespaces": ["shandapha", "org/acme"]
+  },
+  "packs": [],
+  "templates": [
+    {
+      "version": 1,
+      "registryId": "org/acme::template::workspace-review-hub",
+      "namespace": "org/acme",
+      "sourceKind": "org",
+      "visibility": "org",
+      "supportLevel": "internal",
+      "trustLevel": "checksum-verified",
+      "stability": "preview",
+      "previews": [
+        {
+          "title": "Workspace review hub preview",
+          "href": "/templates/workspace-review-hub",
+          "type": "doc"
+        }
+      ],
+      "tags": ["internal", "workspace", "governance"],
+      "owner": {
+        "id": "org/acme",
+        "label": "Acme Design Ops",
+        "packageName": "@acme/shandapha-catalog"
+      },
+      "provenance": {
+        "sourceId": "acme-internal",
+        "checksum": "acme-internal-template-001",
+        "manifestPath": "data/seed/catalogs/acme.internal.catalog.json",
+        "assetPath": "packages/templates/catalog/settings-sectioned"
+      },
+      "installability": {
+        "installable": true,
+        "target": "starter",
+        "notes": "Internal template bundle approved for workspace provisioning flows."
+      },
+      "slug": "workspace-review-hub",
+      "name": "Workspace Review Hub",
+      "group": "saas",
+      "layoutPreset": "form",
+      "shell": "AdminShell",
+      "summary": "Internal review and policy surface for workspace approvals and governance handoff.",
+      "states": ["loading", "empty", "error", "success", "no-access"],
+      "variants": ["workspace", "account"],
+      "blocks": ["settings-sections", "policy-review"],
+      "related": ["settings-sectioned"],
+      "surfaces": ["card", "banner", "audit rail"],
+      "featuredPackIds": ["normal", "glass"],
+      "dataContract": {
+        "entities": ["workspace", "approval", "policy"],
+        "slots": ["banner", "section-footer"],
+        "outputs": ["governance settings page"],
+        "samples": ["settings.json", "policies.json"]
+      },
+      "frameworks": [
+        {
+          "adapter": "react-vite",
+          "support": "supported",
+          "requiredCapabilities": []
+        },
+        {
+          "adapter": "next-app-router",
+          "support": "supported",
+          "requiredCapabilities": ["server-components"]
+        },
+        {
+          "adapter": "wc-universal",
+          "support": "experimental",
+          "requiredCapabilities": ["custom-elements"]
+        },
+        {
+          "adapter": "blazor-wc",
+          "support": "experimental",
+          "requiredCapabilities": ["custom-elements", "wc-interop"]
+        }
+      ],
+      "install": {
+        "requiredPackages": [],
+        "requiredRoutes": ["/workspace-review-hub"],
+        "themeDependencies": ["theme.css", "tokens.json"],
+        "sampleDataBindings": ["settings.json", "policies.json"]
+      }
+    }
+  ],
+  "templateAssets": [
+    {
+      "registryId": "org/acme::template::workspace-review-hub",
+      "rootDir": "packages/templates/catalog/settings-sectioned",
+      "readmePath": "packages/templates/catalog/settings-sectioned/README.md",
+      "previewPath": "packages/templates/catalog/settings-sectioned/preview.md",
+      "files": {
+        "react-vite": [
+          "packages/templates/catalog/settings-sectioned/files/react-vite/index.tsx"
+        ],
+        "next-app-router": [
+          "packages/templates/catalog/settings-sectioned/files/next-app-router/page.tsx"
+        ],
+        "wc-universal": [
+          "packages/templates/catalog/settings-sectioned/files/wc-universal/template.ts"
+        ],
+        "blazor-wc": [
+          "packages/templates/catalog/settings-sectioned/files/blazor-wc/Template.razor"
+        ]
+      },
+      "states": [
+        "packages/templates/catalog/settings-sectioned/states/loading.json",
+        "packages/templates/catalog/settings-sectioned/states/empty.json",
+        "packages/templates/catalog/settings-sectioned/states/error.json",
+        "packages/templates/catalog/settings-sectioned/states/success.json",
+        "packages/templates/catalog/settings-sectioned/states/no-access.json"
+      ],
+      "variants": [
+        "packages/templates/catalog/settings-sectioned/variants/workspace.json",
+        "packages/templates/catalog/settings-sectioned/variants/account.json"
+      ],
+      "samples": [
+        "packages/templates/catalog/settings-sectioned/samples/settings.json",
+        "packages/templates/catalog/settings-sectioned/samples/policies.json"
+      ]
+    }
+  ],
+  "modules": [],
+  "components": [],
+  "blocks": [
+    {
+      "version": 1,
+      "registryId": "org/acme::block::policy-summary-rail",
+      "namespace": "org/acme",
+      "sourceKind": "org",
+      "visibility": "org",
+      "supportLevel": "internal",
+      "trustLevel": "checksum-verified",
+      "stability": "stable",
+      "previews": [],
+      "tags": ["block", "policy", "review"],
+      "owner": {
+        "id": "org/acme",
+        "label": "Acme Design Ops",
+        "packageName": "@acme/shandapha-catalog"
+      },
+      "provenance": {
+        "sourceId": "acme-internal",
+        "checksum": "acme-block-001",
+        "manifestPath": "data/seed/catalogs/acme.internal.catalog.json"
+      },
+      "installability": {
+        "installable": true,
+        "target": "patch",
+        "notes": "Internal policy summary block for governance pages."
+      },
+      "name": "policy-summary-rail",
+      "title": "Policy Summary Rail",
+      "description": "Governance overview block for approvals, locked presets, and drift status.",
+      "type": "block",
+      "ownerPackage": "@acme/shandapha-catalog",
+      "installTarget": "catalog/internal/policy-summary-rail.tsx",
+      "categories": ["internal", "governance"],
+      "files": [],
+      "install": {
+        "targetPaths": ["catalog/internal/policy-summary-rail.tsx"],
+        "runtimeDependencies": [],
+        "peerDependencies": [],
+        "templateDependencies": [],
+        "routeNeeds": [],
+        "minimumPlan": "premium",
+        "frameworks": [
+          {
+            "adapter": "react-vite",
+            "support": "supported",
+            "requiredCapabilities": []
+          },
+          {
+            "adapter": "next-app-router",
+            "support": "supported",
+            "requiredCapabilities": ["server-components"]
+          }
+        ],
+        "patchRules": ["Only install inside org-governed workspace routes."]
+      }
+    }
+  ],
+  "charts": [],
+  "shells": [],
+  "approvals": [
+    {
+      "id": "approval_acme_workspace_review_hub",
+      "registryId": "org/acme::template::workspace-review-hub",
+      "sourceId": "acme-internal",
+      "status": "approved",
+      "approver": "design-ops@acme.dev",
+      "scope": "org",
+      "notes": "Approved for governance and workspace settings flows.",
+      "approvedVersion": "1",
+      "approvedAt": "2026-03-16T08:30:00.000Z"
+    },
+    {
+      "id": "approval_dashboard_home_org",
+      "registryId": "shandapha::template::dashboard-home",
+      "sourceId": "acme-internal",
+      "status": "approved",
+      "approver": "design-ops@acme.dev",
+      "scope": "org",
+      "notes": "First-party dashboard template approved for internal rollout.",
+      "approvedVersion": "1",
+      "approvedAt": "2026-03-16T08:32:00.000Z"
+    }
+  ]
+}

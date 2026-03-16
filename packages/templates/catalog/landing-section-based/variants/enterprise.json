@@ -1,0 +1,7 @@
+{
+  "template": "landing-section-based",
+  "variant": "enterprise",
+  "title": "Landing Section Based - enterprise",
+  "related": ["pricing-basic", "faq", "contact"],
+  "featuredPackIds": ["normal", "glass", "neon"]
+}

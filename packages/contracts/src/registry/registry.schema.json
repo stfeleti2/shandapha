@@ -1,7 +1,25 @@
 {
   "type": "object",
-  "required": ["packs", "templates", "modules"],
+  "required": [
+    "version",
+    "frameworkAdapters",
+    "packs",
+    "templates",
+    "modules",
+    "components",
+    "blocks",
+    "charts",
+    "shells",
+    "workspaces"
+  ],
   "properties": {
+    "version": {
+      "type": "integer",
+      "const": 1
+    },
+    "frameworkAdapters": {
+      "type": "array"
+    },
     "packs": {
       "type": "array"
     },
@@ -9,6 +27,21 @@
       "type": "array"
     },
     "modules": {
+      "type": "array"
+    },
+    "components": {
+      "type": "array"
+    },
+    "blocks": {
+      "type": "array"
+    },
+    "charts": {
+      "type": "array"
+    },
+    "shells": {
+      "type": "array"
+    },
+    "workspaces": {
       "type": "array"
     }
   }

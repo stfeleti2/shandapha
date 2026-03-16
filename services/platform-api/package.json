@@ -14,6 +14,7 @@
     "start": "node --import tsx src/index.ts"
   },
   "dependencies": {
+    "@shandapha/business": "workspace:*",
     "@shandapha/contracts": "workspace:*",
     "@shandapha/entitlements": "workspace:*",
     "@shandapha/generator": "workspace:*",

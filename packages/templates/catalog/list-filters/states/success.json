@@ -1,0 +1,8 @@
+{
+  "template": "list-filters",
+  "state": "success",
+  "headline": "List Filters success",
+  "summary": "Dense index page with filters, saved views, bulk actions, and table affordances.",
+  "surfaces": ["data toolbar", "table baseline", "bulk action bar"],
+  "slots": ["toolbar", "table", "secondaryPanel"]
+}

@@ -1,0 +1,8 @@
+{
+  "template": "legal-layout",
+  "state": "loading",
+  "headline": "Legal Layout loading",
+  "summary": "Legal content layout with side navigation, trust accents, and article framing.",
+  "surfaces": ["docs shell", "sidebar", "article layout"],
+  "slots": ["sidebar", "article", "metaRail"]
+}

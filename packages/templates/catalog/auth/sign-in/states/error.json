@@ -1,0 +1,8 @@
+{
+  "template": "auth/sign-in",
+  "state": "error",
+  "headline": "Auth Sign In error",
+  "summary": "Sign in screen with trust copy, field groups, and help states.",
+  "surfaces": ["card", "field", "alert", "badge"],
+  "slots": ["authCard", "aside"]
+}

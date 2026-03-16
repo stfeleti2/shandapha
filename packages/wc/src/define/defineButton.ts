@@ -1,1 +1,1 @@
-export const buttonTagName = "shandapha-button";
+export { buttonTagName, defineButton } from "../index";

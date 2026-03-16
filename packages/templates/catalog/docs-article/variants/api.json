@@ -1,0 +1,7 @@
+{
+  "template": "docs-article",
+  "variant": "api",
+  "title": "Docs Article - api",
+  "related": ["docs-home", "legal-layout"],
+  "featuredPackIds": ["normal", "glass"]
+}

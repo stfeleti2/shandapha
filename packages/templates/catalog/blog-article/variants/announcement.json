@@ -1,0 +1,7 @@
+{
+  "template": "blog-article",
+  "variant": "announcement",
+  "title": "Blog Article - announcement",
+  "related": ["blog-index", "changelog"],
+  "featuredPackIds": ["normal", "glass", "neon"]
+}

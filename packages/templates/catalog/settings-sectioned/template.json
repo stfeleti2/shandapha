@@ -1,0 +1,57 @@
+{
+  "version": 1,
+  "slug": "settings-sectioned",
+  "name": "Settings Sectioned",
+  "group": "saas",
+  "shell": "SidebarShell",
+  "summary": "Settings shell with grouped controls, policy messaging, and status helpers.",
+  "states": ["loading", "empty", "error", "success", "no access"],
+  "variants": ["workspace", "account"],
+  "blocks": ["policy-panel", "settings-groups", "verification-steps"],
+  "related": ["form-create-edit", "team-roles-starter"],
+  "surfaces": [
+    "switches",
+    "radio groups",
+    "alert panels",
+    "verification lists"
+  ],
+  "featuredPackIds": ["normal", "glass"],
+  "dataContract": {
+    "entities": ["settingGroup", "policyRule", "verificationStep"],
+    "slots": ["sectionNav", "settingsBody", "statusRail"],
+    "outputs": ["settings map", "policy posture"],
+    "samples": ["settings.json", "policies.json"]
+  },
+  "frameworks": [
+    {
+      "adapter": "react-vite",
+      "support": "supported",
+      "notes": "Reference adapter and fastest path for local starters.",
+      "requiredCapabilities": []
+    },
+    {
+      "adapter": "next-app-router",
+      "support": "supported",
+      "notes": "Reference SSR-capable adapter for product starters.",
+      "requiredCapabilities": ["server-components"]
+    },
+    {
+      "adapter": "wc-universal",
+      "support": "experimental",
+      "notes": "Portable surface area is still being rebuilt around the WC baseline.",
+      "requiredCapabilities": ["custom-elements"]
+    },
+    {
+      "adapter": "blazor-wc",
+      "support": "experimental",
+      "notes": "Blazor currently installs through the WC bridge rather than a native adapter.",
+      "requiredCapabilities": ["custom-elements", "wc-interop"]
+    }
+  ],
+  "install": {
+    "requiredPackages": [],
+    "requiredRoutes": [],
+    "themeDependencies": ["theme.css", "tokens.json"],
+    "sampleDataBindings": ["settings.json", "policies.json"]
+  }
+}

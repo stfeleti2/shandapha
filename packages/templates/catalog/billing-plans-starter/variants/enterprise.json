@@ -1,0 +1,7 @@
+{
+  "template": "billing-plans-starter",
+  "variant": "enterprise",
+  "title": "Billing Plans Starter - enterprise",
+  "related": ["team-roles-starter", "dashboard-home"],
+  "featuredPackIds": ["normal", "glass", "neon"]
+}

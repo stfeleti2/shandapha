@@ -1,0 +1,7 @@
+{
+  "template": "blog-article",
+  "variant": "essay",
+  "title": "Blog Article - essay",
+  "related": ["blog-index", "changelog"],
+  "featuredPackIds": ["normal", "glass", "neon"]
+}

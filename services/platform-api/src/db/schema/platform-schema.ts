@@ -1,4 +1,10 @@
-import type { PackId, PlanId } from "@shandapha/contracts";
+import type {
+  CatalogApproval,
+  CatalogPolicy,
+  CatalogSourceManifest,
+  PackId,
+  PlanId,
+} from "@shandapha/contracts";
 import type { AuditEventRecord } from "../../modules/audit/domain/audit.entity";
 import type {
   AuthIdentity,
@@ -58,6 +64,9 @@ export interface PlatformStore {
   };
   registry: {
     syncJobs: RegistrySyncStatus[];
+    sourceManifests: CatalogSourceManifest[];
+    approvals: CatalogApproval[];
+    policies: CatalogPolicy[];
   };
 }
 

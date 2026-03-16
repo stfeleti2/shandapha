@@ -1,0 +1,52 @@
+{
+  "version": 1,
+  "slug": "auth/sign-up",
+  "name": "Auth Sign Up",
+  "group": "saas",
+  "shell": "AuthShell",
+  "summary": "Sign up flow with value framing, workspace defaults, and reassurance copy.",
+  "states": ["loading", "empty", "error", "success", "no access"],
+  "variants": ["invite", "self-serve"],
+  "blocks": ["auth/signup-01", "benefit-grid", "trust-copy"],
+  "related": ["auth/sign-in", "onboarding-3-step"],
+  "surfaces": ["card", "field", "button group", "benefit list"],
+  "featuredPackIds": ["normal", "glass", "neon"],
+  "dataContract": {
+    "entities": ["workspaceSeed", "inviteContext"],
+    "slots": ["authCard", "benefits"],
+    "outputs": ["workspace draft", "account details"],
+    "samples": ["sign-up.json"]
+  },
+  "frameworks": [
+    {
+      "adapter": "react-vite",
+      "support": "supported",
+      "notes": "Reference adapter and fastest path for local starters.",
+      "requiredCapabilities": []
+    },
+    {
+      "adapter": "next-app-router",
+      "support": "supported",
+      "notes": "Reference SSR-capable adapter for product starters.",
+      "requiredCapabilities": ["server-components"]
+    },
+    {
+      "adapter": "wc-universal",
+      "support": "experimental",
+      "notes": "Portable surface area is still being rebuilt around the WC baseline.",
+      "requiredCapabilities": ["custom-elements"]
+    },
+    {
+      "adapter": "blazor-wc",
+      "support": "experimental",
+      "notes": "Blazor currently installs through the WC bridge rather than a native adapter.",
+      "requiredCapabilities": ["custom-elements", "wc-interop"]
+    }
+  ],
+  "install": {
+    "requiredPackages": [],
+    "requiredRoutes": [],
+    "themeDependencies": ["theme.css", "tokens.json"],
+    "sampleDataBindings": ["sign-up.json"]
+  }
+}

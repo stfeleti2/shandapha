@@ -1,37 +1,67 @@
-import { buildRegistry } from "@shandapha/registry";
+import {
+  findCatalogItem,
+  loadCatalogConfig,
+  resolveRegistryCatalog,
+} from "@shandapha/registry";
 
 export type RegistryKind = "pack" | "template" | "module";
+type CatalogSnapshot = ReturnType<typeof resolveRegistryCatalog>;
 
-export function registryBridge() {
-  const registry = buildRegistry();
+export interface RegistryBridgeOptions {
+  catalogConfigPath?: string;
+  workspaceId?: string;
+}
 
+function loadCatalog(options?: RegistryBridgeOptions) {
+  return resolveRegistryCatalog({
+    catalogConfigPath: options?.catalogConfigPath,
+    workspaceId: options?.workspaceId,
+  });
+}
+
+function listKindItems(kind: RegistryKind, catalog: CatalogSnapshot) {
+  return catalog.items.filter((item) => item.kind === kind);
+}
+
+export function registryBridge(defaultOptions: RegistryBridgeOptions = {}) {
   return {
-    registry,
-    list(kind: RegistryKind) {
-      if (kind === "pack") {
-        return registry.packs.map((pack) => pack.slug);
-      }
-      if (kind === "template") {
-        return registry.templates.map((template) => template.slug);
-      }
-      return registry.modules.map((module) => module.id);
+    catalog(options?: RegistryBridgeOptions) {
+      return loadCatalog({
+        ...defaultOptions,
+        ...options,
+      });
     },
-    find(kind: RegistryKind, slug: string) {
-      if (kind === "pack") {
-        return registry.packs.find(
-          (pack) => pack.slug === slug || pack.id === slug,
-        );
-      }
-      if (kind === "template") {
-        return registry.templates.find((template) => template.slug === slug);
-      }
-      return registry.modules.find((module) => module.id === slug);
+    list(kind: RegistryKind, options?: RegistryBridgeOptions) {
+      return listKindItems(kind, this.catalog(options)).map(
+        (item) => item.registryId,
+      );
     },
-    describe() {
+    find(kind: RegistryKind, slugOrRegistryId: string, options?: RegistryBridgeOptions) {
+      return findCatalogItem(
+        this.catalog(options),
+        slugOrRegistryId,
+        kind,
+      );
+    },
+    describe(options?: RegistryBridgeOptions) {
+      const catalog = this.catalog(options);
+
       return {
-        packs: registry.packs.length,
-        templates: registry.templates.length,
-        modules: registry.modules.length,
+        packs: catalog.items.filter((item) => item.kind === "pack").length,
+        templates: catalog.items.filter((item) => item.kind === "template")
+          .length,
+        modules: catalog.items.filter((item) => item.kind === "module").length,
+        sources: catalog.sources.length,
+        warnings: catalog.warnings.length,
+      };
+    },
+    validateConfig(options?: RegistryBridgeOptions) {
+      const config = loadCatalogConfig(options?.catalogConfigPath);
+      const catalog = this.catalog(options);
+
+      return {
+        config,
+        catalog,
       };
     },
   };

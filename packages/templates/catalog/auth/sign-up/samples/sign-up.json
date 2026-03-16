@@ -1,0 +1,10 @@
+{
+  "template": "auth/sign-up",
+  "sample": "sign-up.json",
+  "entities": {
+    "workspaceSeed": "workspaceSeed-1",
+    "inviteContext": "inviteContext-2"
+  },
+  "slots": ["authCard", "benefits"],
+  "outputs": ["workspace draft", "account details"]
+}

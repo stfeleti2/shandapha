@@ -1,0 +1,62 @@
+{
+  "version": 1,
+  "slug": "dashboard-home",
+  "name": "Dashboard Home",
+  "group": "saas",
+  "shell": "AdminShell",
+  "summary": "Overview shell with KPI rails, chart cards, activity cards, and action slots.",
+  "states": ["loading", "empty", "error", "success", "no access"],
+  "variants": ["executive", "ops", "support"],
+  "blocks": [
+    "dashboard-01",
+    "dashboard-sidebar",
+    "chart-area",
+    "datatable-basic"
+  ],
+  "related": ["list-filters", "billing-plans-starter", "team-roles-starter"],
+  "surfaces": [
+    "chart container",
+    "data table baseline",
+    "sidebar shell",
+    "section cards"
+  ],
+  "featuredPackIds": ["normal", "glass", "neon"],
+  "dataContract": {
+    "entities": ["workspace", "usageMetric", "member", "auditEntry"],
+    "slots": ["heroActions", "kpiRail", "chartRegion", "tableRegion"],
+    "outputs": ["dashboard overview", "trend summary", "team activity"],
+    "samples": ["workspace-summary.json", "usage-timeseries.json"]
+  },
+  "frameworks": [
+    {
+      "adapter": "react-vite",
+      "support": "supported",
+      "notes": "Reference adapter and fastest path for local starters.",
+      "requiredCapabilities": []
+    },
+    {
+      "adapter": "next-app-router",
+      "support": "supported",
+      "notes": "Reference SSR-capable adapter for product starters.",
+      "requiredCapabilities": ["server-components"]
+    },
+    {
+      "adapter": "wc-universal",
+      "support": "experimental",
+      "notes": "Portable surface area is still being rebuilt around the WC baseline.",
+      "requiredCapabilities": ["custom-elements"]
+    },
+    {
+      "adapter": "blazor-wc",
+      "support": "experimental",
+      "notes": "Blazor currently installs through the WC bridge rather than a native adapter.",
+      "requiredCapabilities": ["custom-elements", "wc-interop"]
+    }
+  ],
+  "install": {
+    "requiredPackages": [],
+    "requiredRoutes": [],
+    "themeDependencies": ["theme.css", "tokens.json"],
+    "sampleDataBindings": ["workspace-summary.json", "usage-timeseries.json"]
+  }
+}

@@ -1,0 +1,232 @@
+:root {
+  --sh-accent-dark: oklch(0.371 0 0);
+  --sh-accent-foreground-dark: oklch(0.985 0 0);
+  --sh-accent-foreground-light: oklch(0.205 0 0);
+  --sh-accent-light: oklch(0.97 0 0);
+  --sh-background-dark: oklch(0.145 0 0);
+  --sh-background-light: oklch(1 0 0);
+  --sh-border-dark: oklch(1 0 0 / 10%);
+  --sh-border-light: oklch(0.922 0 0);
+  --sh-card-dark: oklch(0.205 0 0);
+  --sh-card-foreground-dark: oklch(0.985 0 0);
+  --sh-card-foreground-light: oklch(0.145 0 0);
+  --sh-card-light: oklch(1 0 0);
+  --sh-chart-1-dark: #93c5fd;
+  --sh-chart-1-light: #93c5fd;
+  --sh-chart-2-dark: #3b82f6;
+  --sh-chart-2-light: #3b82f6;
+  --sh-chart-3-dark: #2563eb;
+  --sh-chart-3-light: #2563eb;
+  --sh-chart-4-dark: #1d4ed8;
+  --sh-chart-4-light: #1d4ed8;
+  --sh-chart-5-dark: #1e40af;
+  --sh-chart-5-light: #1e40af;
+  --sh-code-dark: oklch(0.2 0 0);
+  --sh-code-foreground-dark: oklch(0.708 0 0);
+  --sh-code-foreground-light: oklch(0.145 0 0);
+  --sh-code-highlight-dark: oklch(0.27 0 0);
+  --sh-code-highlight-light: oklch(0.96 0 0);
+  --sh-code-light: oklch(0.98 0 0);
+  --sh-code-number-dark: oklch(0.72 0 0);
+  --sh-code-number-light: oklch(0.56 0 0);
+  --sh-density: comfortable;
+  --sh-destructive-dark: oklch(0.704 0.191 22.216);
+  --sh-destructive-foreground-dark: oklch(0.58 0.22 27);
+  --sh-destructive-foreground-light: oklch(0.97 0.01 17);
+  --sh-destructive-light: oklch(0.577 0.245 27.325);
+  --sh-font-body: 'Inter', ui-sans-serif, system-ui, sans-serif;
+  --sh-font-display: 'Inter', ui-sans-serif, system-ui, sans-serif;
+  --sh-font-mono: 'IBM Plex Mono', ui-monospace, SFMono-Regular, monospace;
+  --sh-foreground-dark: oklch(0.985 0 0);
+  --sh-foreground-light: oklch(0.145 0 0);
+  --sh-input-dark: oklch(1 0 0 / 15%);
+  --sh-input-light: oklch(0.922 0 0);
+  --sh-motion-fast: 150ms;
+  --sh-motion-normal: 170ms;
+  --sh-motion-slow: 240ms;
+  --sh-muted-dark: oklch(0.269 0 0);
+  --sh-muted-foreground-dark: oklch(0.708 0 0);
+  --sh-muted-foreground-light: oklch(0.556 0 0);
+  --sh-muted-light: oklch(0.97 0 0);
+  --sh-pack-id: normal;
+  --sh-popover-dark: oklch(0.205 0 0);
+  --sh-popover-foreground-dark: oklch(0.985 0 0);
+  --sh-popover-foreground-light: oklch(0.145 0 0);
+  --sh-popover-light: oklch(1 0 0);
+  --sh-primary-dark: oklch(0.922 0 0);
+  --sh-primary-foreground-dark: oklch(0.205 0 0);
+  --sh-primary-foreground-light: oklch(0.985 0 0);
+  --sh-primary-light: oklch(0.205 0 0);
+  --sh-radius-full: 999px;
+  --sh-radius-lg: 0.625rem;
+  --sh-radius-md: calc(0.625rem * 0.8);
+  --sh-radius-sm: calc(0.625rem * 0.6);
+  --sh-radius-xl: calc(0.625rem * 1.4);
+  --sh-ring-dark: oklch(0.556 0 0);
+  --sh-ring-light: oklch(0.708 0 0);
+  --sh-secondary-dark: oklch(0.269 0 0);
+  --sh-secondary-foreground-dark: oklch(0.985 0 0);
+  --sh-secondary-foreground-light: oklch(0.205 0 0);
+  --sh-secondary-light: oklch(0.97 0 0);
+  --sh-selection-dark: oklch(0.922 0 0);
+  --sh-selection-foreground-dark: oklch(0.205 0 0);
+  --sh-selection-foreground-light: oklch(1 0 0);
+  --sh-selection-light: oklch(0.145 0 0);
+  --sh-sidebar-accent-dark: oklch(0.269 0 0);
+  --sh-sidebar-accent-foreground-dark: oklch(0.985 0 0);
+  --sh-sidebar-accent-foreground-light: oklch(0.205 0 0);
+  --sh-sidebar-accent-light: oklch(0.97 0 0);
+  --sh-sidebar-border-dark: oklch(1 0 0 / 10%);
+  --sh-sidebar-border-light: oklch(0.922 0 0);
+  --sh-sidebar-dark: oklch(0.205 0 0);
+  --sh-sidebar-foreground-dark: oklch(0.985 0 0);
+  --sh-sidebar-foreground-light: oklch(0.145 0 0);
+  --sh-sidebar-light: oklch(0.985 0 0);
+  --sh-sidebar-primary-dark: oklch(0.922 0 0);
+  --sh-sidebar-primary-foreground-dark: oklch(0.205 0 0);
+  --sh-sidebar-primary-foreground-light: oklch(0.985 0 0);
+  --sh-sidebar-primary-light: oklch(0.205 0 0);
+  --sh-sidebar-ring-dark: oklch(0.556 0 0);
+  --sh-sidebar-ring-light: oklch(0.708 0 0);
+  --sh-surface-dark: oklch(0.2 0 0);
+  --sh-surface-foreground-dark: oklch(0.708 0 0);
+  --sh-surface-foreground-light: oklch(0.145 0 0);
+  --sh-surface-light: oklch(0.98 0 0);
+  --color-background: var(--sh-background-light);
+  --color-foreground: var(--sh-foreground-light);
+  --color-card: var(--sh-card-light);
+  --color-card-foreground: var(--sh-card-foreground-light);
+  --color-popover: var(--sh-popover-light);
+  --color-popover-foreground: var(--sh-popover-foreground-light);
+  --color-primary: var(--sh-primary-light);
+  --color-primary-foreground: var(--sh-primary-foreground-light);
+  --color-secondary: var(--sh-secondary-light);
+  --color-secondary-foreground: var(--sh-secondary-foreground-light);
+  --color-muted: var(--sh-muted-light);
+  --color-muted-foreground: var(--sh-muted-foreground-light);
+  --color-accent: var(--sh-accent-light);
+  --color-accent-foreground: var(--sh-accent-foreground-light);
+  --color-destructive: var(--sh-destructive-light);
+  --color-destructive-foreground: var(--sh-destructive-foreground-light);
+  --color-border: var(--sh-border-light);
+  --color-input: var(--sh-input-light);
+  --color-ring: var(--sh-ring-light);
+  --color-chart-1: var(--sh-chart-1-light);
+  --color-chart-2: var(--sh-chart-2-light);
+  --color-chart-3: var(--sh-chart-3-light);
+  --color-chart-4: var(--sh-chart-4-light);
+  --color-chart-5: var(--sh-chart-5-light);
+  --color-sidebar: var(--sh-sidebar-light);
+  --color-sidebar-foreground: var(--sh-sidebar-foreground-light);
+  --color-sidebar-primary: var(--sh-sidebar-primary-light);
+  --color-sidebar-primary-foreground: var(--sh-sidebar-primary-foreground-light);
+  --color-sidebar-accent: var(--sh-sidebar-accent-light);
+  --color-sidebar-accent-foreground: var(--sh-sidebar-accent-foreground-light);
+  --color-sidebar-border: var(--sh-sidebar-border-light);
+  --color-sidebar-ring: var(--sh-sidebar-ring-light);
+  --color-surface: var(--sh-surface-light);
+  --color-surface-foreground: var(--sh-surface-foreground-light);
+  --color-code: var(--sh-code-light);
+  --color-code-foreground: var(--sh-code-foreground-light);
+  --color-code-highlight: var(--sh-code-highlight-light);
+  --color-code-number: var(--sh-code-number-light);
+  --color-selection: var(--sh-selection-light);
+  --color-selection-foreground: var(--sh-selection-foreground-light);
+  color-scheme: light;
+  font-family: var(--sh-font-body);
+}
+
+.dark, [data-theme-mode="dark"] {
+  --color-background: var(--sh-background-dark);
+  --color-foreground: var(--sh-foreground-dark);
+  --color-card: var(--sh-card-dark);
+  --color-card-foreground: var(--sh-card-foreground-dark);
+  --color-popover: var(--sh-popover-dark);
+  --color-popover-foreground: var(--sh-popover-foreground-dark);
+  --color-primary: var(--sh-primary-dark);
+  --color-primary-foreground: var(--sh-primary-foreground-dark);
+  --color-secondary: var(--sh-secondary-dark);
+  --color-secondary-foreground: var(--sh-secondary-foreground-dark);
+  --color-muted: var(--sh-muted-dark);
+  --color-muted-foreground: var(--sh-muted-foreground-dark);
+  --color-accent: var(--sh-accent-dark);
+  --color-accent-foreground: var(--sh-accent-foreground-dark);
+  --color-destructive: var(--sh-destructive-dark);
+  --color-destructive-foreground: var(--sh-destructive-foreground-dark);
+  --color-border: var(--sh-border-dark);
+  --color-input: var(--sh-input-dark);
+  --color-ring: var(--sh-ring-dark);
+  --color-chart-1: var(--sh-chart-1-dark);
+  --color-chart-2: var(--sh-chart-2-dark);
+  --color-chart-3: var(--sh-chart-3-dark);
+  --color-chart-4: var(--sh-chart-4-dark);
+  --color-chart-5: var(--sh-chart-5-dark);
+  --color-sidebar: var(--sh-sidebar-dark);
+  --color-sidebar-foreground: var(--sh-sidebar-foreground-dark);
+  --color-sidebar-primary: var(--sh-sidebar-primary-dark);
+  --color-sidebar-primary-foreground: var(--sh-sidebar-primary-foreground-dark);
+  --color-sidebar-accent: var(--sh-sidebar-accent-dark);
+  --color-sidebar-accent-foreground: var(--sh-sidebar-accent-foreground-dark);
+  --color-sidebar-border: var(--sh-sidebar-border-dark);
+  --color-sidebar-ring: var(--sh-sidebar-ring-dark);
+  --color-surface: var(--sh-surface-dark);
+  --color-surface-foreground: var(--sh-surface-foreground-dark);
+  --color-code: var(--sh-code-dark);
+  --color-code-foreground: var(--sh-code-foreground-dark);
+  --color-code-highlight: var(--sh-code-highlight-dark);
+  --color-code-number: var(--sh-code-number-dark);
+  --color-selection: var(--sh-selection-dark);
+  --color-selection-foreground: var(--sh-selection-foreground-dark);
+  color-scheme: dark;
+}
+
+html, body {
+  margin: 0;
+  min-height: 100%;
+  background: var(--color-background);
+  color: var(--color-foreground);
+  font-family: var(--sh-font-body);
+}
+
+body {
+  padding: 24px;
+}
+
+main {
+  max-width: 1120px;
+  margin: 0 auto;
+}
+
+.sh-shell {
+  display: grid;
+  gap: 24px;
+}
+
+.sh-card {
+  border: 1px solid var(--color-border);
+  border-radius: var(--sh-radius-lg);
+  background: var(--color-card);
+  color: var(--color-card-foreground);
+  padding: 24px;
+}
+
+a {
+  color: inherit;
+}
+
+button, a, input, select, textarea {
+  font: inherit;
+}
+
+*:focus-visible {
+  outline: 2px solid var(--color-ring);
+  outline-offset: 2px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0ms !important;
+    transition-duration: 0ms !important;
+    scroll-behavior: auto !important;
+  }
+}

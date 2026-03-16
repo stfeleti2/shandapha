@@ -1,0 +1,11 @@
+export default function DocsArticlePage() {
+  return (
+    <main data-template="docs-article">
+      <h1>Docs Article</h1>
+      <p>
+        Article layout with metadata, code samples, registry notes, and sibling
+        nav.
+      </p>
+    </main>
+  );
+}

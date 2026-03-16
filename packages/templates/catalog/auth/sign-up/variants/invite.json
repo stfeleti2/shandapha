@@ -1,0 +1,7 @@
+{
+  "template": "auth/sign-up",
+  "variant": "invite",
+  "title": "Auth Sign Up - invite",
+  "related": ["auth/sign-in", "onboarding-3-step"],
+  "featuredPackIds": ["normal", "glass", "neon"]
+}

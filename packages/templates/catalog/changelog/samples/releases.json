@@ -1,0 +1,11 @@
+{
+  "template": "changelog",
+  "sample": "releases.json",
+  "entities": {
+    "release": "release-1",
+    "upgradeNote": "upgradeNote-2",
+    "registryItem": "registryItem-3"
+  },
+  "slots": ["releaseFeed", "upgradeGuide", "registrySummary"],
+  "outputs": ["changelog page"]
+}

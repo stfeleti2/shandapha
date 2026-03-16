@@ -1,0 +1,7 @@
+{
+  "template": "docs-article",
+  "variant": "concept",
+  "title": "Docs Article - concept",
+  "related": ["docs-home", "legal-layout"],
+  "featuredPackIds": ["normal", "glass"]
+}

@@ -1,0 +1,12 @@
+{
+  "template": "dashboard-home",
+  "sample": "usage-timeseries.json",
+  "entities": {
+    "workspace": "workspace-1",
+    "usageMetric": "usageMetric-2",
+    "member": "member-3",
+    "auditEntry": "auditEntry-4"
+  },
+  "slots": ["heroActions", "kpiRail", "chartRegion", "tableRegion"],
+  "outputs": ["dashboard overview", "trend summary", "team activity"]
+}

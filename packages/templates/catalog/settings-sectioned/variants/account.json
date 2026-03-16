@@ -1,0 +1,7 @@
+{
+  "template": "settings-sectioned",
+  "variant": "account",
+  "title": "Settings Sectioned - account",
+  "related": ["form-create-edit", "team-roles-starter"],
+  "featuredPackIds": ["normal", "glass"]
+}

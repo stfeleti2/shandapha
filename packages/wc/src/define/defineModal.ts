@@ -1,1 +1,1 @@
-export const modalTagName = "shandapha-modal";
+export { defineModal, modalTagName } from "../index";

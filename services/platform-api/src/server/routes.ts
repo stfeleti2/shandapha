@@ -1,4 +1,3 @@
-import { buildRegistry } from "@shandapha/registry";
 import { platformMigrations } from "../db/migrations/platform-migrations";
 import { platformSchema } from "../db/schema/platform-schema";
 import { summarizeEmailJobs } from "../jobs/emails/email.job";
@@ -15,6 +14,7 @@ import { telemetryRoutes } from "../modules/telemetry/api/telemetry.routes";
 import { workspacesRoutes } from "../modules/workspaces/api/workspaces.routes";
 
 export interface PlatformRouteContext {
+  body: unknown;
   pathname: string;
   query: URLSearchParams;
   request: Request;
@@ -22,14 +22,12 @@ export interface PlatformRouteContext {
 }
 
 export interface PlatformRoute {
-  method: "GET";
+  method: "GET" | "POST" | "PATCH";
   path: string;
   handler: (context: PlatformRouteContext) => Promise<unknown> | unknown;
 }
 
 export function createRoutes(): PlatformRoute[] {
-  const registry = buildRegistry();
-
   return [
     {
       method: "GET",
@@ -49,11 +47,6 @@ export function createRoutes(): PlatformRoute[] {
           registrySync: summarizeRegistrySyncJobs(),
         },
       }),
-    },
-    {
-      method: "GET",
-      path: "/api/registry/catalog",
-      handler: () => registry,
     },
     ...authRoutes,
     ...workspacesRoutes,

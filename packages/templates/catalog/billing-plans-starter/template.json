@@ -1,0 +1,52 @@
+{
+  "version": 1,
+  "slug": "billing-plans-starter",
+  "name": "Billing Plans Starter",
+  "group": "saas",
+  "shell": "AdminShell",
+  "summary": "Pricing and usage starter with entitlements framing, usage bars, and trust copy.",
+  "states": ["loading", "empty", "error", "success", "no access"],
+  "variants": ["founder", "enterprise"],
+  "blocks": ["pricing-grid", "usage-summary", "entitlement-summary"],
+  "related": ["team-roles-starter", "dashboard-home"],
+  "surfaces": ["cards", "progress bars", "badges", "comparison table"],
+  "featuredPackIds": ["normal", "glass", "neon"],
+  "dataContract": {
+    "entities": ["plan", "limit", "usageMetric"],
+    "slots": ["planCards", "usageSummary", "upgradeRail"],
+    "outputs": ["plan comparison", "usage posture"],
+    "samples": ["plans.json", "usage.json"]
+  },
+  "frameworks": [
+    {
+      "adapter": "react-vite",
+      "support": "supported",
+      "notes": "Reference adapter and fastest path for local starters.",
+      "requiredCapabilities": []
+    },
+    {
+      "adapter": "next-app-router",
+      "support": "supported",
+      "notes": "Reference SSR-capable adapter for product starters.",
+      "requiredCapabilities": ["server-components"]
+    },
+    {
+      "adapter": "wc-universal",
+      "support": "experimental",
+      "notes": "Portable surface area is still being rebuilt around the WC baseline.",
+      "requiredCapabilities": ["custom-elements"]
+    },
+    {
+      "adapter": "blazor-wc",
+      "support": "experimental",
+      "notes": "Blazor currently installs through the WC bridge rather than a native adapter.",
+      "requiredCapabilities": ["custom-elements", "wc-interop"]
+    }
+  ],
+  "install": {
+    "requiredPackages": [],
+    "requiredRoutes": [],
+    "themeDependencies": ["theme.css", "tokens.json"],
+    "sampleDataBindings": ["plans.json", "usage.json"]
+  }
+}

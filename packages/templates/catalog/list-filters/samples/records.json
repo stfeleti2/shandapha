@@ -1,0 +1,11 @@
+{
+  "template": "list-filters",
+  "sample": "records.json",
+  "entities": {
+    "record": "record-1",
+    "savedView": "savedView-2",
+    "filterOption": "filterOption-3"
+  },
+  "slots": ["toolbar", "table", "secondaryPanel"],
+  "outputs": ["filtered list", "saved view metadata"]
+}

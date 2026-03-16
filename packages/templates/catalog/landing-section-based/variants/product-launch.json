@@ -1,0 +1,7 @@
+{
+  "template": "landing-section-based",
+  "variant": "product launch",
+  "title": "Landing Section Based - product launch",
+  "related": ["pricing-basic", "faq", "contact"],
+  "featuredPackIds": ["normal", "glass", "neon"]
+}

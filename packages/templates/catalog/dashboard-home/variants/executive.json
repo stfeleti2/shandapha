@@ -1,0 +1,7 @@
+{
+  "template": "dashboard-home",
+  "variant": "executive",
+  "title": "Dashboard Home - executive",
+  "related": ["list-filters", "billing-plans-starter", "team-roles-starter"],
+  "featuredPackIds": ["normal", "glass", "neon"]
+}

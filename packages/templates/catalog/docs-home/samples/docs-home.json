@@ -1,0 +1,11 @@
+{
+  "template": "docs-home",
+  "sample": "docs-home.json",
+  "entities": {
+    "docCategory": "docCategory-1",
+    "quickstart": "quickstart-2",
+    "registryItem": "registryItem-3"
+  },
+  "slots": ["hero", "categoryGrid", "quickstarts", "registrySummary"],
+  "outputs": ["docs landing"]
+}

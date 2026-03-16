@@ -14,5 +14,11 @@ describe("platform routes", () => {
     expect(
       routes.some((route) => route.path === "/api/workspaces/detail"),
     ).toBe(true);
+    expect(routes.some((route) => route.path === "/api/registry/sources")).toBe(
+      true,
+    );
+    expect(routes.some((route) => route.path === "/api/policies/check")).toBe(
+      true,
+    );
   });
 });

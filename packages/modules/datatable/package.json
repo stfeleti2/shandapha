@@ -12,7 +12,10 @@
     "test": "vitest run"
   },
   "dependencies": {
-    "@shandapha/contracts": "workspace:*"
+    "@shandapha/contracts": "workspace:*",
+    "@shandapha/core": "workspace:*",
+    "@tanstack/react-table": "^8.21.3",
+    "react": "^19.2.4"
   },
   "shandapha": {
     "moduleManifest": {
@@ -20,7 +23,44 @@
       "name": "Advanced DataTable",
       "packageName": "@shandapha/module-datatable",
       "description": "Client/server table workflows with saved views, pinning, resizing, and export.",
-      "premium": true
+      "premium": true,
+      "minimumPlan": "premium",
+      "status": "installable",
+      "capabilities": {
+        "free": [
+          "client-mode",
+          "filtering",
+          "sorting",
+          "selection",
+          "sticky-header",
+          "pagination",
+          "toolbar-baseline"
+        ],
+        "premium": [
+          "virtualization",
+          "pinning",
+          "resizing",
+          "csv-export",
+          "toolbar-variants",
+          "personal-saved-views"
+        ],
+        "business": [
+          "server-mode-helpers",
+          "org-saved-views",
+          "audit-export",
+          "permissions-hooks",
+          "shared-view-state"
+        ]
+      },
+      "install": {
+        "requiredPackages": [
+          "@tanstack/react-table"
+        ],
+        "requiredRoutes": [
+          "/verification/datatable"
+        ],
+        "frameworks": []
+      }
     }
   },
   "devDependencies": {},

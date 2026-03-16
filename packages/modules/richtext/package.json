@@ -19,8 +19,22 @@
       "id": "richtext",
       "name": "Rich Text",
       "packageName": "@shandapha/module-richtext",
-      "description": "Scaffolded rich text editing seam for future content workflows.",
-      "premium": true
+      "description": "Deferred rich text seam kept parked until there is a real install path.",
+      "premium": true,
+      "minimumPlan": "premium",
+      "status": "deferred",
+      "capabilities": {
+        "free": [],
+        "premium": [
+          "deferred"
+        ],
+        "business": []
+      },
+      "install": {
+        "requiredPackages": [],
+        "requiredRoutes": [],
+        "frameworks": []
+      }
     }
   },
   "devDependencies": {},

@@ -1,0 +1,7 @@
+{
+  "template": "detail-tabs-timeline",
+  "variant": "b2b account",
+  "title": "Detail Tabs Timeline - b2b account",
+  "related": ["list-filters", "settings-sectioned"],
+  "featuredPackIds": ["normal", "glass"]
+}

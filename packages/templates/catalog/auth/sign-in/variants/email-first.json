@@ -1,0 +1,7 @@
+{
+  "template": "auth/sign-in",
+  "variant": "email-first",
+  "title": "Auth Sign In - email-first",
+  "related": ["auth/sign-up", "auth/forgot"],
+  "featuredPackIds": ["normal", "glass"]
+}

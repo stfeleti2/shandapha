@@ -1,0 +1,7 @@
+{
+  "template": "team-roles-starter",
+  "variant": "customer admin",
+  "title": "Team Roles Starter - customer admin",
+  "related": ["billing-plans-starter", "settings-sectioned"],
+  "featuredPackIds": ["normal", "glass"]
+}

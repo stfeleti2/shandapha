@@ -1,0 +1,7 @@
+{
+  "template": "form-create-edit",
+  "variant": "single column",
+  "title": "Form Create Edit - single column",
+  "related": ["settings-sectioned", "auth/sign-up"],
+  "featuredPackIds": ["normal", "glass", "neon"]
+}

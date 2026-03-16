@@ -1,0 +1,7 @@
+{
+  "template": "blog-index",
+  "variant": "product",
+  "title": "Blog Index - product",
+  "related": ["blog-article", "changelog"],
+  "featuredPackIds": ["normal", "glass", "neon"]
+}

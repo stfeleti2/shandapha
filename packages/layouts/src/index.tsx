@@ -1,15 +1,20 @@
 import {
+  LAYOUT_PRESET_IDS,
+  type LayoutPreset,
+  type TemplateManifest,
+} from "@shandapha/contracts";
+import {
   Badge,
   Breadcrumb,
   BreadcrumbItem,
   BreadcrumbList,
   BreadcrumbPage,
-  Button,
   Card,
   CardContent,
   CardDescription,
   CardHeader,
   CardTitle,
+  cn,
   Sidebar,
   SidebarContent,
   SidebarGroup,
@@ -24,7 +29,6 @@ import {
   SidebarRail,
   SidebarSeparator,
   SidebarTrigger,
-  cn,
 } from "@shandapha/core";
 import type { PropsWithChildren, ReactNode } from "react";
 
@@ -35,11 +39,7 @@ interface BoxProps extends PropsWithChildren {
   className?: string;
 }
 
-export function Container({
-  children,
-  maxWidth = 1280,
-  className,
-}: BoxProps) {
+export function Container({ children, maxWidth = 1280, className }: BoxProps) {
   return (
     <div
       className={cn("mx-auto w-full px-4 sm:px-6 lg:px-8", className)}
@@ -50,11 +50,7 @@ export function Container({
   );
 }
 
-export function Section({
-  children,
-  title,
-  className,
-}: BoxProps) {
+export function Section({ children, title, className }: BoxProps) {
   return (
     <section className={cn("py-12 sm:py-16", className)}>
       {title ? (
@@ -67,11 +63,7 @@ export function Section({
   );
 }
 
-export function Surface({
-  children,
-  title,
-  className,
-}: BoxProps) {
+export function Surface({ children, title, className }: BoxProps) {
   return (
     <Card className={cn("gap-4", className)}>
       {title ? (
@@ -140,7 +132,9 @@ export function PageHeader({
             </div>
           ) : null}
         </div>
-        {actions ? <div className="flex items-center gap-3">{actions}</div> : null}
+        {actions ? (
+          <div className="flex items-center gap-3">{actions}</div>
+        ) : null}
       </div>
     </div>
   );
@@ -149,17 +143,21 @@ export function PageHeader({
 export const gridPresets = {
   dashboard: "grid grid-cols-1 gap-4 lg:grid-cols-12",
   list: "grid grid-cols-1 gap-4 lg:grid-cols-[minmax(240px,300px)_minmax(0,1fr)]",
-  detail: "grid grid-cols-1 gap-4 xl:grid-cols-[minmax(0,1.7fr)_minmax(320px,0.9fr)]",
+  detail:
+    "grid grid-cols-1 gap-4 xl:grid-cols-[minmax(0,1.7fr)_minmax(320px,0.9fr)]",
   form: "grid grid-cols-1 gap-4 xl:grid-cols-[minmax(0,760px)_minmax(280px,1fr)]",
   marketing: "grid grid-cols-1 gap-6",
+  docs: "grid grid-cols-1 gap-4 xl:grid-cols-[minmax(240px,300px)_minmax(0,1fr)]",
 } as const;
+
+export const approvedLayoutPresets = [...LAYOUT_PRESET_IDS] as LayoutPreset[];
 
 export function GridPreset({
   preset,
   children,
   className,
 }: PropsWithChildren<{
-  preset: keyof typeof gridPresets;
+  preset: LayoutPreset;
   className?: string;
 }>) {
   return <div className={cn(gridPresets[preset], className)}>{children}</div>;
@@ -167,6 +165,16 @@ export function GridPreset({
 
 export function driftCheck(spacing: number) {
   return spacing <= 32 && spacing % 4 === 0;
+}
+
+export function validateLayoutPreset(preset: string): preset is LayoutPreset {
+  return approvedLayoutPresets.includes(preset as LayoutPreset);
+}
+
+export function validateTemplateLayout(
+  template: Pick<TemplateManifest, "slug" | "layoutPreset">,
+) {
+  return validateLayoutPreset(template.layoutPreset);
 }
 
 interface NavLink {
@@ -195,7 +203,11 @@ export function MarketingShell({
         <div className="border-b border-border/70 bg-background">
           <Container>
             <Section title={eyebrow} className="py-8 sm:py-12">
-              <PageHeader title={title} description={summary} actions={actions} />
+              <PageHeader
+                title={title}
+                description={summary}
+                actions={actions}
+              />
             </Section>
           </Container>
         </div>
@@ -247,9 +259,9 @@ export function DocsShell({
             {breadcrumbs?.length ? (
               <Breadcrumb>
                 <BreadcrumbList>
-                  {breadcrumbs.map((crumb, index) => (
-                    <BreadcrumbItem key={`${crumb}-${index}`}>
-                      {index === breadcrumbs.length - 1 ? (
+                  {breadcrumbs.map((crumb) => (
+                    <BreadcrumbItem key={crumb}>
+                      {crumb === breadcrumbs[breadcrumbs.length - 1] ? (
                         <BreadcrumbPage>{crumb}</BreadcrumbPage>
                       ) : (
                         <span>{crumb}</span>
@@ -260,7 +272,12 @@ export function DocsShell({
               </Breadcrumb>
             ) : null}
             {title ? (
-              <PageHeader title={title} eyebrow={eyebrow} description={summary} actions={actions} />
+              <PageHeader
+                title={title}
+                eyebrow={eyebrow}
+                description={summary}
+                actions={actions}
+              />
             ) : null}
             {children}
           </div>
@@ -290,7 +307,12 @@ export function SidebarShell({
         <GridPreset preset="detail" className="items-start">
           <div className="grid gap-6">
             {title ? (
-              <PageHeader title={title} eyebrow={eyebrow} description={summary} actions={actions} />
+              <PageHeader
+                title={title}
+                eyebrow={eyebrow}
+                description={summary}
+                actions={actions}
+              />
             ) : null}
             {children}
           </div>
@@ -411,7 +433,12 @@ export function AdminShell({
         </header>
         <Container className="py-6">
           {title ? (
-            <PageHeader title={title} eyebrow={eyebrow} description={summary} actions={actions} />
+            <PageHeader
+              title={title}
+              eyebrow={eyebrow}
+              description={summary}
+              actions={actions}
+            />
           ) : null}
           <div className="mt-6 grid gap-6">{children}</div>
         </Container>
@@ -420,11 +447,7 @@ export function AdminShell({
   );
 }
 
-export function MarketingShellNav({
-  items,
-}: {
-  items: NavLink[];
-}) {
+export function MarketingShellNav({ items }: { items: NavLink[] }) {
   return (
     <Inline gap={10} className="text-sm">
       {items.map((item) => (

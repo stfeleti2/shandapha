@@ -1,0 +1,11 @@
+{
+  "template": "landing-section-based",
+  "sample": "landing-content.json",
+  "entities": {
+    "feature": "feature-1",
+    "quote": "quote-2",
+    "metric": "metric-3"
+  },
+  "slots": ["hero", "proof", "sections", "cta"],
+  "outputs": ["marketing page"]
+}

@@ -1,0 +1,8 @@
+{
+  "template": "pricing-basic",
+  "state": "success",
+  "headline": "Pricing Basic success",
+  "summary": "Simple pricing surface with trust copy, FAQ handoff, and upgrade moments.",
+  "surfaces": ["cards", "comparison rows", "badge highlights"],
+  "slots": ["pricingGrid", "faq", "cta"]
+}

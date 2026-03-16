@@ -1,0 +1,52 @@
+{
+  "version": 1,
+  "slug": "landing-section-based",
+  "name": "Landing Section Based",
+  "group": "marketing",
+  "shell": "MarketingShell",
+  "summary": "Modular marketing shell for hero-to-CTA launches with registry-backed sections.",
+  "states": ["loading", "empty", "error", "success", "no access"],
+  "variants": ["product launch", "enterprise"],
+  "blocks": ["marketing-hero", "feature-grid", "logo-strip", "cta-banner"],
+  "related": ["pricing-basic", "faq", "contact"],
+  "surfaces": ["marketing shell", "hero cards", "feature grids", "cta footer"],
+  "featuredPackIds": ["normal", "glass", "neon"],
+  "dataContract": {
+    "entities": ["feature", "quote", "metric"],
+    "slots": ["hero", "proof", "sections", "cta"],
+    "outputs": ["marketing page"],
+    "samples": ["landing-content.json"]
+  },
+  "frameworks": [
+    {
+      "adapter": "react-vite",
+      "support": "supported",
+      "notes": "Reference adapter and fastest path for local starters.",
+      "requiredCapabilities": []
+    },
+    {
+      "adapter": "next-app-router",
+      "support": "supported",
+      "notes": "Reference SSR-capable adapter for product starters.",
+      "requiredCapabilities": ["server-components"]
+    },
+    {
+      "adapter": "wc-universal",
+      "support": "experimental",
+      "notes": "Portable surface area is still being rebuilt around the WC baseline.",
+      "requiredCapabilities": ["custom-elements"]
+    },
+    {
+      "adapter": "blazor-wc",
+      "support": "experimental",
+      "notes": "Blazor currently installs through the WC bridge rather than a native adapter.",
+      "requiredCapabilities": ["custom-elements", "wc-interop"]
+    }
+  ],
+  "install": {
+    "requiredPackages": [],
+    "requiredRoutes": [],
+    "themeDependencies": ["theme.css", "tokens.json"],
+    "sampleDataBindings": ["landing-content.json"]
+  }
+}

@@ -1,0 +1,8 @@
+{
+  "template": "form-create-edit",
+  "state": "loading",
+  "headline": "Form Create Edit loading",
+  "summary": "Structured create/edit flows with helper copy, sections, and action rails.",
+  "surfaces": ["field", "input group", "validation", "success state"],
+  "slots": ["hero", "formSections", "aside"]
+}

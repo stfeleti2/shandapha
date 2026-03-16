@@ -13,8 +13,16 @@ import {
   TableHeader,
   TableRow,
 } from "@shandapha/core";
-import { buildRegistry } from "@shandapha/registry";
 import {
+  GridPreset,
+  Inline,
+  MarketingShell,
+  Section,
+  Stack,
+} from "@shandapha/layouts";
+import { createPackTheme, packs } from "@shandapha/packs";
+import {
+  ChartSurfaceCard,
   ContrastWarningPanel,
   DensityToggle,
   MotionToggle,
@@ -26,13 +34,11 @@ import {
   ThemeModeToggle,
   ThemePackCard,
   TokenSlotCard,
-  ChartSurfaceCard,
 } from "@shandapha/react";
-import { createPackTheme, packs } from "@shandapha/packs";
-import { GridPreset, Inline, MarketingShell, Section, Stack } from "@shandapha/layouts";
 import Link from "next/link";
 import type { ReactNode } from "react";
 import { ComponentShowcaseGrid } from "@/components/site/component-showcases";
+import { getSiteCatalog } from "@/lib/registry";
 import {
   baselineMetrics,
   chartFamilies,
@@ -45,7 +51,8 @@ import {
   secondaryNavItems,
 } from "@/lib/site-navigation";
 
-const registry = buildRegistry();
+const catalog = getSiteCatalog();
+const registry = catalog.manifest;
 const themeScale = createPackTheme("normal").scale;
 
 function CenteredHero({
@@ -98,7 +105,13 @@ function SecondaryLinkRow() {
     <div className="border-b border-border/70">
       <div className="mx-auto flex max-w-[1400px] items-center gap-1 overflow-x-auto px-4 py-3 lg:px-8">
         {secondaryNavItems.map((item) => (
-          <Button key={item.href} asChild variant="ghost" size="sm" className="rounded-lg">
+          <Button
+            key={item.href}
+            asChild
+            variant="ghost"
+            size="sm"
+            className="rounded-lg"
+          >
             <Link href={item.href}>{item.label}</Link>
           </Button>
         ))}
@@ -160,7 +173,8 @@ function DirectoryTable({
       <CardHeader>
         <CardTitle>Registry-style browse</CardTitle>
         <CardDescription>
-          The directory points at Shandapha-owned install targets instead of vendor paths.
+          The directory points at Shandapha-owned install targets instead of
+          vendor paths.
         </CardDescription>
       </CardHeader>
       <CardContent>
@@ -180,7 +194,9 @@ function DirectoryTable({
                   {row.categories.join(", ")}
                 </TableCell>
                 <TableCell>
-                  <code className="text-xs text-muted-foreground">{row.installTarget}</code>
+                  <code className="text-xs text-muted-foreground">
+                    {row.installTarget}
+                  </code>
                 </TableCell>
               </TableRow>
             ))}
@@ -191,16 +207,12 @@ function DirectoryTable({
   );
 }
 
-function PreviewStat({
-  label,
-  value,
-}: {
-  label: string;
-  value: string;
-}) {
+function PreviewStat({ label, value }: { label: string; value: string }) {
   return (
     <div className="rounded-lg border bg-card px-3 py-2">
-      <div className="text-xs uppercase tracking-[0.16em] text-muted-foreground">{label}</div>
+      <div className="text-xs uppercase tracking-[0.16em] text-muted-foreground">
+        {label}
+      </div>
       <div className="mt-1 text-lg font-semibold">{value}</div>
     </div>
   );
@@ -212,16 +224,20 @@ function WebsitePreviewCanvas() {
       <div className="rounded-xl border bg-card p-3">
         <div className="mb-4 text-sm font-semibold">Shandapha</div>
         <div className="grid gap-2">
-          {["Overview", "Templates", "Packs", "Exports", "Members"].map((item, index) => (
-            <div
-              key={item}
-              className={`rounded-lg px-3 py-2 text-sm ${
-                index === 0 ? "bg-primary text-primary-foreground" : "bg-muted/50 text-muted-foreground"
-              }`}
-            >
-              {item}
-            </div>
-          ))}
+          {["Overview", "Templates", "Packs", "Exports", "Members"].map(
+            (item, index) => (
+              <div
+                key={item}
+                className={`rounded-lg px-3 py-2 text-sm ${
+                  index === 0
+                    ? "bg-primary text-primary-foreground"
+                    : "bg-muted/50 text-muted-foreground"
+                }`}
+              >
+                {item}
+              </div>
+            ),
+          )}
         </div>
       </div>
       <div className="grid gap-4">
@@ -272,7 +288,10 @@ function WebsitePreviewCanvas() {
                 ["Motion", "Full"],
                 ["Registry", "Synced"],
               ].map(([label, value]) => (
-                <div key={label} className="flex items-center justify-between rounded-lg border bg-muted/30 px-3 py-2 text-sm">
+                <div
+                  key={label}
+                  className="flex items-center justify-between rounded-lg border bg-muted/30 px-3 py-2 text-sm"
+                >
                   <span className="text-muted-foreground">{label}</span>
                   <span className="font-medium">{value}</span>
                 </div>
@@ -285,11 +304,7 @@ function WebsitePreviewCanvas() {
   );
 }
 
-function BlockPatternPreview({
-  slug,
-}: {
-  slug: string;
-}) {
+function BlockPatternPreview({ slug }: { slug: string }) {
   if (slug === "dashboard-01") {
     return (
       <div className="grid gap-4 bg-muted/20 p-4 md:grid-cols-[180px_minmax(0,1fr)]">
@@ -302,7 +317,9 @@ function BlockPatternPreview({
               <div
                 key={item}
                 className={`rounded-lg px-3 py-2 text-sm ${
-                  index === 0 ? "bg-primary text-primary-foreground" : "bg-muted/50 text-muted-foreground"
+                  index === 0
+                    ? "bg-primary text-primary-foreground"
+                    : "bg-muted/50 text-muted-foreground"
                 }`}
               >
                 {item}
@@ -320,7 +337,11 @@ function BlockPatternPreview({
             <div className="mb-4 h-5 w-40 rounded bg-muted/70" />
             <div className="flex h-32 items-end gap-3">
               {[44, 36, 62, 58, 84, 72].map((height) => (
-                <div key={height} className="flex-1 rounded-t-md bg-primary/80" style={{ height: `${height}%` }} />
+                <div
+                  key={height}
+                  className="flex-1 rounded-t-md bg-primary/80"
+                  style={{ height: `${height}%` }}
+                />
               ))}
             </div>
           </div>
@@ -335,8 +356,18 @@ function BlockPatternPreview({
         <div className="rounded-xl border bg-card p-3">
           <div className="mb-4 h-6 w-28 rounded bg-muted/70" />
           <div className="grid gap-2">
-            {["Search", "Projects", "Templates", "Members", "Settings", "Audit"].map((item) => (
-              <div key={item} className="rounded-lg border bg-muted/30 px-3 py-2 text-sm text-muted-foreground">
+            {[
+              "Search",
+              "Projects",
+              "Templates",
+              "Members",
+              "Settings",
+              "Audit",
+            ].map((item) => (
+              <div
+                key={item}
+                className="rounded-lg border bg-muted/30 px-3 py-2 text-sm text-muted-foreground"
+              >
                 {item}
               </div>
             ))}
@@ -348,8 +379,16 @@ function BlockPatternPreview({
             <Badge variant="outline">Sidebar shell</Badge>
           </div>
           <div className="grid gap-3">
-            {["Active workspace", "Template library", "Policy review", "Export queue"].map((row) => (
-              <div key={row} className="rounded-lg border bg-muted/30 px-4 py-3 text-sm">
+            {[
+              "Active workspace",
+              "Template library",
+              "Policy review",
+              "Export queue",
+            ].map((row) => (
+              <div
+                key={row}
+                className="rounded-lg border bg-muted/30 px-4 py-3 text-sm"
+              >
                 {row}
               </div>
             ))}
@@ -483,7 +522,10 @@ export function renderBaselineHomePage() {
               <div key={item.href} className="lg:col-span-4">
                 <CatalogCard
                   title={item.label}
-                  description={item.description ?? "Part of the shared UI foundation and fully owned inside Shandapha."}
+                  description={
+                    item.description ??
+                    "Part of the shared UI foundation and fully owned inside Shandapha."
+                  }
                   owner="apps/web"
                   href={item.href}
                   hrefLabel={`Open ${item.label}`}
@@ -550,7 +592,9 @@ export function renderComponentsDirectoryPage() {
           rows={featuredRows.concat(
             registry.components.filter(
               (component) =>
-                !featuredRows.some((featured) => featured.name === component.name),
+                !featuredRows.some(
+                  (featured) => featured.name === component.name,
+                ),
             ),
           )}
         />
@@ -679,27 +723,27 @@ export function renderBlocksGalleryPage() {
 export function renderChartsGalleryPage() {
   return (
     <MarketingShell
-      title="Chart families, wrappers, and defaults in the shared layer."
+      title="Charts stay visible as a deferred seam, not a fake install surface."
       eyebrow="Charts"
-      summary="Shandapha owns the chart container, tooltip, legend, and token rules behind the full chart family used across web and Studio."
+      summary="Charting is intentionally paused until it returns with a real module path, catalog metadata, examples, and install proof. The registry shows that truth directly instead of pretending charts are already shipped."
       actions={
         <Inline gap={10}>
           <Button asChild size="sm">
-            <Link href="/directory">Browse chart registry</Link>
+            <Link href="/directory">Browse directory truth</Link>
           </Button>
           <Button asChild size="sm" variant="ghost">
-            <Link href="/playground">Open playground</Link>
+            <Link href="/docs/charts">Read chart status</Link>
           </Button>
         </Inline>
       }
     >
-      <Section title="Chart families">
+      <Section title="Deferred status">
         <GridPreset preset="dashboard">
           {chartFamilies.map((family) => (
             <div key={family.type} className="lg:col-span-4">
               <CatalogCard
-                title={`${family.title} charts`}
-                description={`${family.description} ${family.count} reference examples are represented.`}
+                title={family.title}
+                description={family.description}
                 owner={family.owner}
               />
             </div>
@@ -707,35 +751,24 @@ export function renderChartsGalleryPage() {
         </GridPreset>
       </Section>
 
-      <Section title="Live Shandapha-owned wrappers">
+      <Section title="What ships instead">
         <GridPreset preset="dashboard">
           <div className="lg:col-span-6">
-            <ChartSurfaceCard
-              title="Adoption trend"
-              description="Area/line defaults now read like part of the same neutral system as docs, cards, and sidebars."
-              data={[
-                { label: "Week 1", adoption: 18, normalization: 12 },
-                { label: "Week 2", adoption: 32, normalization: 24 },
-                { label: "Week 3", adoption: 48, normalization: 40 },
-                { label: "Week 4", adoption: 64, normalization: 58 },
+            <ProductReadinessCard
+              title="Templates and packs stay real"
+              points={[
+                "Templates, packs, tokens, WC portability, and installable modules remain the active product truth.",
+                "Free-path theming and starter generation keep moving even while charts are deferred.",
               ]}
-              labelKey="label"
-              valueKey="adoption"
-              secondaryKey="normalization"
             />
           </div>
           <div className="lg:col-span-6">
-            <ChartSurfaceCard
-              title="Usage health"
-              description="The same chart wrapper powers operations, billing, and marketing signal surfaces."
-              data={[
-                { label: "Exports", value: 31 },
-                { label: "Themes", value: 19 },
-                { label: "Templates", value: 27 },
-                { label: "Patches", value: 14 },
+            <ProductReadinessCard
+              title="Return requirements"
+              points={[
+                "Charts come back only with stable registry ids, installability metadata, and generated example proof.",
+                "Any future chart module has to pass the same compatibility and policy gates as first-party modules.",
               ]}
-              labelKey="label"
-              valueKey="value"
             />
           </div>
         </GridPreset>
@@ -745,28 +778,28 @@ export function renderChartsGalleryPage() {
         <GridPreset preset="dashboard">
           <div className="lg:col-span-4">
             <ProductReadinessCard
-              title="Container conventions"
+              title="No silent breadth"
               points={[
-                "Charts live inside shared cards and inherit semantic surface tokens.",
-                "Tooltips and legends follow the same border, radius, and typography rules as the rest of the UI.",
+                "Deferred items stay clearly marked as deferred instead of appearing as installable breadth.",
+                "The directory and docs now point back to registry status instead of standalone marketing copy.",
               ]}
             />
           </div>
           <div className="lg:col-span-4">
             <ProductReadinessCard
-              title="Token compatibility"
+              title="Portable by default"
               points={[
-                "Chart colors map through semantic CSS variables instead of one-off page styles.",
-                "The runtime can still support future pack variations without forking chart code.",
+                "Token and pack truth remain portable and do not depend on future chart work shipping.",
+                "WC, React, and generator flows keep the same baseline while deferred modules stay out of the core path.",
               ]}
             />
           </div>
           <div className="lg:col-span-4">
             <ProductReadinessCard
-              title="Ownership"
+              title="Proof before positioning"
               points={[
-                "Chart wrappers live in the shared component layer, not inside app pages.",
-                "The chart surface informs both web and Studio dashboards.",
+                "Future chart claims require installability, examples, and policy-safe distribution before they show up as supported.",
+                "The platform keeps trust by publishing what is real now, not what might exist later.",
               ]}
             />
           </div>
@@ -836,7 +869,8 @@ export function renderThemesPage() {
             <CardHeader>
               <CardTitle>Active controls</CardTitle>
               <CardDescription>
-                These are the same shared controls used by the public site and Studio.
+                These are the same shared controls used by the public site and
+                Studio.
               </CardDescription>
             </CardHeader>
             <CardContent className="grid gap-5">
@@ -926,9 +960,17 @@ export function renderColorsPage() {
         <GridPreset preset="dashboard">
           {[
             ["--background", themeScale.background, "Base page canvas"],
-            ["--foreground", themeScale.foreground, "Primary text and icon color"],
+            [
+              "--foreground",
+              themeScale.foreground,
+              "Primary text and icon color",
+            ],
             ["--card", themeScale.card, "Card and popover surfaces"],
-            ["--muted", themeScale.muted, "Muted rails, code blocks, and support fills"],
+            [
+              "--muted",
+              themeScale.muted,
+              "Muted rails, code blocks, and support fills",
+            ],
             ["--border", themeScale.border, "Dividers and outline surfaces"],
             ["--chart-1", themeScale.chart1, "Primary chart color"],
           ].map(([slot, value, usage]) => (
@@ -984,7 +1026,7 @@ export function renderDirectoryPage() {
     <MarketingShell
       title="A registry-style directory in Shandapha ownership."
       eyebrow="Directory"
-      summary="The directory maps to components, blocks, charts, shells, templates, packs, and workspaces owned by the existing monorepo."
+      summary="The directory is now fed by the resolved registry catalog, including source, trust, support, stability, and installability metadata. Deferred items remain visible as deferred instead of being treated like installable breadth."
       actions={
         <Button asChild size="sm" variant="outline">
           <Link href="/docs">Read docs</Link>
@@ -1009,9 +1051,9 @@ export function renderDirectoryPage() {
           </div>
           <div className="lg:col-span-3">
             <SectionSignal
-              title="Charts"
-              value={`${registry.charts.length}`}
-              detail="Chart wrappers and live visualization surfaces."
+              title="Deferred modules"
+              value={`${registry.modules.filter((module) => module.status === "deferred").length}`}
+              detail="Future seams stay visible as deferred truth instead of pretending to be installable breadth."
             />
           </div>
           <div className="lg:col-span-3">
@@ -1052,6 +1094,38 @@ export function renderDirectoryPage() {
         </GridPreset>
       </Section>
 
+      <Section title="Catalog sources and trust">
+        <GridPreset preset="dashboard">
+          {catalog.sources.map((source) => (
+            <div key={source.id} className="lg:col-span-4">
+              <Card className="h-full">
+                <CardHeader>
+                  <div className="flex items-start justify-between gap-3">
+                    <div className="grid gap-2">
+                      <CardTitle>{source.label}</CardTitle>
+                      <CardDescription>{source.namespace}</CardDescription>
+                    </div>
+                    <Badge variant="outline">{source.sourceKind}</Badge>
+                  </div>
+                </CardHeader>
+                <CardContent className="grid gap-3">
+                  <Inline gap={8} className="flex-wrap">
+                    <Badge variant="secondary">{source.kind}</Badge>
+                    <Badge variant="secondary">{source.visibility}</Badge>
+                    <Badge variant="secondary">
+                      {source.enabled ? "enabled" : "disabled"}
+                    </Badge>
+                  </Inline>
+                  <div className="text-sm text-muted-foreground">
+                    {catalog.items.filter((item) => item.provenance.sourceId === source.id).length} catalog items resolve from this source.
+                  </div>
+                </CardContent>
+              </Card>
+            </div>
+          ))}
+        </GridPreset>
+      </Section>
+
       <Section title="Installability model">
         <GridPreset preset="detail" className="items-start">
           <RegistryMindsetCard />
@@ -1059,7 +1133,15 @@ export function renderDirectoryPage() {
             rows={[
               ...registry.components.slice(0, 8),
               ...registry.blocks.slice(0, 4),
-              ...registry.charts.slice(0, 3),
+              ...registry.modules
+                .filter((module) => module.status === "installable")
+                .slice(0, 2)
+                .map((module) => ({
+                  name: module.id,
+                  title: module.name,
+                  categories: module.capabilities.free,
+                  installTarget: module.packageName,
+                })),
             ].map((item) => ({
               name: item.name,
               title: item.title,
@@ -1112,7 +1194,8 @@ export function renderCreatePage() {
             <CardHeader>
               <CardTitle>Preview the shared baseline</CardTitle>
               <CardDescription>
-                These controls prove that the public site and Studio now share the same owned runtime.
+                These controls prove that the public site and Studio now share
+                the same owned runtime.
               </CardDescription>
             </CardHeader>
             <CardContent className="grid gap-5">
@@ -1164,7 +1247,7 @@ export function renderCreatePage() {
             <ProductReadinessCard
               title="Studio"
               points={[
-                "Keeps auth, wizard, workspaces, exports, billing, usage, and governance.",
+                "Keeps auth, wizard, workspaces, exports, billing, and usage flows aligned to the shared engine.",
                 "Now reads like it belongs to the same baseline instead of a parallel visual system.",
               ]}
             />

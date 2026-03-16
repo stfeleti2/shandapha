@@ -1,0 +1,10 @@
+{
+  "template": "blog-index",
+  "sample": "posts.json",
+  "entities": {
+    "post": "post-1",
+    "tag": "tag-2"
+  },
+  "slots": ["hero", "filters", "postGrid"],
+  "outputs": ["post index"]
+}

@@ -30,10 +30,10 @@ import {
   TabsList,
   TabsTrigger,
 } from "@shandapha/core";
-import { buildRegistry } from "@shandapha/registry";
 import { ComponentPreviewCard } from "@shandapha/react";
+import { getSiteCatalog } from "@/lib/registry";
 
-const registry = buildRegistry();
+const registry = getSiteCatalog().manifest;
 
 function installTargetFor(name: string) {
   return (

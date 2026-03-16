@@ -1,0 +1,7 @@
+{
+  "template": "docs-home",
+  "variant": "developer",
+  "title": "Docs Home - developer",
+  "related": ["docs-article", "changelog"],
+  "featuredPackIds": ["normal", "glass"]
+}

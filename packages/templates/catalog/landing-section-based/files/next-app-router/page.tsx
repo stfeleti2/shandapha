@@ -1,0 +1,11 @@
+export default function LandingSectionBasedPage() {
+  return (
+    <main data-template="landing-section-based">
+      <h1>Landing Section Based</h1>
+      <p>
+        Modular marketing shell for hero-to-CTA launches with registry-backed
+        sections.
+      </p>
+    </main>
+  );
+}

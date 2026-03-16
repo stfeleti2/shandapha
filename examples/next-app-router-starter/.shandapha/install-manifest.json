@@ -1,0 +1,383 @@
+{
+  "kind": "starter",
+  "plan": {
+    "version": 1,
+    "input": {
+      "version": 1,
+      "framework": "next-app-router",
+      "intent": "new-project",
+      "packId": "normal",
+      "planId": "free",
+      "templates": [
+        "docs-home"
+      ],
+      "modules": []
+    },
+    "frameworkTarget": {
+      "version": 1,
+      "framework": "next-app-router",
+      "projectManager": "pnpm",
+      "projectManifestPath": "package.json",
+      "routesRoot": "app/generated",
+      "themePath": "app/theme.css",
+      "tokensPath": "app/tokens.json",
+      "providerPath": "app/layout.tsx",
+      "verificationPath": "app/generated/verification/page.tsx",
+      "supportsRuntimeBootstrap": true
+    },
+    "selectedPack": {
+      "version": 1,
+      "id": "normal",
+      "slug": "normal",
+      "name": "Normal",
+      "tier": "free",
+      "tagline": "Neutral, editorial, and calm. The clearest expression of the shared Shandapha baseline.",
+      "description": "Normal is the default premium-feeling baseline with restrained contrast, balanced spacing, and the full shared UI surface.",
+      "knobs": [
+        "neutral surface depth",
+        "balanced radii",
+        "steady motion"
+      ]
+    },
+    "selectedTemplates": [
+      {
+        "version": 1,
+        "slug": "docs-home",
+        "name": "Docs Home",
+        "group": "docs",
+        "shell": "DocsShell",
+        "summary": "Documentation landing page with category rails, quickstarts, and install guidance.",
+        "states": [
+          "loading",
+          "empty",
+          "error",
+          "success",
+          "no access"
+        ],
+        "variants": [
+          "product",
+          "developer"
+        ],
+        "blocks": [
+          "docs-home-grid",
+          "quickstart-cards",
+          "registry-setup"
+        ],
+        "related": [
+          "docs-article",
+          "changelog"
+        ],
+        "surfaces": [
+          "docs shell",
+          "cards",
+          "search strip"
+        ],
+        "featuredPackIds": [
+          "normal",
+          "glass"
+        ],
+        "dataContract": {
+          "entities": [
+            "docCategory",
+            "quickstart",
+            "registryItem"
+          ],
+          "slots": [
+            "hero",
+            "categoryGrid",
+            "quickstarts",
+            "registrySummary"
+          ],
+          "outputs": [
+            "docs landing"
+          ],
+          "samples": [
+            "docs-home.json"
+          ]
+        },
+        "frameworks": [
+          {
+            "adapter": "react-vite",
+            "support": "supported",
+            "notes": "Reference adapter and fastest path for local starters.",
+            "requiredCapabilities": []
+          },
+          {
+            "adapter": "next-app-router",
+            "support": "supported",
+            "notes": "Reference SSR-capable adapter for product starters.",
+            "requiredCapabilities": [
+              "server-components"
+            ]
+          },
+          {
+            "adapter": "wc-universal",
+            "support": "experimental",
+            "notes": "Portable surface area is still being rebuilt around the WC baseline.",
+            "requiredCapabilities": [
+              "custom-elements"
+            ]
+          },
+          {
+            "adapter": "blazor-wc",
+            "support": "experimental",
+            "notes": "Blazor currently installs through the WC bridge rather than a native adapter.",
+            "requiredCapabilities": [
+              "custom-elements",
+              "wc-interop"
+            ]
+          }
+        ],
+        "install": {
+          "requiredPackages": [],
+          "requiredRoutes": [],
+          "themeDependencies": [
+            "theme.css",
+            "tokens.json"
+          ],
+          "sampleDataBindings": [
+            "docs-home.json"
+          ]
+        }
+      }
+    ],
+    "selectedModules": [],
+    "starterRecipe": {
+      "version": 1,
+      "framework": "next-app-router",
+      "intent": "new-project",
+      "targetRoot": "app/generated",
+      "templates": [
+        "docs-home"
+      ],
+      "modules": [],
+      "requiredPackages": [
+        "next",
+        "react",
+        "react-dom"
+      ],
+      "requiredRoutes": [
+        "/docs-home",
+        "/generated/verification"
+      ],
+      "themeDependencies": [
+        "theme.css",
+        "tokens.json"
+      ],
+      "sampleDataBindings": [
+        "docs-home.json"
+      ]
+    },
+    "patchOperations": [
+      {
+        "version": 1,
+        "id": "theme-asset",
+        "kind": "create",
+        "targetPath": "app/theme.css",
+        "ownerPackage": "@shandapha/generator",
+        "reason": "Apply Normal theme variables.",
+        "reversible": true,
+        "framework": "next-app-router"
+      },
+      {
+        "version": 1,
+        "id": "token-asset",
+        "kind": "create",
+        "targetPath": "app/tokens.json",
+        "ownerPackage": "@shandapha/generator",
+        "reason": "Write deterministic tokens for Normal.",
+        "reversible": true,
+        "framework": "next-app-router"
+      },
+      {
+        "version": 1,
+        "id": "verification",
+        "kind": "create",
+        "targetPath": "app/generated/verification/page.tsx",
+        "ownerPackage": "@shandapha/generator",
+        "reason": "Create a generated verification surface.",
+        "reversible": true,
+        "framework": "next-app-router"
+      },
+      {
+        "version": 1,
+        "id": "template:docs-home:page.tsx",
+        "kind": "create",
+        "targetPath": "app/generated/docs-home/page.tsx",
+        "ownerPackage": "@shandapha/templates",
+        "reason": "Install Docs Home asset from catalog/docs-home/files/next-app-router/page.tsx.",
+        "reversible": true,
+        "framework": "next-app-router"
+      }
+    ],
+    "fileTransforms": [
+      {
+        "version": 1,
+        "path": "app/theme.css",
+        "operation": "create",
+        "source": "generator",
+        "description": "Apply Normal theme variables."
+      },
+      {
+        "version": 1,
+        "path": "app/tokens.json",
+        "operation": "create",
+        "source": "generator",
+        "description": "Write deterministic tokens for Normal."
+      },
+      {
+        "version": 1,
+        "path": "app/generated/verification/page.tsx",
+        "operation": "create",
+        "source": "generator",
+        "description": "Create a generated verification surface."
+      },
+      {
+        "version": 1,
+        "path": "app/generated/docs-home/page.tsx",
+        "operation": "create",
+        "source": "template",
+        "description": "Install Docs Home asset from catalog/docs-home/files/next-app-router/page.tsx."
+      }
+    ],
+    "diff": {
+      "version": 1,
+      "mode": "starter",
+      "targetRoot": ".",
+      "entries": [
+        {
+          "path": "app/theme.css",
+          "operation": "create",
+          "ownerPackage": "@shandapha/generator",
+          "reason": "Apply Normal theme variables.",
+          "checksum": "4973b17bd0a96afc",
+          "existedBefore": false
+        },
+        {
+          "path": "app/tokens.json",
+          "operation": "create",
+          "ownerPackage": "@shandapha/generator",
+          "reason": "Write deterministic tokens for Normal.",
+          "checksum": "a83e7bd4920224a3",
+          "existedBefore": false
+        },
+        {
+          "path": "app/generated/verification/page.tsx",
+          "operation": "create",
+          "ownerPackage": "@shandapha/generator",
+          "reason": "Create a generated verification surface.",
+          "checksum": "7d8cd0bc8b89b3c5",
+          "existedBefore": false
+        },
+        {
+          "path": "app/generated/docs-home/page.tsx",
+          "operation": "create",
+          "ownerPackage": "@shandapha/templates",
+          "reason": "Install Docs Home asset from catalog/docs-home/files/next-app-router/page.tsx.",
+          "checksum": "94ddd53264fb0432",
+          "existedBefore": false
+        }
+      ]
+    },
+    "uninstall": {
+      "version": 1,
+      "steps": [
+        {
+          "action": "remove-file",
+          "path": "app/theme.css",
+          "detail": "Rollback Apply Normal theme variables."
+        },
+        {
+          "action": "remove-file",
+          "path": "app/tokens.json",
+          "detail": "Rollback Write deterministic tokens for Normal."
+        },
+        {
+          "action": "remove-file",
+          "path": "app/generated/verification/page.tsx",
+          "detail": "Rollback Create a generated verification surface."
+        },
+        {
+          "action": "remove-file",
+          "path": "app/generated/docs-home/page.tsx",
+          "detail": "Rollback Install Docs Home asset from catalog/docs-home/files/next-app-router/page.tsx."
+        }
+      ]
+    },
+    "doctor": {
+      "version": 1,
+      "status": "pass",
+      "summary": "Generator assumptions are aligned with the current workspace.",
+      "checks": [
+        {
+          "id": "theme-loaded",
+          "label": "Theme loaded",
+          "status": "pass",
+          "detail": "tokens.json and theme variables are present."
+        },
+        {
+          "id": "provider-wrapped",
+          "label": "Provider wrapped",
+          "status": "pass",
+          "detail": "Expected bootstrap file is present."
+        },
+        {
+          "id": "styles-present",
+          "label": "Styles present",
+          "status": "pass",
+          "detail": "Theme CSS is available."
+        },
+        {
+          "id": "drift-clean",
+          "label": "Drift clean",
+          "status": "pass",
+          "detail": "Pack and entitlements stay aligned."
+        }
+      ]
+    },
+    "checklist": [
+      "Install packages: next, react, react-dom",
+      "Provision theme assets: theme.css, tokens.json",
+      "Create starter routes: /docs-home, /generated/verification",
+      "Verify app/generated/verification/page.tsx"
+    ],
+    "diffReport": [
+      "CREATE app/theme.css: Apply Normal theme variables.",
+      "CREATE app/tokens.json: Write deterministic tokens for Normal.",
+      "CREATE app/generated/verification/page.tsx: Create a generated verification surface.",
+      "CREATE app/generated/docs-home/page.tsx: Install Docs Home asset from catalog/docs-home/files/next-app-router/page.tsx."
+    ],
+    "uninstallManifest": [
+      "REMOVE-FILE app/theme.css: Rollback Apply Normal theme variables.",
+      "REMOVE-FILE app/tokens.json: Rollback Write deterministic tokens for Normal.",
+      "REMOVE-FILE app/generated/verification/page.tsx: Rollback Create a generated verification surface.",
+      "REMOVE-FILE app/generated/docs-home/page.tsx: Rollback Install Docs Home asset from catalog/docs-home/files/next-app-router/page.tsx."
+    ],
+    "doctorChecks": [
+      {
+        "id": "theme-loaded",
+        "label": "Theme loaded",
+        "status": "pass",
+        "detail": "tokens.json and theme variables are present."
+      },
+      {
+        "id": "provider-wrapped",
+        "label": "Provider wrapped",
+        "status": "pass",
+        "detail": "Expected bootstrap file is present."
+      },
+      {
+        "id": "styles-present",
+        "label": "Styles present",
+        "status": "pass",
+        "detail": "Theme CSS is available."
+      },
+      {
+        "id": "drift-clean",
+        "label": "Drift clean",
+        "status": "pass",
+        "detail": "Pack and entitlements stay aligned."
+      }
+    ]
+  }
+}

@@ -1,0 +1,8 @@
+{
+  "template": "landing-section-based",
+  "state": "error",
+  "headline": "Landing Section Based error",
+  "summary": "Modular marketing shell for hero-to-CTA launches with registry-backed sections.",
+  "surfaces": ["marketing shell", "hero cards", "feature grids", "cta footer"],
+  "slots": ["hero", "proof", "sections", "cta"]
+}

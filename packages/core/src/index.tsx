@@ -1,11 +1,11 @@
-export * from "./foundation";
+export { Toaster, toast } from "sonner";
 export * from "./controls";
-export * from "./overlays";
-export * from "./menus";
 export * from "./data";
-export * from "./sidebar";
+export * from "./foundation";
 export * from "./lib/utils";
-export { toast, Toaster } from "sonner";
+export * from "./menus";
+export * from "./overlays";
+export * from "./sidebar";
 
 export const coreComponentCatalog = [
   "accordion",
@@ -18,7 +18,6 @@ export const coreComponentCatalog = [
   "button-group",
   "calendar",
   "card",
-  "chart",
   "checkbox",
   "combobox",
   "command",
@@ -40,7 +39,6 @@ export const coreComponentCatalog = [
   "popover",
   "progress",
   "radio-group",
-  "resizable",
   "scroll-area",
   "select",
   "separator",
@@ -51,7 +49,6 @@ export const coreComponentCatalog = [
   "spinner",
   "switch",
   "table",
-  "data-table",
   "tabs",
   "textarea",
   "toggle",

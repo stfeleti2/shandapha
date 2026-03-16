@@ -1,0 +1,13 @@
+{
+  "template": "dashboard-home",
+  "state": "no access",
+  "headline": "Dashboard Home no access",
+  "summary": "Overview shell with KPI rails, chart cards, activity cards, and action slots.",
+  "surfaces": [
+    "chart container",
+    "data table baseline",
+    "sidebar shell",
+    "section cards"
+  ],
+  "slots": ["heroActions", "kpiRail", "chartRegion", "tableRegion"]
+}

@@ -1,0 +1,386 @@
+{
+  "kind": "starter",
+  "plan": {
+    "version": 1,
+    "input": {
+      "version": 1,
+      "framework": "wc-universal",
+      "intent": "new-project",
+      "packId": "normal",
+      "planId": "free",
+      "templates": [
+        "landing-section-based"
+      ],
+      "modules": []
+    },
+    "frameworkTarget": {
+      "version": 1,
+      "framework": "wc-universal",
+      "projectManager": "pnpm",
+      "projectManifestPath": "package.json",
+      "routesRoot": "src/views/generated",
+      "themePath": "src/theme/theme.css",
+      "tokensPath": "src/theme/tokens.json",
+      "providerPath": "src/main.ts",
+      "verificationPath": "src/views/generated/verification.ts",
+      "supportsRuntimeBootstrap": false
+    },
+    "selectedPack": {
+      "version": 1,
+      "id": "normal",
+      "slug": "normal",
+      "name": "Normal",
+      "tier": "free",
+      "tagline": "Neutral, editorial, and calm. The clearest expression of the shared Shandapha baseline.",
+      "description": "Normal is the default premium-feeling baseline with restrained contrast, balanced spacing, and the full shared UI surface.",
+      "knobs": [
+        "neutral surface depth",
+        "balanced radii",
+        "steady motion"
+      ]
+    },
+    "selectedTemplates": [
+      {
+        "version": 1,
+        "slug": "landing-section-based",
+        "name": "Landing Section Based",
+        "group": "marketing",
+        "shell": "MarketingShell",
+        "summary": "Modular marketing shell for hero-to-CTA launches with registry-backed sections.",
+        "states": [
+          "loading",
+          "empty",
+          "error",
+          "success",
+          "no access"
+        ],
+        "variants": [
+          "product launch",
+          "enterprise"
+        ],
+        "blocks": [
+          "marketing-hero",
+          "feature-grid",
+          "logo-strip",
+          "cta-banner"
+        ],
+        "related": [
+          "pricing-basic",
+          "faq",
+          "contact"
+        ],
+        "surfaces": [
+          "marketing shell",
+          "hero cards",
+          "feature grids",
+          "cta footer"
+        ],
+        "featuredPackIds": [
+          "normal",
+          "glass",
+          "neon"
+        ],
+        "dataContract": {
+          "entities": [
+            "feature",
+            "quote",
+            "metric"
+          ],
+          "slots": [
+            "hero",
+            "proof",
+            "sections",
+            "cta"
+          ],
+          "outputs": [
+            "marketing page"
+          ],
+          "samples": [
+            "landing-content.json"
+          ]
+        },
+        "frameworks": [
+          {
+            "adapter": "react-vite",
+            "support": "supported",
+            "notes": "Reference adapter and fastest path for local starters.",
+            "requiredCapabilities": []
+          },
+          {
+            "adapter": "next-app-router",
+            "support": "supported",
+            "notes": "Reference SSR-capable adapter for product starters.",
+            "requiredCapabilities": [
+              "server-components"
+            ]
+          },
+          {
+            "adapter": "wc-universal",
+            "support": "experimental",
+            "notes": "Portable surface area is still being rebuilt around the WC baseline.",
+            "requiredCapabilities": [
+              "custom-elements"
+            ]
+          },
+          {
+            "adapter": "blazor-wc",
+            "support": "experimental",
+            "notes": "Blazor currently installs through the WC bridge rather than a native adapter.",
+            "requiredCapabilities": [
+              "custom-elements",
+              "wc-interop"
+            ]
+          }
+        ],
+        "install": {
+          "requiredPackages": [],
+          "requiredRoutes": [],
+          "themeDependencies": [
+            "theme.css",
+            "tokens.json"
+          ],
+          "sampleDataBindings": [
+            "landing-content.json"
+          ]
+        }
+      }
+    ],
+    "selectedModules": [],
+    "starterRecipe": {
+      "version": 1,
+      "framework": "wc-universal",
+      "intent": "new-project",
+      "targetRoot": "src/views/generated",
+      "templates": [
+        "landing-section-based"
+      ],
+      "modules": [],
+      "requiredPackages": [
+        "vite"
+      ],
+      "requiredRoutes": [
+        "/landing-section-based",
+        "/generated/verification"
+      ],
+      "themeDependencies": [
+        "theme.css",
+        "tokens.json"
+      ],
+      "sampleDataBindings": [
+        "landing-content.json"
+      ]
+    },
+    "patchOperations": [
+      {
+        "version": 1,
+        "id": "theme-asset",
+        "kind": "create",
+        "targetPath": "src/theme/theme.css",
+        "ownerPackage": "@shandapha/generator",
+        "reason": "Apply Normal theme variables.",
+        "reversible": true,
+        "framework": "wc-universal"
+      },
+      {
+        "version": 1,
+        "id": "token-asset",
+        "kind": "create",
+        "targetPath": "src/theme/tokens.json",
+        "ownerPackage": "@shandapha/generator",
+        "reason": "Write deterministic tokens for Normal.",
+        "reversible": true,
+        "framework": "wc-universal"
+      },
+      {
+        "version": 1,
+        "id": "verification",
+        "kind": "create",
+        "targetPath": "src/views/generated/verification.ts",
+        "ownerPackage": "@shandapha/generator",
+        "reason": "Create a generated verification surface.",
+        "reversible": true,
+        "framework": "wc-universal"
+      },
+      {
+        "version": 1,
+        "id": "template:landing-section-based:template.ts",
+        "kind": "create",
+        "targetPath": "src/views/generated/landing-section-based/template.ts",
+        "ownerPackage": "@shandapha/templates",
+        "reason": "Install Landing Section Based asset from catalog/landing-section-based/files/wc-universal/template.ts.",
+        "reversible": true,
+        "framework": "wc-universal"
+      }
+    ],
+    "fileTransforms": [
+      {
+        "version": 1,
+        "path": "src/theme/theme.css",
+        "operation": "create",
+        "source": "generator",
+        "description": "Apply Normal theme variables."
+      },
+      {
+        "version": 1,
+        "path": "src/theme/tokens.json",
+        "operation": "create",
+        "source": "generator",
+        "description": "Write deterministic tokens for Normal."
+      },
+      {
+        "version": 1,
+        "path": "src/views/generated/verification.ts",
+        "operation": "create",
+        "source": "generator",
+        "description": "Create a generated verification surface."
+      },
+      {
+        "version": 1,
+        "path": "src/views/generated/landing-section-based/template.ts",
+        "operation": "create",
+        "source": "template",
+        "description": "Install Landing Section Based asset from catalog/landing-section-based/files/wc-universal/template.ts."
+      }
+    ],
+    "diff": {
+      "version": 1,
+      "mode": "starter",
+      "targetRoot": ".",
+      "entries": [
+        {
+          "path": "src/theme/theme.css",
+          "operation": "create",
+          "ownerPackage": "@shandapha/generator",
+          "reason": "Apply Normal theme variables.",
+          "checksum": "7e430478a9258c6a",
+          "existedBefore": false
+        },
+        {
+          "path": "src/theme/tokens.json",
+          "operation": "create",
+          "ownerPackage": "@shandapha/generator",
+          "reason": "Write deterministic tokens for Normal.",
+          "checksum": "dfb3ca57efc9f1ad",
+          "existedBefore": false
+        },
+        {
+          "path": "src/views/generated/verification.ts",
+          "operation": "create",
+          "ownerPackage": "@shandapha/generator",
+          "reason": "Create a generated verification surface.",
+          "checksum": "be5308ee06ada1b5",
+          "existedBefore": false
+        },
+        {
+          "path": "src/views/generated/landing-section-based/template.ts",
+          "operation": "create",
+          "ownerPackage": "@shandapha/templates",
+          "reason": "Install Landing Section Based asset from catalog/landing-section-based/files/wc-universal/template.ts.",
+          "checksum": "7d3f7e7a2a667793",
+          "existedBefore": false
+        }
+      ]
+    },
+    "uninstall": {
+      "version": 1,
+      "steps": [
+        {
+          "action": "remove-file",
+          "path": "src/theme/theme.css",
+          "detail": "Rollback Apply Normal theme variables."
+        },
+        {
+          "action": "remove-file",
+          "path": "src/theme/tokens.json",
+          "detail": "Rollback Write deterministic tokens for Normal."
+        },
+        {
+          "action": "remove-file",
+          "path": "src/views/generated/verification.ts",
+          "detail": "Rollback Create a generated verification surface."
+        },
+        {
+          "action": "remove-file",
+          "path": "src/views/generated/landing-section-based/template.ts",
+          "detail": "Rollback Install Landing Section Based asset from catalog/landing-section-based/files/wc-universal/template.ts."
+        }
+      ]
+    },
+    "doctor": {
+      "version": 1,
+      "status": "warn",
+      "summary": "1 doctor warning(s) need attention before install.",
+      "checks": [
+        {
+          "id": "theme-loaded",
+          "label": "Theme loaded",
+          "status": "pass",
+          "detail": "tokens.json and theme variables are present."
+        },
+        {
+          "id": "provider-wrapped",
+          "label": "Provider wrapped",
+          "status": "warn",
+          "detail": "Framework target does not require a provider wrapper."
+        },
+        {
+          "id": "styles-present",
+          "label": "Styles present",
+          "status": "pass",
+          "detail": "Theme CSS is available."
+        },
+        {
+          "id": "drift-clean",
+          "label": "Drift clean",
+          "status": "pass",
+          "detail": "Pack and entitlements stay aligned."
+        }
+      ]
+    },
+    "checklist": [
+      "Install packages: vite",
+      "Provision theme assets: theme.css, tokens.json",
+      "Create starter routes: /landing-section-based, /generated/verification",
+      "Verify src/views/generated/verification.ts",
+      "Review experimental adapter coverage for: landing-section-based"
+    ],
+    "diffReport": [
+      "CREATE src/theme/theme.css: Apply Normal theme variables.",
+      "CREATE src/theme/tokens.json: Write deterministic tokens for Normal.",
+      "CREATE src/views/generated/verification.ts: Create a generated verification surface.",
+      "CREATE src/views/generated/landing-section-based/template.ts: Install Landing Section Based asset from catalog/landing-section-based/files/wc-universal/template.ts."
+    ],
+    "uninstallManifest": [
+      "REMOVE-FILE src/theme/theme.css: Rollback Apply Normal theme variables.",
+      "REMOVE-FILE src/theme/tokens.json: Rollback Write deterministic tokens for Normal.",
+      "REMOVE-FILE src/views/generated/verification.ts: Rollback Create a generated verification surface.",
+      "REMOVE-FILE src/views/generated/landing-section-based/template.ts: Rollback Install Landing Section Based asset from catalog/landing-section-based/files/wc-universal/template.ts."
+    ],
+    "doctorChecks": [
+      {
+        "id": "theme-loaded",
+        "label": "Theme loaded",
+        "status": "pass",
+        "detail": "tokens.json and theme variables are present."
+      },
+      {
+        "id": "provider-wrapped",
+        "label": "Provider wrapped",
+        "status": "warn",
+        "detail": "Framework target does not require a provider wrapper."
+      },
+      {
+        "id": "styles-present",
+        "label": "Styles present",
+        "status": "pass",
+        "detail": "Theme CSS is available."
+      },
+      {
+        "id": "drift-clean",
+        "label": "Drift clean",
+        "status": "pass",
+        "detail": "Pack and entitlements stay aligned."
+      }
+    ]
+  }
+}

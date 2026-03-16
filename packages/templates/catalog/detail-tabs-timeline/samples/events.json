@@ -1,0 +1,11 @@
+{
+  "template": "detail-tabs-timeline",
+  "sample": "events.json",
+  "entities": {
+    "account": "account-1",
+    "event": "event-2",
+    "relatedEntity": "relatedEntity-3"
+  },
+  "slots": ["summary", "tabPanels", "timeline", "relatedStrip"],
+  "outputs": ["record summary", "recent events", "linked entities"]
+}

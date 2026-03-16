@@ -1,0 +1,81 @@
+{
+  "version": 1,
+  "source": {
+    "id": "community-demo",
+    "kind": "file",
+    "label": "Community demo catalog",
+    "enabled": true,
+    "namespace": "community/demo-labs",
+    "workspaceIds": [],
+    "allowedNamespaces": ["community/demo-labs"]
+  },
+  "packs": [],
+  "templates": [],
+  "templateAssets": [],
+  "modules": [
+    {
+      "registryId": "community/demo-labs::module::release-notes",
+      "namespace": "community/demo-labs",
+      "sourceKind": "community",
+      "visibility": "public",
+      "supportLevel": "community",
+      "trustLevel": "self-declared",
+      "stability": "experimental",
+      "previews": [
+        {
+          "title": "Community release notes module docs",
+          "href": "/docs/platform/publish-to-registry",
+          "type": "doc"
+        }
+      ],
+      "tags": ["community", "content", "release"],
+      "owner": {
+        "id": "community/demo-labs",
+        "label": "Demo Labs Community"
+      },
+      "provenance": {
+        "sourceId": "community-demo",
+        "checksum": "community-release-notes-001",
+        "manifestPath": "data/seed/catalogs/community.demo.catalog.json"
+      },
+      "installability": {
+        "installable": true,
+        "target": "patch",
+        "notes": "Community module that patches package dependencies and release-note routes."
+      },
+      "id": "release-notes",
+      "name": "Release Notes",
+      "packageName": "@demo-labs/shandapha-release-notes",
+      "description": "Community-maintained release note widgets and changelog helpers.",
+      "premium": false,
+      "minimumPlan": "free",
+      "status": "installable",
+      "capabilities": {
+        "free": ["release-feed", "badge-stream", "announcement-callout"],
+        "premium": [],
+        "business": []
+      },
+      "install": {
+        "requiredPackages": ["@demo-labs/shandapha-release-notes"],
+        "requiredRoutes": ["/release-notes"],
+        "frameworks": [
+          {
+            "adapter": "react-vite",
+            "support": "supported",
+            "requiredCapabilities": []
+          },
+          {
+            "adapter": "next-app-router",
+            "support": "supported",
+            "requiredCapabilities": ["server-components"]
+          }
+        ]
+      }
+    }
+  ],
+  "components": [],
+  "blocks": [],
+  "charts": [],
+  "shells": [],
+  "approvals": []
+}

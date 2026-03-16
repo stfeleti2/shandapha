@@ -1,0 +1,8 @@
+{
+  "template": "docs-home",
+  "state": "error",
+  "headline": "Docs Home error",
+  "summary": "Documentation landing page with category rails, quickstarts, and install guidance.",
+  "surfaces": ["docs shell", "cards", "search strip"],
+  "slots": ["hero", "categoryGrid", "quickstarts", "registrySummary"]
+}

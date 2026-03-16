@@ -1,0 +1,7 @@
+{
+  "template": "settings-sectioned",
+  "variant": "workspace",
+  "title": "Settings Sectioned - workspace",
+  "related": ["form-create-edit", "team-roles-starter"],
+  "featuredPackIds": ["normal", "glass"]
+}

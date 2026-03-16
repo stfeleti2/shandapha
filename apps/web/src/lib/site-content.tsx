@@ -4,7 +4,6 @@ import {
   Card,
   CardContent,
   CardDescription,
-  CardFooter,
   CardHeader,
   CardTitle,
   Item,
@@ -30,7 +29,6 @@ import {
   Surface,
 } from "@shandapha/layouts";
 import { createPackTheme, getPackBySlug, packs } from "@shandapha/packs";
-import { buildRegistry } from "@shandapha/registry";
 import {
   ChartSurfaceCard,
   ChecklistPanel,
@@ -50,8 +48,11 @@ import {
 } from "@shandapha/react";
 import Link from "next/link";
 import { notFound } from "next/navigation";
+import { getSiteCatalog } from "@/lib/registry";
 
-const registry = buildRegistry();
+const catalog = getSiteCatalog();
+const registry = catalog.manifest;
+type SiteCatalogItem = (typeof catalog.items)[number];
 
 const navItems = [
   { href: "/", label: "Home" },
@@ -74,13 +75,13 @@ const releaseEntries = [
     date: "March 13, 2026",
     title: "Full shared baseline adopted into Shandapha-owned packages",
     detail:
-      "Core primitives, shells, charts, registry metadata, and app-facing support surfaces now share one visible baseline.",
+      "Core primitives, shells, registry metadata, and app-facing support surfaces now share one visible baseline.",
   },
   {
     date: "March 13, 2026",
     title: "Registry mindset normalized for monorepo ownership",
     detail:
-      "Components, blocks, charts, shells, and workspaces now publish installable metadata without flattening the platform architecture.",
+      "Components, blocks, shells, templates, modules, and workspaces now publish installable metadata without flattening the platform architecture.",
   },
   {
     date: "March 13, 2026",
@@ -100,7 +101,7 @@ const docsArticles = {
       {
         title: "Shared foundation",
         items: [
-          "Shared primitives, form controls, navigation, overlays, charts, and data display live in `packages/core`.",
+          "Shared primitives, form controls, navigation, overlays, and data display live in `packages/core`.",
           "Shells, sections, containers, and sidebar-aware layouts live in `packages/layouts`.",
           "Theme runtime, semantic CSS variables, and pack-aware token output live in `packages/tokens` and `packages/runtime`.",
           "Registry metadata, install targets, and workspace ownership live in `packages/registry`.",
@@ -111,7 +112,7 @@ const docsArticles = {
         items: [
           "Support surfaces such as ThemePackCard, ExportOptionCard, TokenMapperTable, and TemplateCard live in `packages/react`.",
           "Public docs, directory, create flows, and marketing surfaces live in `apps/web`.",
-          "Auth, wizard, workspaces, billing, usage, and governance surfaces live in `apps/studio`.",
+          "Auth, wizard, workspaces, billing, and usage surfaces live in `apps/studio`.",
         ],
       },
       {
@@ -156,7 +157,7 @@ const docsArticles = {
       {
         title: "Broad surface now represented",
         items: [
-          "Forms, overlays, navigation, data display, sidebar, chart, feedback, and typography primitives live in `packages/core`.",
+          "Forms, overlays, navigation, data display, sidebar, feedback, and typography primitives live in `packages/core`.",
           "Product-facing extensions such as ThemePackCard, ExportOptionCard, TokenMapperTable, and TemplateCard live in `packages/react`.",
         ],
       },
@@ -193,24 +194,23 @@ const docsArticles = {
     ],
   },
   charts: {
-    title: "Charts baseline",
+    title: "Charts deferred",
     eyebrow: "Docs",
     summary:
-      "Chart family organization, wrappers, and tooltip/container conventions are normalized into shared wrappers.",
+      "Charts are intentionally deferred from the active install surface until there is a real install path with proof.",
     sections: [
       {
-        title: "Chart families",
+        title: "Current truth",
         items: [
-          "Area, bar, line, pie, radar, radial, and tooltip coverage.",
-          "Shared tooltip, legend, and token-aware chart container defaults.",
+          "Charts are not counted as installable registry breadth in the current cycle.",
+          "The repo keeps charting as an explicit future seam rather than a silent placeholder.",
         ],
       },
       {
-        title: "Result in Shandapha",
+        title: "What ships instead",
         items: [
-          "`packages/core` owns the chart container and primitives.",
-          "`packages/react` exposes chart-friendly product cards and wrappers.",
-          "Web and Studio now share the same chart defaults, tooltip styling, and token-compatible color rules.",
+          "Templates, packs, theming, WC portability, and installable modules stay in the active truth surface.",
+          "Future chart work must return with a real module path, examples, and registry proof before it is marketed again.",
         ],
       },
     ],
@@ -219,12 +219,12 @@ const docsArticles = {
     title: "Directory and registry",
     eyebrow: "Docs",
     summary:
-      "The directory and registry surface points at Shandapha-owned components, blocks, charts, shells, templates, packs, and workspaces.",
+      "The directory and registry surface points at Shandapha-owned components, blocks, shells, templates, packs, modules, and workspaces.",
     sections: [
       {
         title: "Browse model",
         items: [
-          "Registry-style browse surfaces for installable components, blocks, charts, shells, and templates.",
+          "Registry-style browse surfaces for installable components, blocks, shells, templates, modules, and packs.",
           "Installable-item metadata that can be shared across web, Studio, CLI, docs, and generator flows.",
         ],
       },
@@ -387,7 +387,7 @@ const docsArticles = {
         items: [
           "Component manifests.",
           "Block manifests.",
-          "Chart manifests.",
+          "Module manifests.",
           "Shell manifests.",
           "Workspace install targets and alias metadata.",
         ],
@@ -410,7 +410,7 @@ const docsArticles = {
       {
         title: "New coverage",
         items: [
-          "Dashboard templates now point at chart, data table, sidebar, and section card surfaces.",
+          "Dashboard templates now point at data table, sidebar, and section card surfaces.",
           "Related templates and featured packs are explicit metadata, not hidden page assumptions.",
         ],
       },
@@ -443,6 +443,194 @@ const docsArticles = {
           "Apps remain `apps/web` and `apps/studio`.",
           "The backend remains `services/platform-api`.",
           "Packages remain the moat and the primary ownership boundary.",
+        ],
+      },
+    ],
+  },
+  "platform/build-template": {
+    title: "Build a template",
+    eyebrow: "Platform",
+    summary:
+      "Templates are registry-backed asset bundles. Author them against the same contract the generator, CLI, Studio, and docs consume.",
+    sections: [
+      {
+        title: "Required structure",
+        items: [
+          "Every template ships `template.json`, `README.md`, `preview.md`, `files/`, `states/`, `variants/`, and `samples/`.",
+          "Declare `layoutPreset`, framework compatibility, install metadata, and slots in the manifest.",
+          "Keep state files explicit for loading, empty, error, success, and no-access.",
+        ],
+      },
+      {
+        title: "Distribution rules",
+        items: [
+          "Use a stable id such as `org/acme::template::workspace-review-hub`.",
+          "Point `templateAssets` at real framework files so starter and patch flows can install them without guesswork.",
+          "Templates may not bypass layout primitives or token spacing rules.",
+        ],
+      },
+    ],
+  },
+  "platform/build-pack": {
+    title: "Build a pack",
+    eyebrow: "Platform",
+    summary:
+      "Packs extend the token contract with safe visual variation. They do not fork components or redefine layout truth.",
+    sections: [
+      {
+        title: "Pack authoring",
+        items: [
+          "Describe only semantic token knobs and pack metadata.",
+          "Validate contrast, readability, motion safety, and mode compatibility before publishing.",
+          "Preview pack differences on real templates rather than isolated demo shells.",
+        ],
+      },
+      {
+        title: "Registry truth",
+        items: [
+          "Support, trust, and stability come from registry metadata, not docs-only labels.",
+          "First-party, org, and community packs resolve through the same catalog contracts.",
+        ],
+      },
+    ],
+  },
+  "platform/build-module": {
+    title: "Build a module",
+    eyebrow: "Platform",
+    summary:
+      "Modules are opt-in install surfaces with explicit capability slices, install requirements, and policy metadata.",
+    sections: [
+      {
+        title: "Manifest requirements",
+        items: [
+          "Declare free, premium, and business capabilities separately.",
+          "Publish framework compatibility, required packages, route needs, and installability notes.",
+          "Keep essentials free or provide a real free alternative path.",
+        ],
+      },
+      {
+        title: "Reference modules",
+        items: [
+          "Use DataTable and SEO as the installable reference patterns.",
+          "Charts and richtext stay deferred until they satisfy the same registry and example proof.",
+        ],
+      },
+    ],
+  },
+  "platform/publish-to-registry": {
+    title: "Publish to registry",
+    eyebrow: "Platform",
+    summary:
+      "Publishing is catalog-driven. First-party, org, and community items pass through the same manifest validation and compatibility rules.",
+    sections: [
+      {
+        title: "Catalog config",
+        items: [
+          "Declare sources in `shandapha.catalog.json` with `builtin`, `file`, or `api` kinds.",
+          "Use stable ids in the form `<namespace>::<kind>::<slug>`.",
+          "Later sources may extend or approve assets, but may not replace first-party manifests or files.",
+        ],
+      },
+      {
+        title: "Validation flow",
+        items: [
+          "Run `shandapha catalog validate --catalog-config shandapha.catalog.json` before publishing.",
+          "Use `shandapha catalog list` and `shandapha catalog show <registryId>` to inspect trust, support, and installability state.",
+          "Community items must declare provenance and compatibility before discovery or install is allowed.",
+        ],
+      },
+    ],
+  },
+  "platform/private-catalogs": {
+    title: "Private and org catalogs",
+    eyebrow: "Platform",
+    summary:
+      "Teams can publish internal templates, packs, and modules without forking Shandapha. Org catalogs extend the platform spine instead of replacing it.",
+    sections: [
+      {
+        title: "Org catalog rules",
+        items: [
+          "Namespace internal assets under `org/<team>` and keep them in catalog source manifests.",
+          "Use workspace scoping, approvals, and policy metadata to control visibility and rollout.",
+          "Org sources may approve first-party assets, but may not override first-party truth.",
+        ],
+      },
+      {
+        title: "Working example",
+        items: [
+          "This repo seeds `org/acme::template::workspace-review-hub` as a real internal template.",
+          "The same org source also approves `shandapha::template::dashboard-home` for rollout.",
+        ],
+      },
+    ],
+  },
+  "platform/trust-levels": {
+    title: "Trust and support levels",
+    eyebrow: "Platform",
+    summary:
+      "Support and trust are explicit contracts. Discovery surfaces show them directly so installs stay honest.",
+    sections: [
+      {
+        title: "Support levels",
+        items: [
+          "`first-party` means Shandapha owns and supports the asset.",
+          "`internal` marks org-only assets.",
+          "`verified` and `community` separate reviewed extensions from self-maintained community work.",
+        ],
+      },
+      {
+        title: "Trust and stability",
+        items: [
+          "Trust levels are `verified`, `checksum-verified`, and `self-declared`.",
+          "Stability levels are `stable`, `preview`, `experimental`, and `deprecated`.",
+          "Deprecated items may carry replacement ids and removal versions so every surface shows the same warning.",
+        ],
+      },
+    ],
+  },
+  "platform/policies-and-approvals": {
+    title: "Policies and approvals",
+    eyebrow: "Platform",
+    summary:
+      "Governance now evaluates resolved catalog truth instead of decorative metadata. The same evaluator powers CLI, API, and Studio surfaces.",
+    sections: [
+      {
+        title: "Policy controls",
+        items: [
+          "Policies can allow or block namespaces, support levels, stability levels, and community usage.",
+          "They can lock packs, templates, or modules to approved registry ids.",
+          "Modes are `report-only` and `enforce`.",
+        ],
+      },
+      {
+        title: "Approval workflow",
+        items: [
+          "Approvals attach to a `registryId`, `sourceId`, scope, status, and approved version.",
+          "Non-first-party items can require approval before generation or install proceeds.",
+          "Use `shandapha policy check` to surface findings locally before rollout.",
+        ],
+      },
+    ],
+  },
+  "platform/compatibility-rules": {
+    title: "Compatibility rules",
+    eyebrow: "Platform",
+    summary:
+      "Framework adapters, layouts, modules, and templates all publish compatibility metadata so installs fail before they become destructive.",
+    sections: [
+      {
+        title: "Compatibility contract",
+        items: [
+          "Every installable asset declares framework support, required capabilities, and install targets.",
+          "Templates declare a `layoutPreset` and may only target approved layout primitives.",
+          "Community items may not redefine token truth, layout rules, or adapter capabilities.",
+        ],
+      },
+      {
+        title: "Failure behavior",
+        items: [
+          "Invalid or incompatible assets fail in registry resolution, policy checks, and generator planning before file changes happen.",
+          "Dry-run output includes provenance, trust, support, and warnings so teams can review before install.",
         ],
       },
     ],
@@ -490,6 +678,72 @@ function getNav(currentHref: string) {
     ...item,
     active: item.href === currentHref,
   }));
+}
+
+function getCatalogItem(registryId: string) {
+  return catalog.itemsById[registryId];
+}
+
+function renderCatalogBadges(item: SiteCatalogItem) {
+  return (
+    <Inline gap={8} className="flex-wrap">
+      <Badge variant="outline">{item.supportLevel}</Badge>
+      <Badge variant="outline">{item.trustLevel}</Badge>
+      <Badge variant="outline">{item.stability}</Badge>
+      <Badge variant="secondary">{item.visibility}</Badge>
+      <Badge variant="secondary">
+        {item.installability.installable ? item.installability.target : "discovery-only"}
+      </Badge>
+    </Inline>
+  );
+}
+
+function renderCatalogMetaPanel(item: SiteCatalogItem) {
+  return (
+    <Card>
+      <CardHeader>
+        <CardTitle>Catalog truth</CardTitle>
+        <CardDescription>
+          Source, support, and installability metadata come directly from the resolved registry.
+        </CardDescription>
+      </CardHeader>
+      <CardContent className="grid gap-4">
+        {renderCatalogBadges(item)}
+        <ItemGroup className="gap-3">
+          <Item variant="outline" size="sm">
+            <ItemContent>
+              <ItemDescription className="line-clamp-none">
+                Registry id: {item.registryId}
+              </ItemDescription>
+            </ItemContent>
+          </Item>
+          <Item variant="outline" size="sm">
+            <ItemContent>
+              <ItemDescription className="line-clamp-none">
+                Owner: {item.owner.label}
+              </ItemDescription>
+            </ItemContent>
+          </Item>
+          <Item variant="outline" size="sm">
+            <ItemContent>
+              <ItemDescription className="line-clamp-none">
+                Source: {item.provenance.sourceId}
+              </ItemDescription>
+            </ItemContent>
+          </Item>
+          {item.deprecation ? (
+            <Item variant="outline" size="sm">
+              <ItemContent>
+                <ItemDescription className="line-clamp-none">
+                  Deprecated: {item.deprecation.message}
+                </ItemDescription>
+              </ItemContent>
+            </Item>
+          ) : null}
+        </ItemGroup>
+      </CardContent>
+    </Card>
+  );
 }
 
 function docsNav(currentKey: string) {
@@ -546,7 +800,8 @@ function renderPlanComparison() {
       <CardHeader>
         <CardTitle>Plan comparison</CardTitle>
         <CardDescription>
-          Free stays useful, premium accelerates polish, and business adds confidence and governance.
+          Free stays useful, premium accelerates polish, and business adds
+          confidence and governance.
         </CardDescription>
       </CardHeader>
       <CardContent>
@@ -582,7 +837,7 @@ function renderHomePage() {
     <MarketingShell
       title="Shandapha platform."
       eyebrow="Shandapha"
-      summary="The UI system now adopts the full practical baseline across components, blocks, charts, shells, theming, and installability while the platform architecture stays intact."
+      summary="The UI system now adopts the practical baseline across components, blocks, shells, theming, installability, and platform catalog truth while the architecture stays intact."
       navItems={getNav("/")}
       actions={
         <Inline gap={12}>
@@ -626,9 +881,9 @@ function renderHomePage() {
           </div>
           <div className="lg:col-span-3">
             <SectionSignal
-              title="Charts"
-              value={`${registry.charts.length}`}
-              detail="Chart containers, defaults, and token-compatible wrappers are shared rather than page-local."
+              title="Deferred modules"
+              value={`${registry.modules.filter((module) => module.status === "deferred").length}`}
+              detail="Deferred seams remain visible as future work instead of being counted as installable platform breadth."
             />
           </div>
           <div className="lg:col-span-3">
@@ -653,7 +908,7 @@ function renderHomePage() {
               slot="--primary"
               value={createPackTheme("normal").scale.primary}
               description="Primary action tone"
-              usage="Drives buttons, focus highlights, chart emphasis, and active shell moments through a single semantic slot."
+              usage="Drives buttons, focus highlights, and active shell moments through a single semantic slot."
             />
             <TokenSlotCard
               slot="--surface"
@@ -706,7 +961,7 @@ function renderHomePage() {
             <ProductReadinessCard
               title="Component surface absorbed"
               points={[
-                "Forms, overlays, menus, tables, charts, and sidebar primitives now live in `packages/core`.",
+                "Forms, overlays, menus, tables, and sidebar primitives now live in `packages/core`.",
                 "Product-facing cards, panels, and wizard helpers now live in `packages/react`.",
               ]}
             />
@@ -725,9 +980,7 @@ function renderHomePage() {
         </GridPreset>
       </Section>
 
-      <Section title="Pricing">
-        {renderPlanCards()}
-      </Section>
+      <Section title="Pricing">{renderPlanCards()}</Section>
     </MarketingShell>
   );
 }
@@ -846,7 +1099,7 @@ function renderEnterprisePage() {
               label: "Registry remains shared brain",
               done: true,
               detail:
-                "Metadata now covers components, blocks, charts, shells, and workspaces for all product surfaces.",
+                "Metadata now covers components, blocks, shells, templates, modules, and workspaces for all product surfaces.",
             },
             {
               label: "Wizard and generator compatibility preserved",
@@ -866,7 +1119,7 @@ function renderChangelogPage() {
     <MarketingShell
       title="Adoption milestones shipped on March 13, 2026."
       eyebrow="Changelog"
-      summary="The release story is no longer about isolated components. It now covers theming, blocks, charts, shells, registry metadata, and monorepo-aware installability."
+      summary="The release story is no longer about isolated components. It now covers theming, blocks, shells, registry metadata, and monorepo-aware installability."
       navItems={getNav("/changelog")}
       actions={
         <Button asChild type="button" variant="outline">
@@ -894,8 +1147,8 @@ function renderChangelogPage() {
           <div className="lg:col-span-4">
             <SectionSignal
               title="Registry items"
-              value={`${registry.components.length + registry.blocks.length + registry.charts.length + registry.shells.length}`}
-              detail="Installable metadata now spans primitives, blocks, charts, and shells."
+              value={`${registry.components.length + registry.blocks.length + registry.shells.length}`}
+              detail="Installable metadata now spans primitives, blocks, shells, templates, and modules."
             />
           </div>
           <div className="lg:col-span-4">
@@ -941,7 +1194,7 @@ export function renderTemplatesIndexPage() {
     <MarketingShell
       title="Template catalog with shared-system shells, Shandapha-owned metadata."
       eyebrow="Templates"
-      summary="Templates now read like a real registry surface: clear shells, blocks, states, data contracts, related items, and featured packs."
+      summary="Templates now read like a real registry surface: shells, states, data contracts, related items, and explicit support/trust/installability metadata from the resolved catalog."
       navItems={getNav("/templates")}
       actions={
         <Button asChild type="button" variant="outline">
@@ -953,11 +1206,16 @@ export function renderTemplatesIndexPage() {
         <GridPreset preset="dashboard">
           {registry.templates.map((template) => (
             <div key={template.slug} className="lg:col-span-6">
-              <TemplateCard
-                template={template}
-                href={`/templates/${template.slug}`}
-                ctaLabel="Open template"
-              />
+              <Stack gap={12}>
+                <TemplateCard
+                  template={template}
+                  href={`/templates/${template.slug}`}
+                  ctaLabel="Open template"
+                />
+                {getCatalogItem(template.registryId)
+                  ? renderCatalogBadges(getCatalogItem(template.registryId) as SiteCatalogItem)
+                  : null}
+              </Stack>
             </div>
           ))}
         </GridPreset>
@@ -972,6 +1230,8 @@ export function renderTemplateDetailPage(slug: string) {
   if (!template) {
     notFound();
   }
+
+  const catalogItem = getCatalogItem(template.registryId);
 
   return (
     <SidebarShell
@@ -990,6 +1250,7 @@ export function renderTemplateDetailPage(slug: string) {
       }
       sidebar={
         <>
+          {catalogItem ? renderCatalogMetaPanel(catalogItem) : null}
           <TemplateStateGallery states={template.states} />
           <TemplateDataContractPanel contract={template.dataContract} />
         </>
@@ -1023,7 +1284,7 @@ export function renderPacksIndexPage() {
     <MarketingShell
       title="Pack catalog on top of the adopted baseline."
       eyebrow="Packs"
-      summary="The pack system remains intact and compatible with the new baseline, but the catalog now reads like a real registry surface with clear metadata and install targets instead of a grab-bag of demos."
+      summary="The pack system remains intact and compatible with the new baseline, and the catalog now shows support, trust, visibility, and installability directly from registry truth."
       navItems={getNav("/packs")}
       actions={
         <Button asChild type="button" variant="outline">
@@ -1033,9 +1294,14 @@ export function renderPacksIndexPage() {
     >
       <Section title="Pack catalog">
         <GridPreset preset="dashboard">
-          {packs.map((pack) => (
+          {registry.packs.map((pack) => (
             <div key={pack.id} className="lg:col-span-4">
-              <ThemePackCard packId={pack.id} />
+              <Stack gap={12}>
+                <ThemePackCard packId={pack.id} />
+                {getCatalogItem(pack.registryId)
+                  ? renderCatalogBadges(getCatalogItem(pack.registryId) as SiteCatalogItem)
+                  : null}
+              </Stack>
             </div>
           ))}
         </GridPreset>
@@ -1084,6 +1350,8 @@ export function renderPackDetailPage(slug: string) {
   }
 
   const preview = createPackTheme(pack.id);
+  const packManifest = registry.packs.find((entry) => entry.id === pack.id);
+  const catalogItem = packManifest ? getCatalogItem(packManifest.registryId) : undefined;
 
   return (
     <SidebarShell
@@ -1097,6 +1365,7 @@ export function renderPackDetailPage(slug: string) {
       }
       sidebar={
         <>
+          {catalogItem ? renderCatalogMetaPanel(catalogItem) : null}
           <ThemePackCard packId={pack.id} />
           <ContrastWarningPanel />
         </>
@@ -1162,8 +1431,16 @@ export function renderTrustPage(kind: "security" | "privacy" | "terms") {
       summary={page.summary}
       sidebarTitle="Trust pages"
       navItems={[
-        { href: "/trust/security", label: "Security", active: kind === "security" },
-        { href: "/trust/privacy", label: "Privacy", active: kind === "privacy" },
+        {
+          href: "/trust/security",
+          label: "Security",
+          active: kind === "security",
+        },
+        {
+          href: "/trust/privacy",
+          label: "Privacy",
+          active: kind === "privacy",
+        },
         { href: "/trust/terms", label: "Terms", active: kind === "terms" },
       ]}
       breadcrumbs={["Trust", page.title]}
@@ -1177,15 +1454,15 @@ export function renderTrustPage(kind: "security" | "privacy" | "terms") {
             </CardHeader>
             <CardContent>
               <ItemGroup className="gap-3">
-              {page.bullets.map((bullet) => (
-                <Item key={bullet} variant="outline" size="sm">
-                  <ItemContent>
-                    <ItemDescription className="line-clamp-none">
-                      {bullet}
-                    </ItemDescription>
-                  </ItemContent>
-                </Item>
-              ))}
+                {page.bullets.map((bullet) => (
+                  <Item key={bullet} variant="outline" size="sm">
+                    <ItemContent>
+                      <ItemDescription className="line-clamp-none">
+                        {bullet}
+                      </ItemDescription>
+                    </ItemContent>
+                  </Item>
+                ))}
               </ItemGroup>
             </CardContent>
           </Card>
@@ -1200,7 +1477,8 @@ export function renderTrustPage(kind: "security" | "privacy" | "terms") {
 
 export function renderDocsPage(slug: string[]) {
   const key = slug.length ? slug.join("/") : "index";
-  const article = docsArticles[key as keyof typeof docsArticles] ?? docsArticles.index;
+  const article =
+    docsArticles[key as keyof typeof docsArticles] ?? docsArticles.index;
 
   return (
     <DocsShell

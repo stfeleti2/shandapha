@@ -19,8 +19,29 @@
       "id": "seo",
       "name": "SEO",
       "packageName": "@shandapha/module-seo",
-      "description": "Scaffolded SEO helpers for metadata, sitemap, and schema support.",
-      "premium": false
+      "description": "Metadata, sitemap, robots, and structured data helpers.",
+      "premium": false,
+      "minimumPlan": "free",
+      "status": "installable",
+      "capabilities": {
+        "free": [
+          "metadata",
+          "json-ld",
+          "canonical",
+          "sitemap",
+          "robots"
+        ],
+        "premium": [],
+        "business": []
+      },
+      "install": {
+        "requiredPackages": [],
+        "requiredRoutes": [
+          "/sitemap.xml",
+          "/robots.txt"
+        ],
+        "frameworks": []
+      }
     }
   },
   "devDependencies": {},

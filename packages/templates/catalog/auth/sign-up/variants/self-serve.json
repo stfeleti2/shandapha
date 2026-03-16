@@ -1,0 +1,7 @@
+{
+  "template": "auth/sign-up",
+  "variant": "self-serve",
+  "title": "Auth Sign Up - self-serve",
+  "related": ["auth/sign-in", "onboarding-3-step"],
+  "featuredPackIds": ["normal", "glass", "neon"]
+}

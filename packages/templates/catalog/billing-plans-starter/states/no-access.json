@@ -1,0 +1,8 @@
+{
+  "template": "billing-plans-starter",
+  "state": "no access",
+  "headline": "Billing Plans Starter no access",
+  "summary": "Pricing and usage starter with entitlements framing, usage bars, and trust copy.",
+  "surfaces": ["cards", "progress bars", "badges", "comparison table"],
+  "slots": ["planCards", "usageSummary", "upgradeRail"]
+}

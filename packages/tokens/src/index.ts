@@ -139,7 +139,11 @@ function createLightScale(brand: BrandKit, packId: PackId): ThemeScale {
   };
 
   return {
-    background: glass ? "oklch(0.995 0 0)" : neon ? "oklch(0.99 0.004 247.858)" : "oklch(1 0 0)",
+    background: glass
+      ? "oklch(0.995 0 0)"
+      : neon
+        ? "oklch(0.99 0.004 247.858)"
+        : "oklch(1 0 0)",
     foreground: "oklch(0.145 0 0)",
     card: "oklch(1 0 0)",
     cardForeground: "oklch(0.145 0 0)",
@@ -155,27 +159,59 @@ function createLightScale(brand: BrandKit, packId: PackId): ThemeScale {
     accentForeground: "oklch(0.205 0 0)",
     destructive: "oklch(0.577 0.245 27.325)",
     destructiveForeground: "oklch(0.97 0.01 17)",
-    border: glass ? "oklch(0.94 0 0)" : neon ? "oklch(0.93 0.004 247.858)" : "oklch(0.922 0 0)",
-    input: glass ? "oklch(0.94 0 0)" : neon ? "oklch(0.93 0.004 247.858)" : "oklch(0.922 0 0)",
-    ring: usesBaselinePrimary ? "oklch(0.708 0 0)" : mix(brand.primary, 35, "#ffffff"),
+    border: glass
+      ? "oklch(0.94 0 0)"
+      : neon
+        ? "oklch(0.93 0.004 247.858)"
+        : "oklch(0.922 0 0)",
+    input: glass
+      ? "oklch(0.94 0 0)"
+      : neon
+        ? "oklch(0.93 0.004 247.858)"
+        : "oklch(0.922 0 0)",
+    ring: usesBaselinePrimary
+      ? "oklch(0.708 0 0)"
+      : mix(brand.primary, 35, "#ffffff"),
     chart1: chartPalette.chart1,
     chart2: chartPalette.chart2,
     chart3: chartPalette.chart3,
     chart4: chartPalette.chart4,
     chart5: chartPalette.chart5,
-    sidebar: glass ? "oklch(0.99 0 0)" : neon ? "oklch(0.985 0.004 247.858)" : "oklch(0.985 0 0)",
+    sidebar: glass
+      ? "oklch(0.99 0 0)"
+      : neon
+        ? "oklch(0.985 0.004 247.858)"
+        : "oklch(0.985 0 0)",
     sidebarForeground: "oklch(0.145 0 0)",
     sidebarPrimary: primary,
     sidebarPrimaryForeground: primaryForeground,
     sidebarAccent: secondary,
     sidebarAccentForeground: "oklch(0.205 0 0)",
-    sidebarBorder: glass ? "oklch(0.94 0 0)" : neon ? "oklch(0.93 0.004 247.858)" : "oklch(0.922 0 0)",
-    sidebarRing: usesBaselinePrimary ? "oklch(0.708 0 0)" : mix(brand.primary, 40, "#ffffff"),
-    surface: glass ? "oklch(0.985 0 0)" : neon ? "oklch(0.98 0.004 247.858)" : "oklch(0.98 0 0)",
+    sidebarBorder: glass
+      ? "oklch(0.94 0 0)"
+      : neon
+        ? "oklch(0.93 0.004 247.858)"
+        : "oklch(0.922 0 0)",
+    sidebarRing: usesBaselinePrimary
+      ? "oklch(0.708 0 0)"
+      : mix(brand.primary, 40, "#ffffff"),
+    surface: glass
+      ? "oklch(0.985 0 0)"
+      : neon
+        ? "oklch(0.98 0.004 247.858)"
+        : "oklch(0.98 0 0)",
     surfaceForeground: "oklch(0.145 0 0)",
-    code: glass ? "oklch(0.985 0 0)" : neon ? "oklch(0.98 0.004 247.858)" : "oklch(0.98 0 0)",
+    code: glass
+      ? "oklch(0.985 0 0)"
+      : neon
+        ? "oklch(0.98 0.004 247.858)"
+        : "oklch(0.98 0 0)",
     codeForeground: "oklch(0.145 0 0)",
-    codeHighlight: glass ? "oklch(0.97 0 0)" : neon ? "oklch(0.96 0.004 247.858)" : "oklch(0.96 0 0)",
+    codeHighlight: glass
+      ? "oklch(0.97 0 0)"
+      : neon
+        ? "oklch(0.96 0.004 247.858)"
+        : "oklch(0.96 0 0)",
     codeNumber: "oklch(0.56 0 0)",
     selection: "oklch(0.145 0 0)",
     selectionForeground: "oklch(1 0 0)",
@@ -219,11 +255,23 @@ function createDarkScale(brand: BrandKit, packId: PackId): ThemeScale {
   };
 
   return {
-    background: glass ? "oklch(0.14 0 0)" : neon ? "oklch(0.17 0.01 247.858)" : "oklch(0.145 0 0)",
+    background: glass
+      ? "oklch(0.14 0 0)"
+      : neon
+        ? "oklch(0.17 0.01 247.858)"
+        : "oklch(0.145 0 0)",
     foreground: "oklch(0.985 0 0)",
-    card: glass ? "oklch(0.19 0 0)" : neon ? "oklch(0.22 0.01 247.858)" : "oklch(0.205 0 0)",
+    card: glass
+      ? "oklch(0.19 0 0)"
+      : neon
+        ? "oklch(0.22 0.01 247.858)"
+        : "oklch(0.205 0 0)",
     cardForeground: "oklch(0.985 0 0)",
-    popover: glass ? "oklch(0.19 0 0)" : neon ? "oklch(0.22 0.01 247.858)" : "oklch(0.205 0 0)",
+    popover: glass
+      ? "oklch(0.19 0 0)"
+      : neon
+        ? "oklch(0.22 0.01 247.858)"
+        : "oklch(0.205 0 0)",
     popoverForeground: "oklch(0.985 0 0)",
     primary,
     primaryForeground: usesBaselinePrimary ? "oklch(0.205 0 0)" : "#0a0a0a",
@@ -235,27 +283,61 @@ function createDarkScale(brand: BrandKit, packId: PackId): ThemeScale {
     accentForeground: "oklch(0.985 0 0)",
     destructive: "oklch(0.704 0.191 22.216)",
     destructiveForeground: "oklch(0.58 0.22 27)",
-    border: glass ? "oklch(1 0 0 / 8%)" : neon ? "oklch(1 0 0 / 12%)" : "oklch(1 0 0 / 10%)",
-    input: glass ? "oklch(1 0 0 / 12%)" : neon ? "oklch(1 0 0 / 16%)" : "oklch(1 0 0 / 15%)",
-    ring: usesBaselinePrimary ? "oklch(0.556 0 0)" : mix(brand.primary, 48, "#ffffff"),
+    border: glass
+      ? "oklch(1 0 0 / 8%)"
+      : neon
+        ? "oklch(1 0 0 / 12%)"
+        : "oklch(1 0 0 / 10%)",
+    input: glass
+      ? "oklch(1 0 0 / 12%)"
+      : neon
+        ? "oklch(1 0 0 / 16%)"
+        : "oklch(1 0 0 / 15%)",
+    ring: usesBaselinePrimary
+      ? "oklch(0.556 0 0)"
+      : mix(brand.primary, 48, "#ffffff"),
     chart1: chartPalette.chart1,
     chart2: chartPalette.chart2,
     chart3: chartPalette.chart3,
     chart4: chartPalette.chart4,
     chart5: chartPalette.chart5,
-    sidebar: glass ? "oklch(0.19 0 0)" : neon ? "oklch(0.2 0.01 247.858)" : "oklch(0.205 0 0)",
+    sidebar: glass
+      ? "oklch(0.19 0 0)"
+      : neon
+        ? "oklch(0.2 0.01 247.858)"
+        : "oklch(0.205 0 0)",
     sidebarForeground: "oklch(0.985 0 0)",
     sidebarPrimary: primary,
-    sidebarPrimaryForeground: usesBaselinePrimary ? "oklch(0.205 0 0)" : "#0a0a0a",
+    sidebarPrimaryForeground: usesBaselinePrimary
+      ? "oklch(0.205 0 0)"
+      : "#0a0a0a",
     sidebarAccent: secondary,
     sidebarAccentForeground: "oklch(0.985 0 0)",
-    sidebarBorder: glass ? "oklch(1 0 0 / 8%)" : neon ? "oklch(1 0 0 / 12%)" : "oklch(1 0 0 / 10%)",
-    sidebarRing: usesBaselinePrimary ? "oklch(0.556 0 0)" : mix(brand.primary, 50, "#ffffff"),
-    surface: glass ? "oklch(0.18 0 0)" : neon ? "oklch(0.21 0.01 247.858)" : "oklch(0.2 0 0)",
+    sidebarBorder: glass
+      ? "oklch(1 0 0 / 8%)"
+      : neon
+        ? "oklch(1 0 0 / 12%)"
+        : "oklch(1 0 0 / 10%)",
+    sidebarRing: usesBaselinePrimary
+      ? "oklch(0.556 0 0)"
+      : mix(brand.primary, 50, "#ffffff"),
+    surface: glass
+      ? "oklch(0.18 0 0)"
+      : neon
+        ? "oklch(0.21 0.01 247.858)"
+        : "oklch(0.2 0 0)",
     surfaceForeground: "oklch(0.708 0 0)",
-    code: glass ? "oklch(0.18 0 0)" : neon ? "oklch(0.21 0.01 247.858)" : "oklch(0.2 0 0)",
+    code: glass
+      ? "oklch(0.18 0 0)"
+      : neon
+        ? "oklch(0.21 0.01 247.858)"
+        : "oklch(0.2 0 0)",
     codeForeground: "oklch(0.708 0 0)",
-    codeHighlight: glass ? "oklch(0.25 0 0)" : neon ? "oklch(0.28 0.01 247.858)" : "oklch(0.27 0 0)",
+    codeHighlight: glass
+      ? "oklch(0.25 0 0)"
+      : neon
+        ? "oklch(0.28 0.01 247.858)"
+        : "oklch(0.27 0 0)",
     codeNumber: "oklch(0.72 0 0)",
     selection: primary,
     selectionForeground: usesBaselinePrimary ? "oklch(0.205 0 0)" : "#0a0a0a",
@@ -270,7 +352,10 @@ export function createTokenSet(
     light: createLightScale(brand, packId),
     dark: createDarkScale(brand, packId),
     typography: {
-      body: resolveFontStack(brand.font, "ui-sans-serif, system-ui, sans-serif"),
+      body: resolveFontStack(
+        brand.font,
+        "ui-sans-serif, system-ui, sans-serif",
+      ),
       display: brand.font.trim().startsWith("var(")
         ? "var(--font-display), var(--font-body), ui-sans-serif, system-ui, sans-serif"
         : resolveFontStack(brand.font, "ui-sans-serif, system-ui, sans-serif"),
@@ -335,6 +420,38 @@ export function toTokensJson(tokens: TokenSet): string {
   return JSON.stringify(tokens, null, 2);
 }
 
+export function fromTokensJson(value: string): TokenSet {
+  return JSON.parse(value) as TokenSet;
+}
+
+export function toTailwindTheme(tokens: TokenSet) {
+  return {
+    colors: {
+      background: "var(--sh-background-light)",
+      foreground: "var(--sh-foreground-light)",
+      card: "var(--sh-card-light)",
+      primary: "var(--sh-primary-light)",
+      secondary: "var(--sh-secondary-light)",
+      muted: "var(--sh-muted-light)",
+      accent: "var(--sh-accent-light)",
+      border: "var(--sh-border-light)",
+      ring: "var(--sh-ring-light)",
+    },
+    borderRadius: {
+      sm: tokens.radius.sm,
+      md: tokens.radius.md,
+      lg: tokens.radius.lg,
+      xl: tokens.radius.xl,
+      full: tokens.radius.full,
+    },
+    fontFamily: {
+      sans: [tokens.typography.body],
+      display: [tokens.typography.display],
+      mono: [tokens.typography.mono],
+    },
+  };
+}
+
 export function checkContrast(tokens: TokenSet): string[] {
   const warnings: string[] = [];
 
@@ -351,4 +468,43 @@ export function checkContrast(tokens: TokenSet): string[] {
   }
 
   return warnings;
+}
+
+export function validateBrandKit(brand: BrandKit) {
+  const repairs = suggestBrandKitRepair(brand);
+
+  return {
+    valid: repairs.length === 0,
+    repairs,
+  };
+}
+
+export function suggestBrandKitRepair(brand: BrandKit) {
+  const suggestions: string[] = [];
+
+  if (!parseHexColor(brand.primary)) {
+    suggestions.push("Primary color must be a six-digit hex value.");
+  }
+
+  if (!parseHexColor(brand.accent)) {
+    suggestions.push("Accent color must be a six-digit hex value.");
+  }
+
+  if (
+    brand.primary.trim().toLowerCase() === brand.accent.trim().toLowerCase()
+  ) {
+    suggestions.push("Primary and accent colors should not be identical.");
+  }
+
+  if (!brand.font.trim()) {
+    suggestions.push("Font must be a non-empty string.");
+  }
+
+  if (!brand.radius.trim()) {
+    suggestions.push(
+      "Radius must be provided so token output remains deterministic.",
+    );
+  }
+
+  return suggestions;
 }

@@ -1,0 +1,8 @@
+{
+  "template": "contact",
+  "state": "no access",
+  "headline": "Contact no access",
+  "summary": "Contact page with sales paths, support routing, and trust framing.",
+  "surfaces": ["cards", "field", "alert"],
+  "slots": ["contactOptions", "form", "trustNotes"]
+}

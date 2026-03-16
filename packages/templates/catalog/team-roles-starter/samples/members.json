@@ -1,0 +1,11 @@
+{
+  "template": "team-roles-starter",
+  "sample": "members.json",
+  "entities": {
+    "member": "member-1",
+    "role": "role-2",
+    "invite": "invite-3"
+  },
+  "slots": ["memberTable", "invitePanel", "seatSummary"],
+  "outputs": ["member roster", "pending invites"]
+}

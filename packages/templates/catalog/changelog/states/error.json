@@ -1,0 +1,8 @@
+{
+  "template": "changelog",
+  "state": "error",
+  "headline": "Changelog error",
+  "summary": "Release note stream with upgrade guidance, registry updates, and issue tracking hooks.",
+  "surfaces": ["timeline", "badge", "article cards"],
+  "slots": ["releaseFeed", "upgradeGuide", "registrySummary"]
+}

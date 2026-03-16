@@ -1,0 +1,7 @@
+{
+  "template": "pricing-basic",
+  "variant": "self-serve",
+  "title": "Pricing Basic - self-serve",
+  "related": ["landing-section-based", "faq", "contact"],
+  "featuredPackIds": ["normal", "glass", "neon"]
+}

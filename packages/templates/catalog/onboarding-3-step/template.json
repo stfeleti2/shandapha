@@ -1,0 +1,52 @@
+{
+  "version": 1,
+  "slug": "onboarding-3-step",
+  "name": "Onboarding 3 Step",
+  "group": "saas",
+  "shell": "SidebarShell",
+  "summary": "Three-step activation flow that leads into the wizard or export.",
+  "states": ["loading", "empty", "error", "success", "no access"],
+  "variants": ["self-serve", "team"],
+  "blocks": ["wizard-steps", "checklist-panel", "verification-steps"],
+  "related": ["auth/sign-up", "dashboard-home"],
+  "surfaces": ["step cards", "alerts", "checklist", "support rail"],
+  "featuredPackIds": ["normal", "glass"],
+  "dataContract": {
+    "entities": ["step", "check", "workspace"],
+    "slots": ["stepRail", "stepBody", "completionRail"],
+    "outputs": ["step status", "activation checklist"],
+    "samples": ["steps.json", "checks.json"]
+  },
+  "frameworks": [
+    {
+      "adapter": "react-vite",
+      "support": "supported",
+      "notes": "Reference adapter and fastest path for local starters.",
+      "requiredCapabilities": []
+    },
+    {
+      "adapter": "next-app-router",
+      "support": "supported",
+      "notes": "Reference SSR-capable adapter for product starters.",
+      "requiredCapabilities": ["server-components"]
+    },
+    {
+      "adapter": "wc-universal",
+      "support": "experimental",
+      "notes": "Portable surface area is still being rebuilt around the WC baseline.",
+      "requiredCapabilities": ["custom-elements"]
+    },
+    {
+      "adapter": "blazor-wc",
+      "support": "experimental",
+      "notes": "Blazor currently installs through the WC bridge rather than a native adapter.",
+      "requiredCapabilities": ["custom-elements", "wc-interop"]
+    }
+  ],
+  "install": {
+    "requiredPackages": [],
+    "requiredRoutes": [],
+    "themeDependencies": ["theme.css", "tokens.json"],
+    "sampleDataBindings": ["steps.json", "checks.json"]
+  }
+}

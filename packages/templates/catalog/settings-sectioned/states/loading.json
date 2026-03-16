@@ -1,0 +1,13 @@
+{
+  "template": "settings-sectioned",
+  "state": "loading",
+  "headline": "Settings Sectioned loading",
+  "summary": "Settings shell with grouped controls, policy messaging, and status helpers.",
+  "surfaces": [
+    "switches",
+    "radio groups",
+    "alert panels",
+    "verification lists"
+  ],
+  "slots": ["sectionNav", "settingsBody", "statusRail"]
+}

@@ -1,0 +1,10 @@
+{
+  "template": "faq",
+  "sample": "faq.json",
+  "entities": {
+    "faqEntry": "faqEntry-1",
+    "contactPath": "contactPath-2"
+  },
+  "slots": ["faqList", "contactStrip"],
+  "outputs": ["faq page"]
+}

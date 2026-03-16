@@ -22,8 +22,7 @@
     "@shandapha/runtime": "workspace:*",
     "@shandapha/templates": "workspace:*",
     "@shandapha/tokens": "workspace:*",
-    "lucide-react": "^0.544.0",
-    "recharts": "^2.15.4"
+    "lucide-react": "^0.544.0"
   },
   "devDependencies": {},
   "exports": {

@@ -1,0 +1,7 @@
+{
+  "template": "detail-tabs-timeline",
+  "variant": "client-service",
+  "title": "Detail Tabs Timeline - client-service",
+  "related": ["list-filters", "settings-sectioned"],
+  "featuredPackIds": ["normal", "glass"]
+}

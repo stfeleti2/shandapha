@@ -1,0 +1,8 @@
+{
+  "template": "docs-article",
+  "state": "empty",
+  "headline": "Docs Article empty",
+  "summary": "Article layout with metadata, code samples, registry notes, and sibling nav.",
+  "surfaces": ["article shell", "toc", "code panel"],
+  "slots": ["articleBody", "toc", "related"]
+}

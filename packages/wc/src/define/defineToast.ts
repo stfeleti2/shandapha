@@ -1,1 +1,1 @@
-export const toastTagName = "shandapha-toast";
+export { defineToast, toastTagName } from "../index";

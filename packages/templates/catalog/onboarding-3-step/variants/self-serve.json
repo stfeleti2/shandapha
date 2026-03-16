@@ -1,0 +1,7 @@
+{
+  "template": "onboarding-3-step",
+  "variant": "self-serve",
+  "title": "Onboarding 3 Step - self-serve",
+  "related": ["auth/sign-up", "dashboard-home"],
+  "featuredPackIds": ["normal", "glass"]
+}

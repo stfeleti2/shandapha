@@ -1,0 +1,68 @@
+{
+  "version": 1,
+  "sources": [
+    {
+      "id": "builtin:first-party",
+      "kind": "builtin",
+      "label": "Shandapha first-party",
+      "enabled": true,
+      "namespace": "shandapha",
+      "workspaceIds": [],
+      "allowedNamespaces": ["shandapha"]
+    },
+    {
+      "id": "acme-internal",
+      "kind": "file",
+      "label": "Acme internal catalog",
+      "enabled": true,
+      "namespace": "org/acme",
+      "path": "data/seed/catalogs/acme.internal.catalog.json",
+      "workspaceIds": ["acme", "studio-labs"],
+      "allowedNamespaces": ["shandapha", "org/acme"]
+    },
+    {
+      "id": "community-demo",
+      "kind": "file",
+      "label": "Community demo catalog",
+      "enabled": true,
+      "namespace": "community/demo-labs",
+      "path": "data/seed/catalogs/community.demo.catalog.json",
+      "workspaceIds": [],
+      "allowedNamespaces": ["community/demo-labs"]
+    }
+  ],
+  "policies": [
+    {
+      "id": "org-approved-assets",
+      "name": "Org approved assets",
+      "mode": "enforce",
+      "allowedNamespaces": ["shandapha", "org/acme"],
+      "allowedSupportLevels": ["first-party", "internal", "verified"],
+      "allowedStabilities": ["stable", "preview"],
+      "approvedRegistryIds": [],
+      "approvedVersions": ["1"],
+      "lockedPackRegistryIds": [],
+      "lockedTemplateRegistryIds": [],
+      "lockedModuleRegistryIds": [],
+      "allowCommunity": false,
+      "allowExperimental": false,
+      "allowDeprecated": false
+    },
+    {
+      "id": "community-review",
+      "name": "Community review mode",
+      "mode": "report-only",
+      "allowedNamespaces": ["community/demo-labs"],
+      "allowedSupportLevels": ["community"],
+      "allowedStabilities": ["experimental", "preview", "stable"],
+      "approvedRegistryIds": [],
+      "approvedVersions": [],
+      "lockedPackRegistryIds": [],
+      "lockedTemplateRegistryIds": [],
+      "lockedModuleRegistryIds": [],
+      "allowCommunity": true,
+      "allowExperimental": true,
+      "allowDeprecated": false
+    }
+  ]
+}

@@ -1,0 +1,11 @@
+{
+  "template": "billing-plans-starter",
+  "sample": "usage.json",
+  "entities": {
+    "plan": "plan-1",
+    "limit": "limit-2",
+    "usageMetric": "usageMetric-3"
+  },
+  "slots": ["planCards", "usageSummary", "upgradeRail"],
+  "outputs": ["plan comparison", "usage posture"]
+}

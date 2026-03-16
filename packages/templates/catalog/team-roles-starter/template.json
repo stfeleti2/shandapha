@@ -1,0 +1,52 @@
+{
+  "version": 1,
+  "slug": "team-roles-starter",
+  "name": "Team Roles Starter",
+  "group": "saas",
+  "shell": "AdminShell",
+  "summary": "Membership management starter with invites, roles, seats, and audit framing.",
+  "states": ["loading", "empty", "error", "success", "no access"],
+  "variants": ["internal team", "customer admin"],
+  "blocks": ["member-table", "invite-card", "entitlement-summary"],
+  "related": ["billing-plans-starter", "settings-sectioned"],
+  "surfaces": ["avatar list", "table", "badge", "sheet"],
+  "featuredPackIds": ["normal", "glass"],
+  "dataContract": {
+    "entities": ["member", "role", "invite"],
+    "slots": ["memberTable", "invitePanel", "seatSummary"],
+    "outputs": ["member roster", "pending invites"],
+    "samples": ["members.json", "roles.json"]
+  },
+  "frameworks": [
+    {
+      "adapter": "react-vite",
+      "support": "supported",
+      "notes": "Reference adapter and fastest path for local starters.",
+      "requiredCapabilities": []
+    },
+    {
+      "adapter": "next-app-router",
+      "support": "supported",
+      "notes": "Reference SSR-capable adapter for product starters.",
+      "requiredCapabilities": ["server-components"]
+    },
+    {
+      "adapter": "wc-universal",
+      "support": "experimental",
+      "notes": "Portable surface area is still being rebuilt around the WC baseline.",
+      "requiredCapabilities": ["custom-elements"]
+    },
+    {
+      "adapter": "blazor-wc",
+      "support": "experimental",
+      "notes": "Blazor currently installs through the WC bridge rather than a native adapter.",
+      "requiredCapabilities": ["custom-elements", "wc-interop"]
+    }
+  ],
+  "install": {
+    "requiredPackages": [],
+    "requiredRoutes": [],
+    "themeDependencies": ["theme.css", "tokens.json"],
+    "sampleDataBindings": ["members.json", "roles.json"]
+  }
+}

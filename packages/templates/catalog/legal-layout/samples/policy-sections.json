@@ -1,0 +1,9 @@
+{
+  "template": "legal-layout",
+  "sample": "policy-sections.json",
+  "entities": {
+    "policySection": "policySection-1"
+  },
+  "slots": ["sidebar", "article", "metaRail"],
+  "outputs": ["policy article"]
+}

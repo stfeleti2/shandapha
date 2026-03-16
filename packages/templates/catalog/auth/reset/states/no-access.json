@@ -1,0 +1,8 @@
+{
+  "template": "auth/reset",
+  "state": "no access",
+  "headline": "Auth Reset Password no access",
+  "summary": "Reset form with inline validation and success state.",
+  "surfaces": ["field", "progress", "alert"],
+  "slots": ["resetCard"]
+}

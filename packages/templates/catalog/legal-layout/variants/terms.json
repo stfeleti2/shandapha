@@ -1,0 +1,7 @@
+{
+  "template": "legal-layout",
+  "variant": "terms",
+  "title": "Legal Layout - terms",
+  "related": ["docs-article", "faq"],
+  "featuredPackIds": ["normal", "glass"]
+}

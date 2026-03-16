@@ -1,0 +1,8 @@
+{
+  "template": "auth/sign-up",
+  "state": "loading",
+  "headline": "Auth Sign Up loading",
+  "summary": "Sign up flow with value framing, workspace defaults, and reassurance copy.",
+  "surfaces": ["card", "field", "button group", "benefit list"],
+  "slots": ["authCard", "benefits"]
+}

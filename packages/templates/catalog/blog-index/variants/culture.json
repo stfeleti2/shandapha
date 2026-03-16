@@ -1,0 +1,7 @@
+{
+  "template": "blog-index",
+  "variant": "culture",
+  "title": "Blog Index - culture",
+  "related": ["blog-article", "changelog"],
+  "featuredPackIds": ["normal", "glass", "neon"]
+}

@@ -1,0 +1,8 @@
+{
+  "template": "auth/forgot",
+  "state": "error",
+  "headline": "Auth Forgot Password error",
+  "summary": "Recovery flow with email feedback and reassurance copy.",
+  "surfaces": ["card", "alert", "field"],
+  "slots": ["recoveryCard"]
+}

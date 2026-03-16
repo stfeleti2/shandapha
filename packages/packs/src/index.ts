@@ -1,12 +1,20 @@
-import type { BrandKit, PackId, PackManifest, ThemeMode } from "@shandapha/contracts";
 import {
+  type BrandKit,
+  type CatalogMetadata,
+  definePackManifest,
+  type PackId,
+  type PackManifest,
+  type ThemeMode,
+} from "@shandapha/contracts";
+import {
+  checkContrast,
   createTokenSet,
   defaultBrandKit,
   resolveThemeScale,
   toCssVariables,
 } from "@shandapha/tokens";
 
-export const packs: PackManifest[] = [
+const packDefinitions = [
   {
     id: "normal",
     slug: "normal",
@@ -40,7 +48,11 @@ export const packs: PackManifest[] = [
       "Neon raises chart and action contrast while staying inside the same semantic-token, layout, and component grammar.",
     knobs: ["accent emphasis", "chart contrast", "surface depth"],
   },
-] as PackManifest[];
+] satisfies Array<Omit<PackManifest, "version" | keyof CatalogMetadata>>;
+
+export const packs: PackManifest[] = packDefinitions.map((pack) =>
+  definePackManifest(pack),
+);
 
 export function getPackBySlug(slug: string) {
   return packs.find((pack) => pack.slug === slug);
@@ -69,4 +81,22 @@ export function createPackTheme(
 
 export function validatePack(packId: string) {
   return packs.some((pack) => pack.id === packId);
+}
+
+export function validatePackTheme(
+  packId: PackId,
+  brandKit: BrandKit = defaultBrandKit,
+) {
+  return checkContrast(createTokenSet(brandKit, packId));
+}
+
+export function createPackPreviewDescriptors(
+  templateSlugs = ["dashboard-home", "pricing-basic", "auth/sign-in"],
+) {
+  return packs.map((pack) => ({
+    packId: pack.id,
+    tier: pack.tier,
+    templateSlugs,
+    contrastWarnings: validatePackTheme(pack.id),
+  }));
 }

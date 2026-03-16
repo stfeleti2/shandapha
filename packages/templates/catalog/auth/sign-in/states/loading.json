@@ -1,0 +1,8 @@
+{
+  "template": "auth/sign-in",
+  "state": "loading",
+  "headline": "Auth Sign In loading",
+  "summary": "Sign in screen with trust copy, field groups, and help states.",
+  "surfaces": ["card", "field", "alert", "badge"],
+  "slots": ["authCard", "aside"]
+}

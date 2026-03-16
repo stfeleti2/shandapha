@@ -19,6 +19,9 @@ export interface WorkspaceRecord {
   memberIds: string[];
   apiKeyCount: number;
   policyCount: number;
+  catalogSourceIds: string[];
+  allowedNamespaces: string[];
+  policyIds: string[];
   usage: WorkspaceUsageSnapshot;
   lastExportAt: string;
 }
@@ -34,6 +37,8 @@ export function summarizeWorkspace(record: WorkspaceRecord) {
     savedThemeCount: record.savedThemeCount,
     apiKeyCount: record.apiKeyCount,
     policyCount: record.policyCount,
+    catalogSourceCount: record.catalogSourceIds.length,
+    allowedNamespaces: record.allowedNamespaces,
     lastExportAt: record.lastExportAt,
   };
 }

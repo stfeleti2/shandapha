@@ -1,0 +1,8 @@
+{
+  "template": "contact",
+  "state": "success",
+  "headline": "Contact success",
+  "summary": "Contact page with sales paths, support routing, and trust framing.",
+  "surfaces": ["cards", "field", "alert"],
+  "slots": ["contactOptions", "form", "trustNotes"]
+}

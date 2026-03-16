@@ -11,6 +11,10 @@ export const policyReports = [
   "audit export",
 ] as const;
 
+export {
+  evaluateCatalogPolicies,
+  groupApprovalsByRegistryId,
+} from "./catalogPolicy";
 export type { AuditEntry } from "./audit/auditTrail";
 export {
   createAuditEntry,

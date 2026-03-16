@@ -1,0 +1,8 @@
+{
+  "template": "blog-index",
+  "state": "success",
+  "headline": "Blog Index success",
+  "summary": "Journal index for product updates, launch stories, and registry notes.",
+  "surfaces": ["cards", "filters", "empty state"],
+  "slots": ["hero", "filters", "postGrid"]
+}

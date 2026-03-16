@@ -1,0 +1,11 @@
+{
+  "template": "settings-sectioned",
+  "sample": "policies.json",
+  "entities": {
+    "settingGroup": "settingGroup-1",
+    "policyRule": "policyRule-2",
+    "verificationStep": "verificationStep-3"
+  },
+  "slots": ["sectionNav", "settingsBody", "statusRail"],
+  "outputs": ["settings map", "policy posture"]
+}

@@ -1,0 +1,11 @@
+{
+  "template": "form-create-edit",
+  "sample": "form-schema.json",
+  "entities": {
+    "draft": "draft-1",
+    "policy": "policy-2",
+    "validationIssue": "validationIssue-3"
+  },
+  "slots": ["hero", "formSections", "aside"],
+  "outputs": ["draft payload", "validation state", "review summary"]
+}

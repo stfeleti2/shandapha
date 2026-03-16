@@ -1,0 +1,52 @@
+{
+  "version": 1,
+  "slug": "pricing-basic",
+  "name": "Pricing Basic",
+  "group": "marketing",
+  "shell": "MarketingShell",
+  "summary": "Simple pricing surface with trust copy, FAQ handoff, and upgrade moments.",
+  "states": ["loading", "empty", "error", "success", "no access"],
+  "variants": ["self-serve", "hybrid"],
+  "blocks": ["pricing-grid", "faq-accordion", "upgrade-strip"],
+  "related": ["landing-section-based", "faq", "contact"],
+  "surfaces": ["cards", "comparison rows", "badge highlights"],
+  "featuredPackIds": ["normal", "glass", "neon"],
+  "dataContract": {
+    "entities": ["plan", "faqEntry"],
+    "slots": ["pricingGrid", "faq", "cta"],
+    "outputs": ["pricing page"],
+    "samples": ["pricing.json", "faq.json"]
+  },
+  "frameworks": [
+    {
+      "adapter": "react-vite",
+      "support": "supported",
+      "notes": "Reference adapter and fastest path for local starters.",
+      "requiredCapabilities": []
+    },
+    {
+      "adapter": "next-app-router",
+      "support": "supported",
+      "notes": "Reference SSR-capable adapter for product starters.",
+      "requiredCapabilities": ["server-components"]
+    },
+    {
+      "adapter": "wc-universal",
+      "support": "experimental",
+      "notes": "Portable surface area is still being rebuilt around the WC baseline.",
+      "requiredCapabilities": ["custom-elements"]
+    },
+    {
+      "adapter": "blazor-wc",
+      "support": "experimental",
+      "notes": "Blazor currently installs through the WC bridge rather than a native adapter.",
+      "requiredCapabilities": ["custom-elements", "wc-interop"]
+    }
+  ],
+  "install": {
+    "requiredPackages": [],
+    "requiredRoutes": [],
+    "themeDependencies": ["theme.css", "tokens.json"],
+    "sampleDataBindings": ["pricing.json", "faq.json"]
+  }
+}

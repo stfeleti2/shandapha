@@ -1,0 +1,8 @@
+{
+  "template": "blog-article",
+  "state": "empty",
+  "headline": "Blog Article empty",
+  "summary": "Editorial article template with pull quotes, metadata, and related strips.",
+  "surfaces": ["article shell", "quote panel", "related strip"],
+  "slots": ["hero", "body", "related"]
+}

@@ -1,0 +1,11 @@
+export default function TeamRolesStarterPage() {
+  return (
+    <main data-template="team-roles-starter">
+      <h1>Team Roles Starter</h1>
+      <p>
+        Membership management starter with invites, roles, seats, and audit
+        framing.
+      </p>
+    </main>
+  );
+}

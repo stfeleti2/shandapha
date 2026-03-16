@@ -1,0 +1,8 @@
+{
+  "template": "detail-tabs-timeline",
+  "state": "success",
+  "headline": "Detail Tabs Timeline success",
+  "summary": "Entity detail screen with summary card, tabs, timeline, and related activity.",
+  "surfaces": ["tabs", "items", "timeline rail"],
+  "slots": ["summary", "tabPanels", "timeline", "relatedStrip"]
+}

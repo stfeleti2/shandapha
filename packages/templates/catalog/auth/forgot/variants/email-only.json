@@ -1,0 +1,7 @@
+{
+  "template": "auth/forgot",
+  "variant": "email-only",
+  "title": "Auth Forgot Password - email-only",
+  "related": ["auth/sign-in", "auth/reset"],
+  "featuredPackIds": ["normal", "glass"]
+}

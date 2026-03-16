@@ -1,0 +1,52 @@
+{
+  "version": 1,
+  "slug": "blog-article",
+  "name": "Blog Article",
+  "group": "docs",
+  "shell": "DocsShell",
+  "summary": "Editorial article template with pull quotes, metadata, and related strips.",
+  "states": ["loading", "empty", "error", "success", "no access"],
+  "variants": ["announcement", "essay"],
+  "blocks": ["article-hero", "pull-quote", "related-articles"],
+  "related": ["blog-index", "changelog"],
+  "surfaces": ["article shell", "quote panel", "related strip"],
+  "featuredPackIds": ["normal", "glass", "neon"],
+  "dataContract": {
+    "entities": ["post", "quote", "author"],
+    "slots": ["hero", "body", "related"],
+    "outputs": ["post article"],
+    "samples": ["post.mdx"]
+  },
+  "frameworks": [
+    {
+      "adapter": "react-vite",
+      "support": "supported",
+      "notes": "Reference adapter and fastest path for local starters.",
+      "requiredCapabilities": []
+    },
+    {
+      "adapter": "next-app-router",
+      "support": "supported",
+      "notes": "Reference SSR-capable adapter for product starters.",
+      "requiredCapabilities": ["server-components"]
+    },
+    {
+      "adapter": "wc-universal",
+      "support": "experimental",
+      "notes": "Portable surface area is still being rebuilt around the WC baseline.",
+      "requiredCapabilities": ["custom-elements"]
+    },
+    {
+      "adapter": "blazor-wc",
+      "support": "experimental",
+      "notes": "Blazor currently installs through the WC bridge rather than a native adapter.",
+      "requiredCapabilities": ["custom-elements", "wc-interop"]
+    }
+  ],
+  "install": {
+    "requiredPackages": [],
+    "requiredRoutes": [],
+    "themeDependencies": ["theme.css", "tokens.json"],
+    "sampleDataBindings": ["post.mdx"]
+  }
+}

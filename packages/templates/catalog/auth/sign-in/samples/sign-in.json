@@ -1,0 +1,10 @@
+{
+  "template": "auth/sign-in",
+  "sample": "sign-in.json",
+  "entities": {
+    "identityProvider": "identityProvider-1",
+    "supportLink": "supportLink-2"
+  },
+  "slots": ["authCard", "aside"],
+  "outputs": ["credential submission"]
+}

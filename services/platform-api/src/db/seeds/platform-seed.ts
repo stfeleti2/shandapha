@@ -1,7 +1,18 @@
+import {
+  assertCatalogConfig,
+  assertCatalogSourceManifest,
+} from "@shandapha/contracts";
+import rootCatalogConfig from "../../../../../shandapha.catalog.json";
+import acmeInternalCatalog from "../../../../../data/seed/catalogs/acme.internal.catalog.json";
+import communityDemoCatalog from "../../../../../data/seed/catalogs/community.demo.catalog.json";
 import type { PlatformStore } from "../schema/platform-schema";
 import { platformSchema } from "../schema/platform-schema";
 
 export function createSeededPlatformStore(): PlatformStore {
+  const catalogConfig = assertCatalogConfig(rootCatalogConfig);
+  const acmeCatalog = assertCatalogSourceManifest(acmeInternalCatalog);
+  const communityCatalog = assertCatalogSourceManifest(communityDemoCatalog);
+
   return {
     schema: platformSchema,
     auth: {
@@ -57,6 +68,9 @@ export function createSeededPlatformStore(): PlatformStore {
         memberIds: ["user_promise"],
         apiKeyCount: 2,
         policyCount: 3,
+        catalogSourceIds: ["acme-internal"],
+        allowedNamespaces: ["shandapha", "org/acme"],
+        policyIds: ["org-approved-assets"],
         usage: {
           starterExportsUsed: 9,
           starterExportsLimit: 25,
@@ -77,6 +91,9 @@ export function createSeededPlatformStore(): PlatformStore {
         memberIds: ["user_promise", "user_ops"],
         apiKeyCount: 5,
         policyCount: 6,
+        catalogSourceIds: ["acme-internal"],
+        allowedNamespaces: ["shandapha", "org/acme"],
+        policyIds: ["org-approved-assets", "community-review"],
         usage: {
           starterExportsUsed: 22,
           starterExportsLimit: 100,
@@ -272,6 +289,9 @@ export function createSeededPlatformStore(): PlatformStore {
           checksum: "registry-20260313-b",
         },
       ],
+      sourceManifests: [acmeCatalog, communityCatalog],
+      approvals: [...acmeCatalog.approvals],
+      policies: catalogConfig.policies,
     },
   };
 }

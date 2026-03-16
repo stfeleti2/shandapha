@@ -13,7 +13,8 @@
   },
   "dependencies": {
     "@shandapha/contracts": "workspace:*",
-    "@shandapha/entitlements": "workspace:*"
+    "@shandapha/entitlements": "workspace:*",
+    "@shandapha/registry": "workspace:*"
   },
   "devDependencies": {},
   "exports": {

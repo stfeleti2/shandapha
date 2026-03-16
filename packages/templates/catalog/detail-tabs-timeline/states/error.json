@@ -1,0 +1,8 @@
+{
+  "template": "detail-tabs-timeline",
+  "state": "error",
+  "headline": "Detail Tabs Timeline error",
+  "summary": "Entity detail screen with summary card, tabs, timeline, and related activity.",
+  "surfaces": ["tabs", "items", "timeline rail"],
+  "slots": ["summary", "tabPanels", "timeline", "relatedStrip"]
+}

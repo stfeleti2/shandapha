@@ -1,0 +1,7 @@
+{
+  "template": "list-filters",
+  "variant": "advanced",
+  "title": "List Filters - advanced",
+  "related": ["dashboard-home", "detail-tabs-timeline"],
+  "featuredPackIds": ["normal", "glass"]
+}

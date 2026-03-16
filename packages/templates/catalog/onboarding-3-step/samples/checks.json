@@ -1,0 +1,11 @@
+{
+  "template": "onboarding-3-step",
+  "sample": "checks.json",
+  "entities": {
+    "step": "step-1",
+    "check": "check-2",
+    "workspace": "workspace-3"
+  },
+  "slots": ["stepRail", "stepBody", "completionRail"],
+  "outputs": ["step status", "activation checklist"]
+}

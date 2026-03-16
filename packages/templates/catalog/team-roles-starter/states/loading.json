@@ -1,0 +1,8 @@
+{
+  "template": "team-roles-starter",
+  "state": "loading",
+  "headline": "Team Roles Starter loading",
+  "summary": "Membership management starter with invites, roles, seats, and audit framing.",
+  "surfaces": ["avatar list", "table", "badge", "sheet"],
+  "slots": ["memberTable", "invitePanel", "seatSummary"]
+}

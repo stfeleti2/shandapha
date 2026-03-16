@@ -1,0 +1,7 @@
+{
+  "template": "auth/reset",
+  "variant": "single-step",
+  "title": "Auth Reset Password - single-step",
+  "related": ["auth/sign-in", "auth/forgot"],
+  "featuredPackIds": ["normal", "glass"]
+}

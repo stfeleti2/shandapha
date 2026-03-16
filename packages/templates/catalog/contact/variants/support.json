@@ -1,0 +1,7 @@
+{
+  "template": "contact",
+  "variant": "support",
+  "title": "Contact - support",
+  "related": ["faq", "legal-layout"],
+  "featuredPackIds": ["normal", "glass"]
+}

@@ -1,0 +1,10 @@
+{
+  "template": "pricing-basic",
+  "sample": "pricing.json",
+  "entities": {
+    "plan": "plan-1",
+    "faqEntry": "faqEntry-2"
+  },
+  "slots": ["pricingGrid", "faq", "cta"],
+  "outputs": ["pricing page"]
+}

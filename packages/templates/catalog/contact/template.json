@@ -1,0 +1,52 @@
+{
+  "version": 1,
+  "slug": "contact",
+  "name": "Contact",
+  "group": "marketing",
+  "shell": "MarketingShell",
+  "summary": "Contact page with sales paths, support routing, and trust framing.",
+  "states": ["loading", "empty", "error", "success", "no access"],
+  "variants": ["sales", "support"],
+  "blocks": ["contact-shell", "contact-cards", "office-strip"],
+  "related": ["faq", "legal-layout"],
+  "surfaces": ["cards", "field", "alert"],
+  "featuredPackIds": ["normal", "glass"],
+  "dataContract": {
+    "entities": ["contactPath", "region"],
+    "slots": ["contactOptions", "form", "trustNotes"],
+    "outputs": ["contact page"],
+    "samples": ["contact.json"]
+  },
+  "frameworks": [
+    {
+      "adapter": "react-vite",
+      "support": "supported",
+      "notes": "Reference adapter and fastest path for local starters.",
+      "requiredCapabilities": []
+    },
+    {
+      "adapter": "next-app-router",
+      "support": "supported",
+      "notes": "Reference SSR-capable adapter for product starters.",
+      "requiredCapabilities": ["server-components"]
+    },
+    {
+      "adapter": "wc-universal",
+      "support": "experimental",
+      "notes": "Portable surface area is still being rebuilt around the WC baseline.",
+      "requiredCapabilities": ["custom-elements"]
+    },
+    {
+      "adapter": "blazor-wc",
+      "support": "experimental",
+      "notes": "Blazor currently installs through the WC bridge rather than a native adapter.",
+      "requiredCapabilities": ["custom-elements", "wc-interop"]
+    }
+  ],
+  "install": {
+    "requiredPackages": [],
+    "requiredRoutes": [],
+    "themeDependencies": ["theme.css", "tokens.json"],
+    "sampleDataBindings": ["contact.json"]
+  }
+}

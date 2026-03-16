@@ -28,10 +28,8 @@ import {
   CardFooter,
   CardHeader,
   CardTitle,
-  ChartContainer,
-  ChartTooltip,
-  ChartTooltipContent,
   Checkbox,
+  cn,
   Input,
   InputGroup,
   InputGroupAddon,
@@ -57,9 +55,13 @@ import {
   Toaster,
   ToggleGroup,
   ToggleGroupItem,
-  cn,
 } from "@shandapha/core";
-import { requirePack, resolveEntitlements, upgradeCopy } from "@shandapha/entitlements";
+import {
+  limitsForPlan,
+  requirePack,
+  resolveEntitlements,
+  upgradeCopy,
+} from "@shandapha/entitlements";
 import { GridPreset, Inline, Stack, Surface } from "@shandapha/layouts";
 import { createPackTheme, getPackById, packs } from "@shandapha/packs";
 import { getTemplateBySlug } from "@shandapha/registry";
@@ -76,14 +78,6 @@ import {
   ShieldCheckIcon,
   SparklesIcon,
 } from "lucide-react";
-import {
-  Area,
-  AreaChart,
-  CartesianGrid,
-  Line,
-  LineChart,
-  XAxis,
-} from "recharts";
 import {
   createContext,
   type PropsWithChildren,
@@ -135,30 +129,7 @@ function getSystemMode(): Exclude<ThemeMode, "system"> {
 }
 
 function getPlanLimits(planId: PlanId): PlanLimits {
-  if (planId === "business") {
-    return {
-      exportsPerMonth: 100,
-      themeRevisions: 80,
-      patchInstalls: 40,
-      members: 50,
-    };
-  }
-
-  if (planId === "premium") {
-    return {
-      exportsPerMonth: 25,
-      themeRevisions: 24,
-      patchInstalls: 10,
-      members: 12,
-    };
-  }
-
-  return {
-    exportsPerMonth: 3,
-    themeRevisions: 8,
-    patchInstalls: 1,
-    members: 3,
-  };
+  return limitsForPlan(planId);
 }
 
 function useOptionalThemeContext() {
@@ -190,9 +161,9 @@ export function ThemeProvider({
   });
   const [mode, setModeState] = useState<ThemeMode>(initialMode);
   const [motion, setMotionState] = useState<MotionMode>(initialMotion);
-  const [resolvedMode, setResolvedMode] = useState<Exclude<ThemeMode, "system">>(
-    initialMode === "system" ? getSystemMode() : initialMode,
-  );
+  const [resolvedMode, setResolvedMode] = useState<
+    Exclude<ThemeMode, "system">
+  >(initialMode === "system" ? getSystemMode() : initialMode);
 
   const availablePacks = useMemo(
     () => packs.filter((pack) => requirePack(planId, pack.id)),
@@ -230,10 +201,13 @@ export function ThemeProvider({
 
   useEffect(() => {
     applyCurrentTheme();
-  }, [applyCurrentTheme, brandKitState, mode, motion, packId]);
+  }, []);
 
   const contrastWarnings = useMemo(
-    () => checkContrast(createPackTheme(packId, brandKitState, resolvedMode).tokens),
+    () =>
+      checkContrast(
+        createPackTheme(packId, brandKitState, resolvedMode).tokens,
+      ),
     [brandKitState, packId, resolvedMode],
   );
 
@@ -251,7 +225,9 @@ export function ThemeProvider({
       limits,
       setPackId: (nextPackId) =>
         startTransition(() =>
-          setPackIdState(requirePack(planId, nextPackId) ? nextPackId : "normal"),
+          setPackIdState(
+            requirePack(planId, nextPackId) ? nextPackId : "normal",
+          ),
         ),
       setMode: (nextMode) => startTransition(() => setModeState(nextMode)),
       setDensity: (nextDensity) =>
@@ -378,7 +354,9 @@ export function ThemePackCard({
   const activeMode = context?.resolvedMode ?? "light";
   const activeBrandKit = context?.brandKit ?? defaultBrandKit;
   const preview = createPackTheme(packId, activeBrandKit, activeMode);
-  const locked = context ? !requirePack(context.planId, packId) : manifest.tier !== "free";
+  const locked = context
+    ? !requirePack(context.planId, packId)
+    : manifest.tier !== "free";
   const isSelected = selected ?? context?.packId === packId;
   const handleSelect = () => {
     if (locked) {
@@ -410,16 +388,16 @@ export function ThemePackCard({
       <CardContent className="grid gap-4">
         <div className="grid grid-cols-5 gap-2">
           {[
-            preview.scale.background,
-            preview.scale.card,
-            preview.scale.primary,
-            preview.scale.accent,
-            preview.scale.chart1,
-          ].map((value, index) => (
+            ["background", preview.scale.background],
+            ["card", preview.scale.card],
+            ["primary", preview.scale.primary],
+            ["accent", preview.scale.accent],
+            ["chart", preview.scale.chart1],
+          ].map(([swatch, value]) => (
             <div
-              key={`${packId}-swatch-${index}`}
+              key={`${packId}-${swatch}`}
               className="h-12 rounded-lg border"
-              style={{ background: value }}
+              style={{ background: value as string }}
             />
           ))}
         </div>
@@ -746,7 +724,9 @@ export function ChecklistPanel({
         <div className="flex items-center justify-between gap-3">
           <div>
             <CardTitle>{title}</CardTitle>
-            <CardDescription>State-complete delivery before export.</CardDescription>
+            <CardDescription>
+              State-complete delivery before export.
+            </CardDescription>
           </div>
           <Badge variant="outline">
             {completeCount}/{items.length}
@@ -780,11 +760,7 @@ export function ChecklistPanel({
   );
 }
 
-export function DoctorStatusList({
-  checks,
-}: {
-  checks: DoctorCheck[];
-}) {
+export function DoctorStatusList({ checks }: { checks: DoctorCheck[] }) {
   return (
     <Card>
       <CardHeader>
@@ -795,30 +771,34 @@ export function DoctorStatusList({
       </CardHeader>
       <CardContent>
         <ItemGroup className="gap-3">
-        {checks.map((check) => (
-          <Item key={check.id} variant="outline" className="items-start">
-            <ItemMedia className="mt-0.5">
-              {check.status === "pass" ? (
-                <CheckCircle2Icon className="size-4" />
-              ) : (
-                <CircleAlertIcon className="size-4" />
-              )}
-            </ItemMedia>
-            <ItemContent>
-              <ItemHeader className="items-start">
-                <ItemTitle>{check.label}</ItemTitle>
-                <ItemActions>
-                  <Badge variant={check.status === "pass" ? "secondary" : "outline"}>
-                    {check.status}
-                  </Badge>
-                </ItemActions>
-              </ItemHeader>
-              <ItemDescription className="line-clamp-none">
-                {check.detail}
-              </ItemDescription>
-            </ItemContent>
-          </Item>
-        ))}
+          {checks.map((check) => (
+            <Item key={check.id} variant="outline" className="items-start">
+              <ItemMedia className="mt-0.5">
+                {check.status === "pass" ? (
+                  <CheckCircle2Icon className="size-4" />
+                ) : (
+                  <CircleAlertIcon className="size-4" />
+                )}
+              </ItemMedia>
+              <ItemContent>
+                <ItemHeader className="items-start">
+                  <ItemTitle>{check.label}</ItemTitle>
+                  <ItemActions>
+                    <Badge
+                      variant={
+                        check.status === "pass" ? "secondary" : "outline"
+                      }
+                    >
+                      {check.status}
+                    </Badge>
+                  </ItemActions>
+                </ItemHeader>
+                <ItemDescription className="line-clamp-none">
+                  {check.detail}
+                </ItemDescription>
+              </ItemContent>
+            </Item>
+          ))}
         </ItemGroup>
       </CardContent>
     </Card>
@@ -842,7 +822,9 @@ export function VerificationSteps({
     <Card>
       <CardHeader>
         <CardTitle>{title}</CardTitle>
-        <CardDescription>Carry the same checks across Studio, CLI, and docs.</CardDescription>
+        <CardDescription>
+          Carry the same checks across Studio, CLI, and docs.
+        </CardDescription>
       </CardHeader>
       <CardContent className="grid gap-4">
         <Progress value={(completeCount / Math.max(steps.length, 1)) * 100} />
@@ -854,9 +836,7 @@ export function VerificationSteps({
               size="sm"
               className="items-start"
             >
-              <ItemMedia className="text-xs font-medium">
-                {index + 1}
-              </ItemMedia>
+              <ItemMedia className="text-xs font-medium">{index + 1}</ItemMedia>
               <ItemContent>
                 <ItemHeader className="items-start">
                   <ItemTitle>{step.title}</ItemTitle>
@@ -931,7 +911,8 @@ export function TokenMapperTable({
       <CardHeader>
         <CardTitle>Token mapper</CardTitle>
         <CardDescription>
-          Semantic slots stay exportable across runtime, registry, and future brand kits.
+          Semantic slots stay exportable across runtime, registry, and future
+          brand kits.
         </CardDescription>
       </CardHeader>
       <CardContent>
@@ -978,11 +959,7 @@ export function BrandSafetyNotice({
   );
 }
 
-export function ContrastWarningPanel({
-  warnings,
-}: {
-  warnings?: string[];
-}) {
+export function ContrastWarningPanel({ warnings }: { warnings?: string[] }) {
   const context = useOptionalThemeContext();
   const resolvedWarnings = warnings ?? context?.contrastWarnings ?? [];
 
@@ -992,7 +969,8 @@ export function ContrastWarningPanel({
         <CheckCircle2Icon className="size-4" />
         <AlertTitle>Contrast guard looks healthy</AlertTitle>
         <AlertDescription>
-          Current semantic token values keep separation between canvas, borders, and primary actions.
+          Current semantic token values keep separation between canvas, borders,
+          and primary actions.
         </AlertDescription>
       </Alert>
     );
@@ -1019,7 +997,8 @@ export function FocusVisibilityPreview() {
       <CardHeader>
         <CardTitle>Focus visibility</CardTitle>
         <CardDescription>
-          Shared rings stay obvious across the adopted baseline, including Glass and Neon.
+          Shared rings stay obvious across the adopted baseline, including Glass
+          and Neon.
         </CardDescription>
       </CardHeader>
       <CardContent className="grid gap-4">
@@ -1067,7 +1046,8 @@ export function DataToolbar({
           <div className="grid gap-1">
             <CardTitle>{title}</CardTitle>
             <CardDescription>
-              {summary ?? "Saved views, search, and bulk actions stay inside the same visual language."}
+              {summary ??
+                "Saved views, search, and bulk actions stay inside the same visual language."}
             </CardDescription>
           </div>
           <Button type="button" onClick={onAction}>
@@ -1171,11 +1151,7 @@ export function TemplateCard({
   );
 }
 
-export function TemplateStateGallery({
-  states,
-}: {
-  states: string[];
-}) {
+export function TemplateStateGallery({ states }: { states: string[] }) {
   return (
     <Card>
       <CardHeader>
@@ -1186,16 +1162,16 @@ export function TemplateStateGallery({
       </CardHeader>
       <CardContent>
         <ItemGroup className="gap-3">
-        {states.map((state) => (
-          <Item key={state} variant="outline" size="sm">
-            <ItemContent>
-              <ItemTitle>{state}</ItemTitle>
-            </ItemContent>
-            <ItemActions>
-              <Badge variant="outline">covered</Badge>
-            </ItemActions>
-          </Item>
-        ))}
+          {states.map((state) => (
+            <Item key={state} variant="outline" size="sm">
+              <ItemContent>
+                <ItemTitle>{state}</ItemTitle>
+              </ItemContent>
+              <ItemActions>
+                <Badge variant="outline">covered</Badge>
+              </ItemActions>
+            </Item>
+          ))}
         </ItemGroup>
       </CardContent>
     </Card>
@@ -1212,7 +1188,8 @@ export function TemplateDataContractPanel({
       <CardHeader>
         <CardTitle>Template data contract</CardTitle>
         <CardDescription>
-          Registry metadata stays explicit so wizard, CLI, docs, and previews share the same source of truth.
+          Registry metadata stays explicit so wizard, CLI, docs, and previews
+          share the same source of truth.
         </CardDescription>
       </CardHeader>
       <CardContent className="grid gap-6">
@@ -1259,11 +1236,7 @@ export function TemplateDataContractPanel({
   );
 }
 
-export function RelatedTemplatesStrip({
-  slugs,
-}: {
-  slugs: string[];
-}) {
+export function RelatedTemplatesStrip({ slugs }: { slugs: string[] }) {
   const relatedTemplates = slugs
     .map((slug) => getTemplateBySlug(slug))
     .filter((template): template is TemplateManifest => Boolean(template));
@@ -1273,7 +1246,8 @@ export function RelatedTemplatesStrip({
       <CardHeader>
         <CardTitle>Related templates</CardTitle>
         <CardDescription>
-          Keep adjacent flows close so catalog browsing feels like a registry, not a random page pile.
+          Keep adjacent flows close so catalog browsing feels like a registry,
+          not a random page pile.
         </CardDescription>
       </CardHeader>
       <CardContent>
@@ -1310,23 +1284,11 @@ export function ChartSurfaceCard({
   secondaryKey?: string;
   labelKey?: string;
 }) {
-  const config = secondaryKey
-    ? {
-        [valueKey]: {
-          label: title,
-          color: "var(--chart-1)",
-        },
-        [secondaryKey]: {
-          label: "Secondary",
-          color: "var(--chart-2)",
-        },
-      }
-    : {
-        [valueKey]: {
-          label: title,
-          color: "var(--chart-1)",
-        },
-      };
+  const values = data.map((entry) => Number(entry[valueKey] ?? 0));
+  const secondaryValues = secondaryKey
+    ? data.map((entry) => Number(entry[secondaryKey] ?? 0))
+    : [];
+  const max = Math.max(1, ...values, ...secondaryValues);
 
   return (
     <Card>
@@ -1334,59 +1296,46 @@ export function ChartSurfaceCard({
         <CardTitle>{title}</CardTitle>
         <CardDescription>{description}</CardDescription>
       </CardHeader>
-      <CardContent>
-        <ChartContainer config={config} className="h-[240px] w-full">
-          {secondaryKey ? (
-            <LineChart accessibilityLayer data={data}>
-              <CartesianGrid vertical={false} />
-              <XAxis
-                dataKey={labelKey}
-                tickLine={false}
-                axisLine={false}
-                tickMargin={8}
-              />
-              <ChartTooltip content={<ChartTooltipContent />} />
-              <Line
-                dataKey={valueKey}
-                type="monotone"
-                stroke={`var(--color-${valueKey})`}
-                strokeWidth={2}
-                dot={false}
-              />
-              <Line
-                dataKey={secondaryKey}
-                type="monotone"
-                stroke={`var(--color-${secondaryKey})`}
-                strokeWidth={2}
-                dot={false}
-              />
-            </LineChart>
-          ) : (
-            <AreaChart accessibilityLayer data={data}>
-              <defs>
-                <linearGradient id={`${valueKey}-fill`} x1="0" y1="0" x2="0" y2="1">
-                  <stop offset="5%" stopColor={`var(--color-${valueKey})`} stopOpacity={0.8} />
-                  <stop offset="95%" stopColor={`var(--color-${valueKey})`} stopOpacity={0.1} />
-                </linearGradient>
-              </defs>
-              <CartesianGrid vertical={false} />
-              <XAxis
-                dataKey={labelKey}
-                tickLine={false}
-                axisLine={false}
-                tickMargin={8}
-              />
-              <ChartTooltip content={<ChartTooltipContent />} />
-              <Area
-                dataKey={valueKey}
-                type="monotone"
-                fill={`url(#${valueKey}-fill)`}
-                stroke={`var(--color-${valueKey})`}
-                strokeWidth={2}
-              />
-            </AreaChart>
-          )}
-        </ChartContainer>
+      <CardContent className="grid gap-4">
+        <div className="grid h-[240px] grid-cols-[repeat(auto-fit,minmax(0,1fr))] items-end gap-3 rounded-xl border border-border/70 bg-muted/30 p-4">
+          {data.map((entry) => {
+            const label = String(entry[labelKey] ?? valueKey);
+            const primaryHeight = Math.max(
+              10,
+              (Number(entry[valueKey] ?? 0) / max) * 100,
+            );
+            const secondaryHeight =
+              secondaryKey === undefined
+                ? 0
+                : Math.max(8, (Number(entry[secondaryKey] ?? 0) / max) * 100);
+
+            return (
+              <div key={label} className="grid gap-2">
+                <div className="flex min-h-36 items-end gap-2">
+                  <div
+                    className="w-full rounded-t-md bg-[var(--chart-1)]/85 transition-all"
+                    style={{ height: `${primaryHeight}%` }}
+                  />
+                  {secondaryKey ? (
+                    <div
+                      className="w-full rounded-t-md bg-[var(--chart-2)]/70 transition-all"
+                      style={{ height: `${secondaryHeight}%` }}
+                    />
+                  ) : null}
+                </div>
+                <div className="grid gap-1 text-xs">
+                  <span className="font-medium text-foreground">{label}</span>
+                  <span className="text-muted-foreground">
+                    {valueKey}: {entry[valueKey] as React.ReactNode}
+                    {secondaryKey
+                      ? ` • ${secondaryKey}: ${entry[secondaryKey] as React.ReactNode}`
+                      : ""}
+                  </span>
+                </div>
+              </div>
+            );
+          })}
+        </div>
       </CardContent>
     </Card>
   );
@@ -1482,15 +1431,18 @@ export function RegistryMindsetCard() {
       <CardContent className="grid gap-3 text-sm leading-6 text-muted-foreground">
         <div className="flex items-start gap-3">
           <FolderKanbanIcon className="mt-1 size-4 text-primary" />
-          Metadata stays centralized for components, blocks, charts, shells, and workspaces.
+          Metadata stays centralized for components, blocks, charts, shells, and
+          workspaces.
         </div>
         <div className="flex items-start gap-3">
           <DownloadIcon className="mt-1 size-4 text-primary" />
-          Install targets stay monorepo-aware so apps can adopt shared UI without copying raw vendor trees.
+          Install targets stay monorepo-aware so apps can adopt shared UI
+          without copying raw vendor trees.
         </div>
         <div className="flex items-start gap-3">
           <SparklesIcon className="mt-1 size-4 text-primary" />
-          Source code remains locally editable, AI-readable, and pack-compatible.
+          Source code remains locally editable, AI-readable, and
+          pack-compatible.
         </div>
       </CardContent>
     </Card>
@@ -1506,7 +1458,8 @@ export function ThemeFoundationCard() {
       <CardHeader>
         <CardTitle>Theme foundation</CardTitle>
         <CardDescription>
-          CSS variables, light/dark, density, motion, and pack switching share one runtime.
+          CSS variables, light/dark, density, motion, and pack switching share
+          one runtime.
         </CardDescription>
       </CardHeader>
       <CardContent className="grid gap-4">
@@ -1518,7 +1471,10 @@ export function ThemeFoundationCard() {
             ["accent", theme.scale.accent],
           ].map(([label, value]) => (
             <div key={label} className="grid gap-2 rounded-lg border p-3">
-              <div className="h-12 rounded-md border" style={{ background: value }} />
+              <div
+                className="h-12 rounded-md border"
+                style={{ background: value }}
+              />
               <div className="text-xs font-medium uppercase tracking-[0.16em] text-muted-foreground">
                 {label}
               </div>
@@ -1544,7 +1500,10 @@ export function ProductReadinessCard({
       </CardHeader>
       <CardContent className="grid gap-3">
         {points.map((point) => (
-          <div key={point} className="flex items-start gap-3 text-sm leading-6 text-muted-foreground">
+          <div
+            key={point}
+            className="flex items-start gap-3 text-sm leading-6 text-muted-foreground"
+          >
             <CheckCircle2Icon className="mt-1 size-4 text-primary" />
             <span>{point}</span>
           </div>
@@ -1582,7 +1541,8 @@ export function TokenRuntimeNote() {
       <CardHeader>
         <CardTitle>Runtime ownership</CardTitle>
         <CardDescription>
-          Theme application stays lightweight while packs remain future-proof for wizard and CLI parity.
+          Theme application stays lightweight while packs remain future-proof
+          for wizard and CLI parity.
         </CardDescription>
       </CardHeader>
       <CardContent className="grid gap-3 text-sm leading-6 text-muted-foreground">
@@ -1596,7 +1556,8 @@ export function TokenRuntimeNote() {
         </div>
         <div className="flex items-start gap-3">
           <FolderKanbanIcon className="mt-1 size-4 text-primary" />
-          Exportable variables are ready for future registry and brand-kit automation.
+          Exportable variables are ready for future registry and brand-kit
+          automation.
         </div>
       </CardContent>
     </Card>

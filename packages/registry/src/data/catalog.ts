@@ -1,7 +1,10 @@
-import type {
-  RegistryFileManifest,
-  RegistryItemManifest,
-  RegistryWorkspaceManifest,
+import {
+  type CatalogMetadata,
+  createFrameworkCompatibilityRules,
+  defineRegistryItemManifest,
+  type RegistryFileManifest,
+  type RegistryItemManifest,
+  type RegistryWorkspaceManifest,
 } from "@shandapha/contracts";
 
 function createFile(
@@ -18,21 +21,67 @@ function createFile(
 }
 
 function createItem(
-  item: Omit<RegistryItemManifest, "files"> & {
+  item: Omit<
+    RegistryItemManifest,
+    "version" | "files" | "install" | keyof CatalogMetadata
+  > & {
     files?: Array<Pick<RegistryFileManifest, "path" | "role">>;
+    routeNeeds?: string[];
+    minimumPlan?: RegistryItemManifest["install"]["minimumPlan"];
+    freeAlternative?: string;
   },
 ): RegistryItemManifest {
+  const files = item.files?.map((file) =>
+    createFile(item.ownerPackage, file.path, file.role),
+  );
+  const targetPaths = files?.map((file) => file.target) ?? [item.installTarget];
+  const frameworks = createRegistryFrameworks(item.ownerPackage);
+
   return {
-    ...item,
-    files: item.files?.map((file) =>
-      createFile(item.ownerPackage, file.path, file.role),
-    ),
+    ...defineRegistryItemManifest({
+      ...item,
+      files,
+      install: {
+        targetPaths,
+        runtimeDependencies: [...(item.dependencies ?? [])],
+        peerDependencies: [],
+        templateDependencies: [...(item.registryDependencies ?? [])],
+        routeNeeds: [...(item.routeNeeds ?? [])],
+        minimumPlan: item.minimumPlan ?? "free",
+        freeAlternative: item.freeAlternative,
+        frameworks,
+        patchRules: [`Only modify declared target paths for ${item.name}.`],
+      },
+    }),
   };
 }
 
 const core = "@shandapha/core";
 const layouts = "@shandapha/layouts";
+const moduleDatatable = "@shandapha/module-datatable";
 const react = "@shandapha/react";
+
+function createRegistryFrameworks(ownerPackage: string) {
+  if (
+    ownerPackage === core ||
+    ownerPackage === react ||
+    ownerPackage === layouts ||
+    ownerPackage === moduleDatatable
+  ) {
+    return createFrameworkCompatibilityRules({
+      "wc-universal": {
+        support: "blocked",
+        notes: `${ownerPackage} currently exports framework-specific code.`,
+      },
+      "blazor-wc": {
+        support: "blocked",
+        notes: `${ownerPackage} currently exports framework-specific code.`,
+      },
+    });
+  }
+
+  return createFrameworkCompatibilityRules();
+}
 
 export const componentManifests: RegistryItemManifest[] = [
   createItem({
@@ -49,7 +98,8 @@ export const componentManifests: RegistryItemManifest[] = [
   createItem({
     name: "alert",
     title: "Alert",
-    description: "Status messaging surface for success, warning, and destructive states.",
+    description:
+      "Status messaging surface for success, warning, and destructive states.",
     type: "component",
     ownerPackage: core,
     installTarget: "packages/core/src/foundation.tsx",
@@ -59,7 +109,8 @@ export const componentManifests: RegistryItemManifest[] = [
   createItem({
     name: "alert-dialog",
     title: "Alert Dialog",
-    description: "Critical confirmation dialog aligned to the adopted overlay model.",
+    description:
+      "Critical confirmation dialog aligned to the adopted overlay model.",
     type: "component",
     ownerPackage: core,
     installTarget: "packages/core/src/overlays.tsx",
@@ -132,7 +183,8 @@ export const componentManifests: RegistryItemManifest[] = [
   createItem({
     name: "card",
     title: "Card",
-    description: "Core surface primitive for docs, dashboards, and marketing blocks.",
+    description:
+      "Core surface primitive for docs, dashboards, and marketing blocks.",
     type: "component",
     ownerPackage: core,
     installTarget: "packages/core/src/foundation.tsx",
@@ -140,20 +192,10 @@ export const componentManifests: RegistryItemManifest[] = [
     files: [{ path: "packages/core/src/foundation.tsx", role: "component" }],
   }),
   createItem({
-    name: "chart",
-    title: "Chart",
-    description: "Chart container, tooltip, and legend wrappers that match the overall system.",
-    type: "component",
-    ownerPackage: core,
-    installTarget: "packages/core/src/data.tsx",
-    categories: ["data", "visualization"],
-    dependencies: ["recharts"],
-    files: [{ path: "packages/core/src/data.tsx", role: "component" }],
-  }),
-  createItem({
     name: "checkbox",
     title: "Checkbox",
-    description: "Selection control tuned for forms, tables, and checklist flows.",
+    description:
+      "Selection control tuned for forms, tables, and checklist flows.",
     type: "component",
     ownerPackage: core,
     installTarget: "packages/core/src/controls.tsx",
@@ -164,7 +206,8 @@ export const componentManifests: RegistryItemManifest[] = [
   createItem({
     name: "combobox",
     title: "Combobox",
-    description: "Searchable select built from command, popover, and button primitives.",
+    description:
+      "Searchable select built from command, popover, and button primitives.",
     type: "component",
     ownerPackage: core,
     installTarget: "packages/core/src/menus.tsx",
@@ -175,7 +218,8 @@ export const componentManifests: RegistryItemManifest[] = [
   createItem({
     name: "command",
     title: "Command",
-    description: "Command palette baseline for omnibox and searchable selection.",
+    description:
+      "Command palette baseline for omnibox and searchable selection.",
     type: "component",
     ownerPackage: core,
     installTarget: "packages/core/src/menus.tsx",
@@ -197,14 +241,20 @@ export const componentManifests: RegistryItemManifest[] = [
   createItem({
     name: "data-table",
     title: "Data Table",
-    description: "Search, sort, and paginate baseline for operational product surfaces.",
+    description:
+      "Search, sort, and paginate baseline for operational product surfaces.",
     type: "component",
-    ownerPackage: core,
-    installTarget: "packages/core/src/data.tsx",
+    ownerPackage: moduleDatatable,
+    installTarget: "packages/modules/datatable/src/react.tsx",
     categories: ["data", "table"],
     dependencies: ["@tanstack/react-table"],
     registryDependencies: ["table", "input", "progress"],
-    files: [{ path: "packages/core/src/data.tsx", role: "component" }],
+    minimumPlan: "premium",
+    freeAlternative:
+      "Use TableBasic from @shandapha/core for a fully shippable free path.",
+    files: [
+      { path: "packages/modules/datatable/src/react.tsx", role: "component" },
+    ],
   }),
   createItem({
     name: "date-picker",
@@ -231,7 +281,8 @@ export const componentManifests: RegistryItemManifest[] = [
   createItem({
     name: "drawer",
     title: "Drawer",
-    description: "Mobile-friendly bottom sheet for compact edit flows and menus.",
+    description:
+      "Mobile-friendly bottom sheet for compact edit flows and menus.",
     type: "component",
     ownerPackage: core,
     installTarget: "packages/core/src/overlays.tsx",
@@ -253,7 +304,8 @@ export const componentManifests: RegistryItemManifest[] = [
   createItem({
     name: "empty",
     title: "Empty State",
-    description: "State-complete empty view primitives for product screens and templates.",
+    description:
+      "State-complete empty view primitives for product screens and templates.",
     type: "component",
     ownerPackage: core,
     installTarget: "packages/core/src/foundation.tsx",
@@ -273,7 +325,8 @@ export const componentManifests: RegistryItemManifest[] = [
   createItem({
     name: "form",
     title: "Form",
-    description: "React Hook Form adapters aligned to the shared field primitives.",
+    description:
+      "React Hook Form adapters aligned to the shared field primitives.",
     type: "component",
     ownerPackage: core,
     installTarget: "packages/core/src/controls.tsx",
@@ -306,7 +359,8 @@ export const componentManifests: RegistryItemManifest[] = [
   createItem({
     name: "input-group",
     title: "Input Group",
-    description: "Composable grouped input pattern for search and structured entry.",
+    description:
+      "Composable grouped input pattern for search and structured entry.",
     type: "component",
     ownerPackage: core,
     installTarget: "packages/core/src/controls.tsx",
@@ -360,7 +414,8 @@ export const componentManifests: RegistryItemManifest[] = [
   createItem({
     name: "pagination",
     title: "Pagination",
-    description: "Paged navigation primitive that matches button styling and rhythm.",
+    description:
+      "Paged navigation primitive that matches button styling and rhythm.",
     type: "component",
     ownerPackage: core,
     installTarget: "packages/core/src/foundation.tsx",
@@ -371,7 +426,8 @@ export const componentManifests: RegistryItemManifest[] = [
   createItem({
     name: "popover",
     title: "Popover",
-    description: "Anchored content surface used across date pickers and comboboxes.",
+    description:
+      "Anchored content surface used across date pickers and comboboxes.",
     type: "component",
     ownerPackage: core,
     installTarget: "packages/core/src/overlays.tsx",
@@ -399,17 +455,6 @@ export const componentManifests: RegistryItemManifest[] = [
     categories: ["forms", "selection"],
     dependencies: ["radix-ui"],
     files: [{ path: "packages/core/src/controls.tsx", role: "component" }],
-  }),
-  createItem({
-    name: "resizable",
-    title: "Resizable",
-    description: "Panel resize baseline for dual-pane detail and docs layouts.",
-    type: "component",
-    ownerPackage: core,
-    installTarget: "packages/core/src/data.tsx",
-    categories: ["layout", "data"],
-    dependencies: ["react-resizable-panels"],
-    files: [{ path: "packages/core/src/data.tsx", role: "component" }],
   }),
   createItem({
     name: "scroll-area",
@@ -503,7 +548,8 @@ export const componentManifests: RegistryItemManifest[] = [
   createItem({
     name: "spinner",
     title: "Spinner",
-    description: "Compact loading indicator for inline actions and shell states.",
+    description:
+      "Compact loading indicator for inline actions and shell states.",
     type: "component",
     ownerPackage: core,
     installTarget: "packages/core/src/foundation.tsx",
@@ -513,7 +559,8 @@ export const componentManifests: RegistryItemManifest[] = [
   createItem({
     name: "switch",
     title: "Switch",
-    description: "Boolean toggle used across settings, density, and motion controls.",
+    description:
+      "Boolean toggle used across settings, density, and motion controls.",
     type: "component",
     ownerPackage: core,
     installTarget: "packages/core/src/controls.tsx",
@@ -524,7 +571,8 @@ export const componentManifests: RegistryItemManifest[] = [
   createItem({
     name: "table",
     title: "Table",
-    description: "Structured table primitives for detail, billing, and data surfaces.",
+    description:
+      "Structured table primitives for detail, billing, and data surfaces.",
     type: "component",
     ownerPackage: core,
     installTarget: "packages/core/src/data.tsx",
@@ -534,7 +582,8 @@ export const componentManifests: RegistryItemManifest[] = [
   createItem({
     name: "tabs",
     title: "Tabs",
-    description: "Section switching baseline for dashboards, detail views, and docs.",
+    description:
+      "Section switching baseline for dashboards, detail views, and docs.",
     type: "component",
     ownerPackage: core,
     installTarget: "packages/core/src/controls.tsx",
@@ -545,7 +594,8 @@ export const componentManifests: RegistryItemManifest[] = [
   createItem({
     name: "textarea",
     title: "Textarea",
-    description: "Multiline entry field for contact, notes, and policy editors.",
+    description:
+      "Multiline entry field for contact, notes, and policy editors.",
     type: "component",
     ownerPackage: core,
     installTarget: "packages/core/src/controls.tsx",
@@ -555,7 +605,8 @@ export const componentManifests: RegistryItemManifest[] = [
   createItem({
     name: "toggle",
     title: "Toggle",
-    description: "Single toggle primitive aligned to shared segmented controls.",
+    description:
+      "Single toggle primitive aligned to shared segmented controls.",
     type: "component",
     ownerPackage: core,
     installTarget: "packages/core/src/controls.tsx",
@@ -566,7 +617,8 @@ export const componentManifests: RegistryItemManifest[] = [
   createItem({
     name: "toggle-group",
     title: "Toggle Group",
-    description: "Segmented control baseline for pack, density, and mode switching.",
+    description:
+      "Segmented control baseline for pack, density, and mode switching.",
     type: "component",
     ownerPackage: core,
     installTarget: "packages/core/src/controls.tsx",
@@ -578,7 +630,8 @@ export const componentManifests: RegistryItemManifest[] = [
   createItem({
     name: "tooltip",
     title: "Tooltip",
-    description: "Tooltip pattern carried through command, sidebar, and shell actions.",
+    description:
+      "Tooltip pattern carried through command, sidebar, and shell actions.",
     type: "component",
     ownerPackage: core,
     installTarget: "packages/core/src/overlays.tsx",
@@ -589,7 +642,8 @@ export const componentManifests: RegistryItemManifest[] = [
   createItem({
     name: "typography",
     title: "Typography",
-    description: "Shared prose and heading primitives for docs, marketing, and admin copy.",
+    description:
+      "Shared prose and heading primitives for docs, marketing, and admin copy.",
     type: "component",
     ownerPackage: core,
     installTarget: "packages/core/src/foundation.tsx",
@@ -602,7 +656,8 @@ export const blockManifests: RegistryItemManifest[] = [
   createItem({
     name: "auth-login-01",
     title: "Auth Login",
-    description: "Shandapha-owned login block adopting the shared card + field composition model.",
+    description:
+      "Shandapha-owned login block adopting the shared card + field composition model.",
     type: "block",
     ownerPackage: react,
     installTarget: "packages/react/src/index.tsx",
@@ -613,7 +668,8 @@ export const blockManifests: RegistryItemManifest[] = [
   createItem({
     name: "auth-signup-01",
     title: "Auth Sign Up",
-    description: "Sign-up block with value framing, pack hints, and workspace defaults.",
+    description:
+      "Sign-up block with value framing, pack hints, and workspace defaults.",
     type: "block",
     ownerPackage: react,
     installTarget: "packages/react/src/index.tsx",
@@ -624,7 +680,8 @@ export const blockManifests: RegistryItemManifest[] = [
   createItem({
     name: "dashboard-01",
     title: "Dashboard Overview",
-    description: "Overview block with metrics, chart card, and table-friendly action rails.",
+    description:
+      "Overview block with metrics, chart card, and table-friendly action rails.",
     type: "block",
     ownerPackage: react,
     installTarget: "packages/react/src/index.tsx",
@@ -635,7 +692,8 @@ export const blockManifests: RegistryItemManifest[] = [
   createItem({
     name: "dashboard-sidebar",
     title: "Dashboard Sidebar",
-    description: "Sidebar-driven dashboard shell built on the shared sidebar block model.",
+    description:
+      "Sidebar-driven dashboard shell built on the shared sidebar block model.",
     type: "block",
     ownerPackage: layouts,
     installTarget: "packages/layouts/src/index.tsx",
@@ -646,7 +704,8 @@ export const blockManifests: RegistryItemManifest[] = [
   createItem({
     name: "docs-article",
     title: "Docs Article",
-    description: "Documentation article block with sidebar nav, breadcrumbs, and prose rhythm.",
+    description:
+      "Documentation article block with sidebar nav, breadcrumbs, and prose rhythm.",
     type: "block",
     ownerPackage: layouts,
     installTarget: "packages/layouts/src/index.tsx",
@@ -657,7 +716,8 @@ export const blockManifests: RegistryItemManifest[] = [
   createItem({
     name: "marketing-hero",
     title: "Marketing Hero",
-    description: "Landing hero block using the adopted neutral surfaces and action hierarchy.",
+    description:
+      "Landing hero block using the adopted neutral surfaces and action hierarchy.",
     type: "block",
     ownerPackage: react,
     installTarget: "packages/react/src/index.tsx",
@@ -668,7 +728,8 @@ export const blockManifests: RegistryItemManifest[] = [
   createItem({
     name: "pricing-grid",
     title: "Pricing Grid",
-    description: "Pricing comparison block aligned to the shared card and badge system.",
+    description:
+      "Pricing comparison block aligned to the shared card and badge system.",
     type: "block",
     ownerPackage: react,
     installTarget: "packages/react/src/index.tsx",
@@ -690,7 +751,8 @@ export const blockManifests: RegistryItemManifest[] = [
   createItem({
     name: "contact-shell",
     title: "Contact Shell",
-    description: "Contact/legal style surface for sales, support, and trust flows.",
+    description:
+      "Contact/legal style surface for sales, support, and trust flows.",
     type: "block",
     ownerPackage: react,
     installTarget: "packages/react/src/index.tsx",
@@ -701,7 +763,8 @@ export const blockManifests: RegistryItemManifest[] = [
   createItem({
     name: "legal-shell",
     title: "Legal Shell",
-    description: "Long-form trust and policy block using docs-grade typography and rhythm.",
+    description:
+      "Long-form trust and policy block using docs-grade typography and rhythm.",
     type: "block",
     ownerPackage: layouts,
     installTarget: "packages/layouts/src/index.tsx",
@@ -712,7 +775,8 @@ export const blockManifests: RegistryItemManifest[] = [
   createItem({
     name: "wizard-steps",
     title: "Wizard Steps",
-    description: "Step shell, checklist, verification, and export block for Studio flows.",
+    description:
+      "Step shell, checklist, verification, and export block for Studio flows.",
     type: "block",
     ownerPackage: react,
     installTarget: "packages/react/src/index.tsx",
@@ -723,7 +787,8 @@ export const blockManifests: RegistryItemManifest[] = [
   createItem({
     name: "template-gallery",
     title: "Template Gallery",
-    description: "Catalog block for template browsing, data contracts, and related items.",
+    description:
+      "Catalog block for template browsing, data contracts, and related items.",
     type: "block",
     ownerPackage: react,
     installTarget: "packages/react/src/index.tsx",
@@ -733,50 +798,14 @@ export const blockManifests: RegistryItemManifest[] = [
   }),
 ];
 
-export const chartManifests: RegistryItemManifest[] = [
-  createItem({
-    name: "trend-area",
-    title: "Trend Area",
-    description: "Area chart default for exports, growth, and adoption over time.",
-    type: "chart",
-    ownerPackage: react,
-    installTarget: "packages/react/src/index.tsx",
-    categories: ["charts", "area"],
-    dependencies: ["recharts"],
-    registryDependencies: ["chart", "card"],
-    files: [{ path: "packages/react/src/index.tsx", role: "component" }],
-  }),
-  createItem({
-    name: "dual-line",
-    title: "Dual Line",
-    description: "Two-series comparison chart with shared tooltip styling.",
-    type: "chart",
-    ownerPackage: react,
-    installTarget: "packages/react/src/index.tsx",
-    categories: ["charts", "line"],
-    dependencies: ["recharts"],
-    registryDependencies: ["chart", "card"],
-    files: [{ path: "packages/react/src/index.tsx", role: "component" }],
-  }),
-  createItem({
-    name: "usage-health",
-    title: "Usage Health",
-    description: "Usage chart framing for billing and operational dashboards.",
-    type: "chart",
-    ownerPackage: react,
-    installTarget: "packages/react/src/index.tsx",
-    categories: ["charts", "usage"],
-    dependencies: ["recharts"],
-    registryDependencies: ["chart", "badge", "card"],
-    files: [{ path: "packages/react/src/index.tsx", role: "component" }],
-  }),
-];
+export const chartManifests: RegistryItemManifest[] = [];
 
 export const shellManifests: RegistryItemManifest[] = [
   createItem({
     name: "marketing-shell",
     title: "Marketing Shell",
-    description: "Marketing shell with hero framing, neutral surfaces, and shared nav rhythm.",
+    description:
+      "Marketing shell with hero framing, neutral surfaces, and shared nav rhythm.",
     type: "shell",
     ownerPackage: layouts,
     installTarget: "packages/layouts/src/index.tsx",
@@ -787,7 +816,8 @@ export const shellManifests: RegistryItemManifest[] = [
   createItem({
     name: "docs-shell",
     title: "Docs Shell",
-    description: "Sidebar docs shell for article navigation and long-form content.",
+    description:
+      "Sidebar docs shell for article navigation and long-form content.",
     type: "shell",
     ownerPackage: layouts,
     installTarget: "packages/layouts/src/index.tsx",
@@ -798,7 +828,8 @@ export const shellManifests: RegistryItemManifest[] = [
   createItem({
     name: "sidebar-shell",
     title: "Sidebar Shell",
-    description: "Detail shell with supporting right rail and anti-grid-drift discipline.",
+    description:
+      "Detail shell with supporting right rail and anti-grid-drift discipline.",
     type: "shell",
     ownerPackage: layouts,
     installTarget: "packages/layouts/src/index.tsx",
@@ -809,7 +840,8 @@ export const shellManifests: RegistryItemManifest[] = [
   createItem({
     name: "admin-shell",
     title: "Admin Shell",
-    description: "Studio-grade product shell using the shared sidebar ownership model.",
+    description:
+      "Studio-grade product shell using the shared sidebar ownership model.",
     type: "shell",
     ownerPackage: layouts,
     installTarget: "packages/layouts/src/index.tsx",
@@ -820,7 +852,8 @@ export const shellManifests: RegistryItemManifest[] = [
   createItem({
     name: "auth-shell",
     title: "Auth Shell",
-    description: "Authentication shell with centered card framing and trust copy.",
+    description:
+      "Authentication shell with centered card framing and trust copy.",
     type: "shell",
     ownerPackage: layouts,
     installTarget: "packages/layouts/src/index.tsx",

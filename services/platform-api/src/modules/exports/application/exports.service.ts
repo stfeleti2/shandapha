@@ -1,3 +1,4 @@
+import { defineGenerationInput } from "@shandapha/contracts";
 import { createGenerationPlan } from "@shandapha/generator";
 import { summarizeExportBuildJobs } from "../../../jobs/export-builds/export-build.job";
 import { PlatformHttpError } from "../../../server/middleware/errors";
@@ -23,12 +24,14 @@ export function getExportsSummary(workspaceId: string) {
 }
 
 export function getExportPlanPreview() {
-  return createGenerationPlan({
-    framework: "next-app-router",
-    intent: "existing-project",
-    packId: "normal",
-    planId: "premium",
-    templates: ["dashboard-home", "pricing-basic"],
-    modules: ["datatable"],
-  });
+  return createGenerationPlan(
+    defineGenerationInput({
+      framework: "next-app-router",
+      intent: "existing-project",
+      packId: "normal",
+      planId: "premium",
+      templates: ["dashboard-home", "pricing-basic"],
+      modules: ["datatable"],
+    }),
+  );
 }

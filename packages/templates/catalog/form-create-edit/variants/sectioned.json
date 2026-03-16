@@ -1,0 +1,7 @@
+{
+  "template": "form-create-edit",
+  "variant": "sectioned",
+  "title": "Form Create Edit - sectioned",
+  "related": ["settings-sectioned", "auth/sign-up"],
+  "featuredPackIds": ["normal", "glass", "neon"]
+}

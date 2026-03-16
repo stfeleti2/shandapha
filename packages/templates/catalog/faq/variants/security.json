@@ -1,0 +1,7 @@
+{
+  "template": "faq",
+  "variant": "security",
+  "title": "FAQ - security",
+  "related": ["pricing-basic", "legal-layout"],
+  "featuredPackIds": ["normal", "glass"]
+}

@@ -11,7 +11,9 @@
     "lint": "biome check --config-path ../../configs/biome.json src",
     "test": "vitest run"
   },
-  "dependencies": {},
+  "dependencies": {
+    "@shandapha/contracts": "workspace:*"
+  },
   "devDependencies": {},
   "exports": {
     ".": "./src/index.ts"

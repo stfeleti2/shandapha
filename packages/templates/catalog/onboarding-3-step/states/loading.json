@@ -1,0 +1,8 @@
+{
+  "template": "onboarding-3-step",
+  "state": "loading",
+  "headline": "Onboarding 3 Step loading",
+  "summary": "Three-step activation flow that leads into the wizard or export.",
+  "surfaces": ["step cards", "alerts", "checklist", "support rail"],
+  "slots": ["stepRail", "stepBody", "completionRail"]
+}

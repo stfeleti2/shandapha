@@ -1,0 +1,7 @@
+{
+  "template": "team-roles-starter",
+  "variant": "internal team",
+  "title": "Team Roles Starter - internal team",
+  "related": ["billing-plans-starter", "settings-sectioned"],
+  "featuredPackIds": ["normal", "glass"]
+}

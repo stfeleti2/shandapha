@@ -30,6 +30,7 @@ import {
 } from "@shandapha/core";
 import { plans } from "@shandapha/entitlements";
 import { createGenerationPlan } from "@shandapha/generator";
+import { evaluateCatalogPolicies, loadCatalogConfig } from "@shandapha/registry";
 import {
   AdminShell,
   AuthShell,
@@ -39,7 +40,6 @@ import {
   Stack,
 } from "@shandapha/layouts";
 import { packs } from "@shandapha/packs";
-import { buildRegistry } from "@shandapha/registry";
 import {
   BrandSafetyNotice,
   ChartSurfaceCard,
@@ -69,15 +69,29 @@ import {
   WorkspaceLaunchCard,
 } from "@shandapha/react";
 import Link from "next/link";
+import { getStudioCatalog } from "@/lib/registry";
 
-const registry = buildRegistry();
+const catalog = getStudioCatalog("acme");
+const registry = catalog.manifest;
+const catalogConfig = loadCatalogConfig();
 const generationPreview = createGenerationPlan({
+  version: 1,
   framework: "next-app-router",
   intent: "existing-project",
   packId: "glass",
   planId: "premium",
   templates: ["dashboard-home", "billing-plans-starter", "auth/sign-in"],
-  modules: ["datatable", "charts"],
+  modules: ["datatable", "seo"],
+  catalogWorkspaceId: "acme",
+});
+const generationPolicyResult = evaluateCatalogPolicies({
+  catalog,
+  policies: catalogConfig.policies,
+  selectedRegistryIds: [
+    generationPreview.selectedPack.registryId,
+    ...generationPreview.selectedTemplates.map((template) => template.registryId),
+    ...generationPreview.selectedModules.map((module) => module.registryId),
+  ],
 });
 
 const wizardSteps = [
@@ -205,7 +219,9 @@ function renderAuthForm(kind: "sign-in" | "sign-up") {
 
   return (
     <AuthShell
-      title={isSignIn ? "Welcome back to Studio" : "Create your Studio workspace"}
+      title={
+        isSignIn ? "Welcome back to Studio" : "Create your Studio workspace"
+      }
       eyebrow="Access"
       summary={
         isSignIn
@@ -221,17 +237,20 @@ function renderAuthForm(kind: "sign-in" | "sign-up") {
               {
                 label: "Same baseline as the public site",
                 done: true,
-                detail: "Docs, marketing, and Studio now share one visual and implementation model.",
+                detail:
+                  "Docs, marketing, and Studio now share one visual and implementation model.",
               },
               {
                 label: "Local ownership stays intact",
                 done: true,
-                detail: "The UI system is editable inside project packages, not hidden behind a vendor boundary.",
+                detail:
+                  "The UI system is editable inside project packages, not hidden behind a vendor boundary.",
               },
               {
                 label: "Wizard, CLI, and registry stay aligned",
                 done: true,
-                detail: "Metadata and generation semantics still belong to Shandapha.",
+                detail:
+                  "Metadata and generation semantics still belong to Shandapha.",
               },
             ]}
           />
@@ -259,7 +278,8 @@ function renderAuthForm(kind: "sign-in" | "sign-up") {
                 <FieldLabel htmlFor="workspace-name">Workspace name</FieldLabel>
                 <Input id="workspace-name" placeholder="Atlas Health" />
                 <FieldDescription>
-                  This name carries through Studio, exports, and registry metadata.
+                  This name carries through Studio, exports, and registry
+                  metadata.
                 </FieldDescription>
               </Field>
             ) : null}
@@ -298,8 +318,9 @@ function renderWizardBody(stepId: string) {
     registry.templates.find((template) => template.slug === "docs-home") ??
     registry.templates[1];
   const marketingTemplate =
-    registry.templates.find((template) => template.slug === "landing-section-based") ??
-    registry.templates[2];
+    registry.templates.find(
+      (template) => template.slug === "landing-section-based",
+    ) ?? registry.templates[2];
 
   if (stepId === "framework") {
     return (
@@ -314,17 +335,20 @@ function renderWizardBody(stepId: string) {
                 {
                   label: "Next.js App Router",
                   done: true,
-                  detail: "Best current fit for Shandapha’s web and Studio apps.",
+                  detail:
+                    "Best current fit for Shandapha’s web and Studio apps.",
                 },
                 {
                   label: "React Vite",
                   done: true,
-                  detail: "Still available for starter exports and lightweight adoption.",
+                  detail:
+                    "Still available for starter exports and lightweight adoption.",
                 },
                 {
                   label: "Web Components and Blazor",
                   done: true,
-                  detail: "Remain future-compatible because the token contract and generator seams were preserved.",
+                  detail:
+                    "Remain future-compatible because the token contract and generator seams were preserved.",
                 },
               ]}
             />
@@ -336,19 +360,23 @@ function renderWizardBody(stepId: string) {
           {[
             {
               label: "Next.js",
-              description: "Closest match to the current monorepo and block-rich app surfaces.",
+              description:
+                "Closest match to the current monorepo and block-rich app surfaces.",
             },
             {
               label: "React Vite",
-              description: "Fast starter for teams adopting templates outside the current repo.",
+              description:
+                "Fast starter for teams adopting templates outside the current repo.",
             },
             {
               label: "Web Components",
-              description: "Keeps portability baseline intact for future exports.",
+              description:
+                "Keeps portability baseline intact for future exports.",
             },
             {
               label: "Blazor WC",
-              description: "Retains the portable Web Components path without forking the design system.",
+              description:
+                "Retains the portable Web Components path without forking the design system.",
             },
           ].map((option) => (
             <div key={option.label} className="lg:col-span-6">
@@ -374,16 +402,20 @@ function renderWizardBody(stepId: string) {
         aside={
           <>
             <TemplateStateGallery states={dashboardTemplate.states} />
-            <TemplateDataContractPanel contract={dashboardTemplate.dataContract} />
+            <TemplateDataContractPanel
+              contract={dashboardTemplate.dataContract}
+            />
           </>
         }
       >
         <GridPreset preset="dashboard">
-          {[dashboardTemplate, marketingTemplate, docsTemplate].map((template) => (
-            <div key={template.slug} className="lg:col-span-4">
-              <TemplateCard template={template} />
-            </div>
-          ))}
+          {[dashboardTemplate, marketingTemplate, docsTemplate].map(
+            (template) => (
+              <div key={template.slug} className="lg:col-span-4">
+                <TemplateCard template={template} />
+              </div>
+            ),
+          )}
         </GridPreset>
       </WizardStepShell>
     );
@@ -428,7 +460,7 @@ function renderWizardBody(stepId: string) {
       <WizardStepShell
         step={currentStepLabel(stepId)}
         title="Map the brand inputs"
-        description="Brand input remains constrained by semantic slots so packs, charts, and future brand kits can stay compatible."
+        description="Brand input remains constrained by semantic slots so packs, templates, and future brand kits can stay compatible."
         aside={
           <>
             <BrandSafetyNotice />
@@ -442,7 +474,7 @@ function renderWizardBody(stepId: string) {
               slot: "primary",
               source: "brand kit primary",
               exportTarget: "--sh-primary-light / --sh-primary-dark",
-              note: "Feeds buttons, chart emphasis, links, and shell active states.",
+              note: "Feeds buttons, links, shell active states, and emphasis surfaces.",
             },
             {
               slot: "accent",
@@ -475,7 +507,9 @@ function renderWizardBody(stepId: string) {
         title="Choose templates and blocks"
         description="Templates now show shell, block, state, and data-contract metadata directly inside Studio."
         aside={
-          <TemplateDataContractPanel contract={dashboardTemplate.dataContract} />
+          <TemplateDataContractPanel
+            contract={dashboardTemplate.dataContract}
+          />
         }
       >
         <GridPreset preset="dashboard">
@@ -494,7 +528,7 @@ function renderWizardBody(stepId: string) {
       <WizardStepShell
         step={currentStepLabel(stepId)}
         title="Enable feature depth"
-        description="Charts, data tables, saved views, and richer blocks now fit the same system instead of reading like bolt-on extras."
+        description="Installable modules, table workflows, and richer blocks now resolve through registry and entitlement truth instead of bolt-on copy."
         aside={
           <>
             <PackLimitsSummary />
@@ -511,12 +545,17 @@ function renderWizardBody(stepId: string) {
       >
         <Stack gap={24}>
           <DataToolbar
-            filters={["Saved views", "Bulk actions", "Status filter", "Export ready"]}
+            filters={[
+              "Saved views",
+              "Bulk actions",
+              "Status filter",
+              "Export ready",
+            ]}
             actionLabel="Create feature bundle"
           />
           <ChartSurfaceCard
             title="Feature activation"
-            description="Shared chart wrappers now fit directly into Studio decision flows."
+            description="Studio keeps lightweight analytics previews while generator, registry, and policy checks stay in the critical path."
             data={[...usageTrend]}
             valueKey="exports"
             secondaryKey="checks"
@@ -609,17 +648,20 @@ function renderWizardBody(stepId: string) {
             steps={[
               {
                 title: "Review theme output",
-                description: "Check light/dark, pack, density, and motion combinations.",
+                description:
+                  "Check light/dark, pack, density, and motion combinations.",
                 status: "done",
               },
               {
                 title: "Review generated surfaces",
-                description: "Ensure templates and shells feel native to the adopted baseline.",
+                description:
+                  "Ensure templates and shells feel native to the adopted baseline.",
                 status: "current",
               },
               {
                 title: "Run doctor",
-                description: "Validate patch safety, tokens, styles, and provider wiring.",
+                description:
+                  "Validate patch safety, tokens, styles, and provider wiring.",
                 status: "pending",
               },
             ]}
@@ -641,12 +683,14 @@ function renderWizardBody(stepId: string) {
               {
                 label: "Use the adopted baseline everywhere",
                 done: true,
-                detail: "Marketing, docs, Studio, and shared packages now read as one family.",
+                detail:
+                  "Marketing, docs, Studio, and shared packages now read as one family.",
               },
               {
                 label: "Keep the architecture intact",
                 done: true,
-                detail: "Apps, API, packs, generator, CLI, and business rules remain in place.",
+                detail:
+                  "Apps, API, packs, generator, CLI, and business rules remain in place.",
               },
             ]}
           />
@@ -704,19 +748,22 @@ function renderWorkspaceSection(section: string, workspaceId: string) {
       actor: "promise.feliti",
       action: "export.created",
       scope: workspaceId,
-      detail: "Generated an existing-project patch plan for the dashboard stack.",
+      detail:
+        "Generated an existing-project patch plan for the dashboard stack.",
     }),
     createAuditEntry({
       actor: "studio-bot",
       action: "theme.saved",
       scope: workspaceId,
-      detail: "Saved the Glass pack with compact density and reduced motion fallback.",
+      detail:
+        "Saved the Glass pack with compact density and reduced motion fallback.",
     }),
     createAuditEntry({
       actor: "ops-review",
       action: "policy.reviewed",
       scope: workspaceId,
-      detail: "Validated registry metadata, export review, and pack compatibility rules.",
+      detail:
+        "Validated registry metadata, export review, and pack compatibility rules.",
     }),
   ];
   const auditSummary = summarizeAuditTrail(auditEntries);
@@ -777,13 +824,49 @@ function renderWorkspaceSection(section: string, workspaceId: string) {
         <GridPreset preset="dashboard">
           {registry.templates.slice(0, 4).map((template) => (
             <div key={template.slug} className="lg:col-span-6">
-              <TemplateCard template={template} />
+              <Card className="h-full">
+                <CardContent className="grid gap-4 pt-6">
+                  <TemplateCard template={template} />
+                  <Inline gap={8} className="flex-wrap">
+                    <Badge variant="outline">{template.supportLevel}</Badge>
+                    <Badge variant="outline">{template.trustLevel}</Badge>
+                    <Badge variant="outline">{template.stability}</Badge>
+                    <Badge variant="secondary">{template.visibility}</Badge>
+                  </Inline>
+                  <div className="text-sm text-muted-foreground">
+                    {template.registryId} via {template.provenance.sourceId}
+                  </div>
+                </CardContent>
+              </Card>
             </div>
           ))}
         </GridPreset>
         <GridPreset preset="detail" className="items-start">
           <TemplateStateGallery states={featuredTemplate.states} />
-          <TemplateDataContractPanel contract={featuredTemplate.dataContract} />
+          <Stack gap={16}>
+            <TemplateDataContractPanel contract={featuredTemplate.dataContract} />
+            <Card>
+              <CardHeader>
+                <CardTitle>Catalog approvals</CardTitle>
+                <CardDescription>
+                  Workspace-scoped assets and approved first-party templates resolve from the same registry truth.
+                </CardDescription>
+              </CardHeader>
+              <CardContent>
+                <ItemGroup className="gap-3">
+                  {catalog.approvals.slice(0, 3).map((approval) => (
+                    <Item key={approval.id} variant="outline" size="sm">
+                      <ItemContent>
+                        <ItemDescription className="line-clamp-none">
+                          {approval.registryId} · {approval.status} · {approval.scope}
+                        </ItemDescription>
+                      </ItemContent>
+                    </Item>
+                  ))}
+                </ItemGroup>
+              </CardContent>
+            </Card>
+          </Stack>
         </GridPreset>
         <RelatedTemplatesStrip slugs={featuredTemplate.related} />
       </Stack>
@@ -799,7 +882,11 @@ function renderWorkspaceSection(section: string, workspaceId: string) {
               title="Starter export"
               description="Generate a clean starter from the current workspace defaults."
               ctaLabel="Export starter"
-              checklist={["Owned baseline", "Registry metadata", "Token runtime"]}
+              checklist={[
+                "Owned baseline",
+                "Registry metadata",
+                "Token runtime",
+              ]}
               recommended
             />
           </div>
@@ -808,7 +895,11 @@ function renderWorkspaceSection(section: string, workspaceId: string) {
               title="Patch install"
               description="Apply the shared UI baseline into an existing codebase."
               ctaLabel="Patch repo"
-              checklist={["Reversible diff", "Minimal churn", "Reviewable files"]}
+              checklist={[
+                "Reversible diff",
+                "Minimal churn",
+                "Reviewable files",
+              ]}
             />
           </div>
           <div className="lg:col-span-4">
@@ -816,7 +907,11 @@ function renderWorkspaceSection(section: string, workspaceId: string) {
               title="Theme package"
               description="Ship tokens and runtime first, then layer blocks later."
               ctaLabel="Export theme"
-              checklist={["Semantic tokens", "Pack-ready runtime", "Future-safe"]}
+              checklist={[
+                "Semantic tokens",
+                "Pack-ready runtime",
+                "Future-safe",
+              ]}
             />
           </div>
         </GridPreset>
@@ -878,7 +973,7 @@ function renderWorkspaceSection(section: string, workspaceId: string) {
       <Stack gap={24}>
         <ChartSurfaceCard
           title="Workspace usage"
-          description={`Usage in ${workspaceName} keeps the same chart defaults as the rest of the adopted system.`}
+          description={`Usage in ${workspaceName} stays visible inside the same registry-aware workspace shell.`}
           data={[...usageTrend]}
           valueKey="exports"
           secondaryKey="checks"
@@ -889,7 +984,8 @@ function renderWorkspaceSection(section: string, workspaceId: string) {
             {
               label: "Exports are active",
               done: true,
-              detail: "Teams are using both starter exports and patch installs.",
+              detail:
+                "Teams are using both starter exports and patch installs.",
             },
             {
               label: "Doctor checks are running",
@@ -913,7 +1009,8 @@ function renderWorkspaceSection(section: string, workspaceId: string) {
         <CardHeader>
           <CardTitle>Members</CardTitle>
           <CardDescription>
-            Roles and invites now live inside the same adopted admin shell as exports and billing.
+            Roles and invites now live inside the same adopted admin shell as
+            exports and billing.
           </CardDescription>
         </CardHeader>
         <CardContent>
@@ -950,27 +1047,25 @@ function renderWorkspaceSection(section: string, workspaceId: string) {
         <CardHeader>
           <CardTitle>API keys</CardTitle>
           <CardDescription>
-            API access remains inside the Studio shell, ready for policy and audit linkage.
+            API access remains inside the Studio shell, ready for policy and
+            audit linkage.
           </CardDescription>
         </CardHeader>
         <CardContent>
           <ItemGroup className="gap-3">
-          {[
-            "studio_live_xxxxx1234",
-            "export_worker_xxxxx5678",
-            "registry_sync_xxxxx9012",
-          ].map((key) => (
-            <Item
-              key={key}
-              variant="outline"
-              size="sm"
-              className="font-mono"
-            >
-              <ItemContent>
-                <ItemTitle className="font-mono text-xs font-normal">{key}</ItemTitle>
-              </ItemContent>
-            </Item>
-          ))}
+            {[
+              "studio_live_xxxxx1234",
+              "export_worker_xxxxx5678",
+              "registry_sync_xxxxx9012",
+            ].map((key) => (
+              <Item key={key} variant="outline" size="sm" className="font-mono">
+                <ItemContent>
+                  <ItemTitle className="font-mono text-xs font-normal">
+                    {key}
+                  </ItemTitle>
+                </ItemContent>
+              </Item>
+            ))}
           </ItemGroup>
         </CardContent>
       </Card>
@@ -981,22 +1076,72 @@ function renderWorkspaceSection(section: string, workspaceId: string) {
     return (
       <Stack gap={24}>
         <BrandSafetyNotice />
+        <Card>
+          <CardHeader>
+            <CardTitle>Catalog policy posture</CardTitle>
+            <CardDescription>
+              Studio now reflects the same approval and policy evaluator used by the CLI and generator.
+            </CardDescription>
+          </CardHeader>
+          <CardContent className="grid gap-4">
+            <Inline gap={8} className="flex-wrap">
+              <Badge variant="outline">{generationPolicyResult.status}</Badge>
+              <Badge variant="secondary">
+                {catalog.sources.length} catalog sources
+              </Badge>
+              <Badge variant="secondary">
+                {catalog.approvals.length} approvals
+              </Badge>
+              <Badge variant="secondary">
+                {catalog.warnings.length} warnings
+              </Badge>
+            </Inline>
+            <ItemGroup className="gap-3">
+              {generationPolicyResult.findings.length > 0 ? (
+                generationPolicyResult.findings.map((finding) => (
+                  <Item
+                    key={`${finding.code}:${finding.registryId ?? "catalog"}`}
+                    variant="outline"
+                    size="sm"
+                  >
+                    <ItemContent>
+                      <ItemDescription className="line-clamp-none">
+                        [{finding.severity}] {finding.message}
+                      </ItemDescription>
+                    </ItemContent>
+                  </Item>
+                ))
+              ) : (
+                <Item variant="outline" size="sm">
+                  <ItemContent>
+                    <ItemDescription className="line-clamp-none">
+                      Current starter selection passes catalog policy checks.
+                    </ItemDescription>
+                  </ItemContent>
+                </Item>
+              )}
+            </ItemGroup>
+          </CardContent>
+        </Card>
         <VerificationSteps
           title="Policy checks"
           steps={[
             {
               title: "Token review",
-              description: "Semantic token changes require approval before becoming defaults.",
+              description:
+                "Semantic token changes require approval before becoming defaults.",
               status: "done",
             },
             {
               title: "Export review",
-              description: "Existing-project patch installs stay reviewable and reversible.",
+              description:
+                "Existing-project patch installs stay reviewable and reversible.",
               status: "current",
             },
             {
               title: "Audit retention",
-              description: "Persistence rules will harden further when deeper storage lands.",
+              description:
+                "Persistence rules will harden further when deeper storage lands.",
               status: "pending",
             },
           ]}
@@ -1012,7 +1157,8 @@ function renderWorkspaceSection(section: string, workspaceId: string) {
           <CardHeader>
             <CardTitle>Audit summary</CardTitle>
             <CardDescription>
-              {auditSummary.total} events across {auditSummary.actors.length} actors and {auditSummary.scopes.length} scopes.
+              {auditSummary.total} events across {auditSummary.actors.length}{" "}
+              actors and {auditSummary.scopes.length} scopes.
             </CardDescription>
           </CardHeader>
           <CardContent>
@@ -1112,7 +1258,7 @@ export function renderWorkspaceLandingPage() {
       navGroups={studioNavGroups("workspaces")}
       title="Workspaces"
       eyebrow="Studio"
-      summary="Open the same adopted system from a workspace point of view: packs, templates, exports, billing, governance, and audit."
+      summary="Open the same adopted system from a workspace point of view: packs, templates, exports, billing, and audit-backed workspace state."
       actions={
         <Button asChild type="button">
           <Link href="/wizard">Open wizard</Link>
@@ -1151,7 +1297,7 @@ export function renderWorkspaceLandingPage() {
           <div className="lg:col-span-8">
             <ChartSurfaceCard
               title="Workspace activity"
-              description="Studio surfaces now use the same chart defaults and card rhythm as the public catalog."
+              description="Studio surfaces now use the same card rhythm and registry-aware baseline as the public catalog."
               data={[...usageTrend]}
               valueKey="exports"
               secondaryKey="checks"
@@ -1174,7 +1320,7 @@ export function renderWorkspacePage(section: string, workspaceId: string) {
       navGroups={workspaceNavGroups(workspaceId, section)}
       title={`${titleCase(workspaceId)} ${titleCase(section)}`}
       eyebrow="Workspace"
-      summary="All workspace sections now inherit the same adopted component, shell, and chart baseline."
+      summary="All workspace sections now inherit the same adopted component, shell, and registry-aware baseline."
       actions={
         <Button asChild type="button" variant="outline">
           <Link href="/wizard">Open wizard</Link>

@@ -1,0 +1,52 @@
+{
+  "version": 1,
+  "slug": "form-create-edit",
+  "name": "Form Create Edit",
+  "group": "saas",
+  "shell": "AdminShell",
+  "summary": "Structured create/edit flows with helper copy, sections, and action rails.",
+  "states": ["loading", "empty", "error", "success", "no access"],
+  "variants": ["single column", "sectioned"],
+  "blocks": ["form-sections", "field-group", "success-panel"],
+  "related": ["settings-sectioned", "auth/sign-up"],
+  "surfaces": ["field", "input group", "validation", "success state"],
+  "featuredPackIds": ["normal", "glass", "neon"],
+  "dataContract": {
+    "entities": ["draft", "policy", "validationIssue"],
+    "slots": ["hero", "formSections", "aside"],
+    "outputs": ["draft payload", "validation state", "review summary"],
+    "samples": ["form-draft.json", "form-schema.json"]
+  },
+  "frameworks": [
+    {
+      "adapter": "react-vite",
+      "support": "supported",
+      "notes": "Reference adapter and fastest path for local starters.",
+      "requiredCapabilities": []
+    },
+    {
+      "adapter": "next-app-router",
+      "support": "supported",
+      "notes": "Reference SSR-capable adapter for product starters.",
+      "requiredCapabilities": ["server-components"]
+    },
+    {
+      "adapter": "wc-universal",
+      "support": "experimental",
+      "notes": "Portable surface area is still being rebuilt around the WC baseline.",
+      "requiredCapabilities": ["custom-elements"]
+    },
+    {
+      "adapter": "blazor-wc",
+      "support": "experimental",
+      "notes": "Blazor currently installs through the WC bridge rather than a native adapter.",
+      "requiredCapabilities": ["custom-elements", "wc-interop"]
+    }
+  ],
+  "install": {
+    "requiredPackages": [],
+    "requiredRoutes": [],
+    "themeDependencies": ["theme.css", "tokens.json"],
+    "sampleDataBindings": ["form-draft.json", "form-schema.json"]
+  }
+}

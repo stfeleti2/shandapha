@@ -1,0 +1,8 @@
+{
+  "template": "detail-tabs-timeline",
+  "state": "no access",
+  "headline": "Detail Tabs Timeline no access",
+  "summary": "Entity detail screen with summary card, tabs, timeline, and related activity.",
+  "surfaces": ["tabs", "items", "timeline rail"],
+  "slots": ["summary", "tabPanels", "timeline", "relatedStrip"]
+}

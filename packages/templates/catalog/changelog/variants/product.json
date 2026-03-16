@@ -1,0 +1,7 @@
+{
+  "template": "changelog",
+  "variant": "product",
+  "title": "Changelog - product",
+  "related": ["docs-home", "blog-index"],
+  "featuredPackIds": ["normal", "glass"]
+}

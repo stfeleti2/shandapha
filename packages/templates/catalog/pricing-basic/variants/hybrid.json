@@ -1,0 +1,7 @@
+{
+  "template": "pricing-basic",
+  "variant": "hybrid",
+  "title": "Pricing Basic - hybrid",
+  "related": ["landing-section-based", "faq", "contact"],
+  "featuredPackIds": ["normal", "glass", "neon"]
+}

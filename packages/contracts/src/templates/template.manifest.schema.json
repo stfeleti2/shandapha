@@ -1,7 +1,27 @@
 {
   "type": "object",
-  "required": ["slug", "name", "group", "summary"],
+  "required": [
+    "version",
+    "slug",
+    "name",
+    "group",
+    "shell",
+    "summary",
+    "states",
+    "variants",
+    "blocks",
+    "related",
+    "surfaces",
+    "featuredPackIds",
+    "dataContract",
+    "frameworks",
+    "install"
+  ],
   "properties": {
+    "version": {
+      "type": "integer",
+      "const": 1
+    },
     "slug": {
       "type": "string"
     },
@@ -9,6 +29,9 @@
       "type": "string"
     },
     "group": {
+      "type": "string"
+    },
+    "shell": {
       "type": "string"
     },
     "summary": {
@@ -24,6 +47,122 @@
       "type": "array",
       "items": {
         "type": "string"
+      }
+    },
+    "blocks": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "related": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "surfaces": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "featuredPackIds": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "dataContract": {
+      "type": "object",
+      "required": ["entities", "slots", "outputs", "samples"],
+      "properties": {
+        "entities": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "slots": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "outputs": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "samples": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "frameworks": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["adapter", "support", "requiredCapabilities"],
+        "properties": {
+          "adapter": {
+            "type": "string"
+          },
+          "support": {
+            "type": "string"
+          },
+          "notes": {
+            "type": "string"
+          },
+          "minimumAdapterVersion": {
+            "type": "integer"
+          },
+          "requiredCapabilities": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          }
+        }
+      }
+    },
+    "install": {
+      "type": "object",
+      "required": [
+        "requiredPackages",
+        "requiredRoutes",
+        "themeDependencies",
+        "sampleDataBindings"
+      ],
+      "properties": {
+        "requiredPackages": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "requiredRoutes": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "themeDependencies": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "sampleDataBindings": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
       }
     }
   }
