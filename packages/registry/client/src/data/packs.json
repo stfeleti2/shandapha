@@ -1,0 +1,29 @@
+[
+  {
+    "id": "normal",
+    "slug": "normal",
+    "name": "Normal",
+    "tier": "free",
+    "tagline": "Clean depth, calm surfaces, and a premium default that stays trusted.",
+    "description": "Normal is the default premium baseline for teams that want semantic tokens, balanced contrast, and minimal visual noise.",
+    "knobs": ["contrast-safe palette", "steady motion", "balanced radii"]
+  },
+  {
+    "id": "glass",
+    "slug": "glass",
+    "name": "Glass",
+    "tier": "premium",
+    "tagline": "Softer surface contrast and gentler separation that stay opt-in.",
+    "description": "Glass keeps the shared component contracts intact while easing surface contrast and divider weight for a quieter premium feel.",
+    "knobs": ["surface softness", "divider contrast", "motion softness"]
+  },
+  {
+    "id": "neon",
+    "slug": "neon",
+    "name": "Neon",
+    "tier": "premium",
+    "tagline": "Higher accent contrast and darker canvases inside the same baseline.",
+    "description": "Neon raises chart and action contrast while preserving accessibility, reduced-motion fallbacks, and the shared semantic token model.",
+    "knobs": ["accent emphasis", "chart contrast", "surface depth"]
+  }
+]

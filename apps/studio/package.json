@@ -19,7 +19,7 @@
     "@shandapha/business": "workspace:*",
     "@shandapha/core": "workspace:*",
     "@shandapha/entitlements": "workspace:*",
-    "@shandapha/generator": "workspace:*",
+    "@shandapha/generator-manifests": "workspace:*",
     "@shandapha/layouts": "workspace:*",
     "@shandapha/packs": "workspace:*",
     "@shandapha/react": "workspace:*",

@@ -1,5 +1,5 @@
 import type { DoctorResult, PolicyCheckResult } from "@shandapha/contracts";
-import type { GenerationExecutionResult } from "@shandapha/generator";
+import type { GenerationExecutionResult } from "@shandapha/generator-core";
 
 function isRecord(value: unknown): value is Record<string, unknown> {
   return typeof value === "object" && value !== null;

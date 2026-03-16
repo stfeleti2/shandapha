@@ -1,0 +1,377 @@
+{
+  "kind": "starter",
+  "plan": {
+    "version": 1,
+    "input": {
+      "version": 1,
+      "framework": "blazor-wc",
+      "intent": "new-project",
+      "packId": "normal",
+      "planId": "free",
+      "templates": [
+        "auth/sign-in"
+      ],
+      "modules": []
+    },
+    "frameworkTarget": {
+      "version": 1,
+      "framework": "blazor-wc",
+      "projectManager": "dotnet",
+      "projectManifestPath": "Shandapha.Generated.csproj",
+      "routesRoot": "Components/Generated",
+      "themePath": "wwwroot/theme/theme.css",
+      "tokensPath": "wwwroot/theme/tokens.json",
+      "providerPath": "Components/App.razor",
+      "verificationPath": "Components/Generated/Verification.razor",
+      "supportsRuntimeBootstrap": false
+    },
+    "selectedPack": {
+      "version": 1,
+      "id": "normal",
+      "slug": "normal",
+      "name": "Normal",
+      "tier": "free",
+      "tagline": "Neutral, editorial, and calm. The clearest expression of the shared Shandapha baseline.",
+      "description": "Normal is the default premium-feeling baseline with restrained contrast, balanced spacing, and the full shared UI surface.",
+      "knobs": [
+        "neutral surface depth",
+        "balanced radii",
+        "steady motion"
+      ]
+    },
+    "selectedTemplates": [
+      {
+        "version": 1,
+        "slug": "auth/sign-in",
+        "name": "Auth Sign In",
+        "group": "saas",
+        "shell": "AuthShell",
+        "summary": "Sign in screen with trust copy, field groups, and help states.",
+        "states": [
+          "loading",
+          "empty",
+          "error",
+          "success",
+          "no access"
+        ],
+        "variants": [
+          "email-first"
+        ],
+        "blocks": [
+          "auth/login-01",
+          "trust-copy",
+          "social-placeholder"
+        ],
+        "related": [
+          "auth/sign-up",
+          "auth/forgot"
+        ],
+        "surfaces": [
+          "card",
+          "field",
+          "alert",
+          "badge"
+        ],
+        "featuredPackIds": [
+          "normal",
+          "glass"
+        ],
+        "dataContract": {
+          "entities": [
+            "identityProvider",
+            "supportLink"
+          ],
+          "slots": [
+            "authCard",
+            "aside"
+          ],
+          "outputs": [
+            "credential submission"
+          ],
+          "samples": [
+            "sign-in.json"
+          ]
+        },
+        "frameworks": [
+          {
+            "adapter": "react-vite",
+            "support": "supported",
+            "notes": "Reference adapter and fastest path for local starters.",
+            "requiredCapabilities": []
+          },
+          {
+            "adapter": "next-app-router",
+            "support": "supported",
+            "notes": "Reference SSR-capable adapter for product starters.",
+            "requiredCapabilities": [
+              "server-components"
+            ]
+          },
+          {
+            "adapter": "wc-universal",
+            "support": "experimental",
+            "notes": "Portable surface area is still being rebuilt around the WC baseline.",
+            "requiredCapabilities": [
+              "custom-elements"
+            ]
+          },
+          {
+            "adapter": "blazor-wc",
+            "support": "experimental",
+            "notes": "Blazor currently installs through the WC bridge rather than a native adapter.",
+            "requiredCapabilities": [
+              "custom-elements",
+              "wc-interop"
+            ]
+          }
+        ],
+        "install": {
+          "requiredPackages": [],
+          "requiredRoutes": [],
+          "themeDependencies": [
+            "theme.css",
+            "tokens.json"
+          ],
+          "sampleDataBindings": [
+            "sign-in.json"
+          ]
+        }
+      }
+    ],
+    "selectedModules": [],
+    "starterRecipe": {
+      "version": 1,
+      "framework": "blazor-wc",
+      "intent": "new-project",
+      "targetRoot": "Components/Generated",
+      "templates": [
+        "auth/sign-in"
+      ],
+      "modules": [],
+      "requiredPackages": [],
+      "requiredRoutes": [
+        "/auth/sign-in",
+        "/Generated/Verification"
+      ],
+      "themeDependencies": [
+        "theme.css",
+        "tokens.json"
+      ],
+      "sampleDataBindings": [
+        "sign-in.json"
+      ]
+    },
+    "patchOperations": [
+      {
+        "version": 1,
+        "id": "theme-asset",
+        "kind": "create",
+        "targetPath": "wwwroot/theme/theme.css",
+        "ownerPackage": "@shandapha/generator",
+        "reason": "Apply Normal theme variables.",
+        "reversible": true,
+        "framework": "blazor-wc"
+      },
+      {
+        "version": 1,
+        "id": "token-asset",
+        "kind": "create",
+        "targetPath": "wwwroot/theme/tokens.json",
+        "ownerPackage": "@shandapha/generator",
+        "reason": "Write deterministic tokens for Normal.",
+        "reversible": true,
+        "framework": "blazor-wc"
+      },
+      {
+        "version": 1,
+        "id": "verification",
+        "kind": "create",
+        "targetPath": "Components/Generated/Verification.razor",
+        "ownerPackage": "@shandapha/generator",
+        "reason": "Create a generated verification surface.",
+        "reversible": true,
+        "framework": "blazor-wc"
+      },
+      {
+        "version": 1,
+        "id": "template:auth/sign-in:Template.razor",
+        "kind": "create",
+        "targetPath": "Components/Generated/auth/sign-in/Template.razor",
+        "ownerPackage": "@shandapha/templates",
+        "reason": "Install Auth Sign In asset from catalog/auth/sign-in/files/blazor-wc/Template.razor.",
+        "reversible": true,
+        "framework": "blazor-wc"
+      }
+    ],
+    "fileTransforms": [
+      {
+        "version": 1,
+        "path": "wwwroot/theme/theme.css",
+        "operation": "create",
+        "source": "generator",
+        "description": "Apply Normal theme variables."
+      },
+      {
+        "version": 1,
+        "path": "wwwroot/theme/tokens.json",
+        "operation": "create",
+        "source": "generator",
+        "description": "Write deterministic tokens for Normal."
+      },
+      {
+        "version": 1,
+        "path": "Components/Generated/Verification.razor",
+        "operation": "create",
+        "source": "generator",
+        "description": "Create a generated verification surface."
+      },
+      {
+        "version": 1,
+        "path": "Components/Generated/auth/sign-in/Template.razor",
+        "operation": "create",
+        "source": "template",
+        "description": "Install Auth Sign In asset from catalog/auth/sign-in/files/blazor-wc/Template.razor."
+      }
+    ],
+    "diff": {
+      "version": 1,
+      "mode": "starter",
+      "targetRoot": ".",
+      "entries": [
+        {
+          "path": "wwwroot/theme/theme.css",
+          "operation": "create",
+          "ownerPackage": "@shandapha/generator",
+          "reason": "Apply Normal theme variables.",
+          "checksum": "e050eedad9e57626",
+          "existedBefore": false
+        },
+        {
+          "path": "wwwroot/theme/tokens.json",
+          "operation": "create",
+          "ownerPackage": "@shandapha/generator",
+          "reason": "Write deterministic tokens for Normal.",
+          "checksum": "6c2357b7025ecf7c",
+          "existedBefore": false
+        },
+        {
+          "path": "Components/Generated/Verification.razor",
+          "operation": "create",
+          "ownerPackage": "@shandapha/generator",
+          "reason": "Create a generated verification surface.",
+          "checksum": "aec98bfd5f4f2834",
+          "existedBefore": false
+        },
+        {
+          "path": "Components/Generated/auth/sign-in/Template.razor",
+          "operation": "create",
+          "ownerPackage": "@shandapha/templates",
+          "reason": "Install Auth Sign In asset from catalog/auth/sign-in/files/blazor-wc/Template.razor.",
+          "checksum": "68e0053efc817300",
+          "existedBefore": false
+        }
+      ]
+    },
+    "uninstall": {
+      "version": 1,
+      "steps": [
+        {
+          "action": "remove-file",
+          "path": "wwwroot/theme/theme.css",
+          "detail": "Rollback Apply Normal theme variables."
+        },
+        {
+          "action": "remove-file",
+          "path": "wwwroot/theme/tokens.json",
+          "detail": "Rollback Write deterministic tokens for Normal."
+        },
+        {
+          "action": "remove-file",
+          "path": "Components/Generated/Verification.razor",
+          "detail": "Rollback Create a generated verification surface."
+        },
+        {
+          "action": "remove-file",
+          "path": "Components/Generated/auth/sign-in/Template.razor",
+          "detail": "Rollback Install Auth Sign In asset from catalog/auth/sign-in/files/blazor-wc/Template.razor."
+        }
+      ]
+    },
+    "doctor": {
+      "version": 1,
+      "status": "warn",
+      "summary": "1 doctor warning(s) need attention before install.",
+      "checks": [
+        {
+          "id": "theme-loaded",
+          "label": "Theme loaded",
+          "status": "pass",
+          "detail": "tokens.json and theme variables are present."
+        },
+        {
+          "id": "provider-wrapped",
+          "label": "Provider wrapped",
+          "status": "warn",
+          "detail": "Framework target does not require a provider wrapper."
+        },
+        {
+          "id": "styles-present",
+          "label": "Styles present",
+          "status": "pass",
+          "detail": "Theme CSS is available."
+        },
+        {
+          "id": "drift-clean",
+          "label": "Drift clean",
+          "status": "pass",
+          "detail": "Pack and entitlements stay aligned."
+        }
+      ]
+    },
+    "checklist": [
+      "Install packages: none",
+      "Provision theme assets: theme.css, tokens.json",
+      "Create starter routes: /auth/sign-in, /Generated/Verification",
+      "Verify Components/Generated/Verification.razor",
+      "Review experimental adapter coverage for: auth/sign-in"
+    ],
+    "diffReport": [
+      "CREATE wwwroot/theme/theme.css: Apply Normal theme variables.",
+      "CREATE wwwroot/theme/tokens.json: Write deterministic tokens for Normal.",
+      "CREATE Components/Generated/Verification.razor: Create a generated verification surface.",
+      "CREATE Components/Generated/auth/sign-in/Template.razor: Install Auth Sign In asset from catalog/auth/sign-in/files/blazor-wc/Template.razor."
+    ],
+    "uninstallManifest": [
+      "REMOVE-FILE wwwroot/theme/theme.css: Rollback Apply Normal theme variables.",
+      "REMOVE-FILE wwwroot/theme/tokens.json: Rollback Write deterministic tokens for Normal.",
+      "REMOVE-FILE Components/Generated/Verification.razor: Rollback Create a generated verification surface.",
+      "REMOVE-FILE Components/Generated/auth/sign-in/Template.razor: Rollback Install Auth Sign In asset from catalog/auth/sign-in/files/blazor-wc/Template.razor."
+    ],
+    "doctorChecks": [
+      {
+        "id": "theme-loaded",
+        "label": "Theme loaded",
+        "status": "pass",
+        "detail": "tokens.json and theme variables are present."
+      },
+      {
+        "id": "provider-wrapped",
+        "label": "Provider wrapped",
+        "status": "warn",
+        "detail": "Framework target does not require a provider wrapper."
+      },
+      {
+        "id": "styles-present",
+        "label": "Styles present",
+        "status": "pass",
+        "detail": "Theme CSS is available."
+      },
+      {
+        "id": "drift-clean",
+        "label": "Drift clean",
+        "status": "pass",
+        "detail": "Pack and entitlements stay aligned."
+      }
+    ]
+  }
+}

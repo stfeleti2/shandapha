@@ -3,7 +3,7 @@ import {
   generatePatch,
   generateStarter,
   generateThemeOnly,
-} from "@shandapha/generator";
+} from "@shandapha/generator-core";
 import { runCommand } from "./shared/generatorBridge";
 import { registryBridge } from "./shared/registryBridge";
 import { formatOutput } from "./ui/output";

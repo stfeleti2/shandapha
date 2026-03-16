@@ -1,0 +1,16 @@
+{
+  "name": "@shandapha/website",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "description": "Astro marketing site for the Shandapha modernization and continuity platform.",
+  "scripts": {
+    "dev": "astro dev --port 4321",
+    "build": "astro build",
+    "typecheck": "astro check",
+    "lint": "biome check --config-path ../../configs/biome.json src public astro.config.mjs"
+  },
+  "dependencies": {
+    "astro": "^6.0.5"
+  }
+}

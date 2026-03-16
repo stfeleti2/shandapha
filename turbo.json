@@ -13,11 +13,35 @@
       "dependsOn": ["^build"],
       "outputs": [".next/**"]
     },
+    "@shandapha/website#build": {
+      "dependsOn": ["^build"],
+      "outputs": ["dist/**"]
+    },
+    "@shandapha/docs#build": {
+      "dependsOn": ["^build"],
+      "outputs": ["dist/**"]
+    },
     "@shandapha/studio#build": {
       "dependsOn": ["^build"],
       "outputs": [".next/**"]
     },
+    "@shandapha/wizard#build": {
+      "dependsOn": ["^build"],
+      "outputs": [".next/**"]
+    },
+    "@shandapha/control-plane#build": {
+      "dependsOn": ["^build"],
+      "outputs": [".next/**"]
+    },
+    "@shandapha/sandbox#build": {
+      "dependsOn": ["^build"],
+      "outputs": [".next/**"]
+    },
     "@shandapha/storybook#build": {
+      "dependsOn": ["^build"],
+      "outputs": ["storybook-static/**"]
+    },
+    "@shandapha/tooling-storybook#build": {
       "dependsOn": ["^build"],
       "outputs": ["storybook-static/**"]
     },

@@ -1,0 +1,11 @@
+@import "@shandapha/core/styles.css";
+
+@layer base {
+  body {
+    min-height: 100vh;
+  }
+
+  a {
+    text-decoration: none;
+  }
+}

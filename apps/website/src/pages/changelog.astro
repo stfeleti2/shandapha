@@ -1,0 +1,27 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+---
+
+<BaseLayout
+  title="Shandapha Changelog"
+  description="Migration milestones for the final modernization and continuity architecture."
+>
+  <section class="section">
+    <span class="eyebrow">Migration status</span>
+    <h1>Architecture shift in progress</h1>
+    <div class="stack-card">
+      <div class="step">
+        <strong>Registry split</strong>
+        <p>Client-safe and server-side registry boundaries now exist as separate workspace packages.</p>
+      </div>
+      <div class="step">
+        <strong>Generator split</strong>
+        <p>Server-side generation core and browser-safe generation preview manifests now have separate homes.</p>
+      </div>
+      <div class="step">
+        <strong>App surface migration</strong>
+        <p>Website, docs, wizard, control-plane, sandbox, and demo app targets are being established alongside transitional surfaces.</p>
+      </div>
+    </div>
+  </section>
+</BaseLayout>

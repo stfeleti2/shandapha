@@ -2,7 +2,7 @@ import {
   findCatalogItem,
   loadCatalogConfig,
   resolveRegistryCatalog,
-} from "@shandapha/registry";
+} from "@shandapha/registry-server";
 
 export type RegistryKind = "pack" | "template" | "module";
 type CatalogSnapshot = ReturnType<typeof resolveRegistryCatalog>;

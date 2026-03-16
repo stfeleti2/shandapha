@@ -211,29 +211,98 @@
       "id": "charts",
       "name": "Charts",
       "packageName": "@shandapha/module-charts",
-      "description": "Scaffolded charting module seam for future opt-in visualizations.",
-      "premium": true
+      "description": "Deferred charting seam kept out of active install and pricing claims.",
+      "premium": true,
+      "minimumPlan": "premium",
+      "status": "deferred",
+      "capabilities": {
+        "free": [],
+        "premium": ["deferred"],
+        "business": []
+      },
+      "install": {
+        "requiredPackages": [],
+        "requiredRoutes": [],
+        "frameworks": []
+      }
     },
     {
       "id": "datatable",
       "name": "Advanced DataTable",
       "packageName": "@shandapha/module-datatable",
       "description": "Client/server table workflows with saved views, pinning, resizing, and export.",
-      "premium": true
+      "premium": true,
+      "minimumPlan": "premium",
+      "status": "installable",
+      "capabilities": {
+        "free": [
+          "client-mode",
+          "filtering",
+          "sorting",
+          "selection",
+          "sticky-header",
+          "pagination",
+          "toolbar-baseline"
+        ],
+        "premium": [
+          "virtualization",
+          "pinning",
+          "resizing",
+          "csv-export",
+          "toolbar-variants",
+          "personal-saved-views"
+        ],
+        "business": [
+          "server-mode-helpers",
+          "org-saved-views",
+          "audit-export",
+          "permissions-hooks",
+          "shared-view-state"
+        ]
+      },
+      "install": {
+        "requiredPackages": ["@tanstack/react-table"],
+        "requiredRoutes": ["/verification/datatable"],
+        "frameworks": []
+      }
     },
     {
       "id": "richtext",
       "name": "Rich Text",
       "packageName": "@shandapha/module-richtext",
-      "description": "Scaffolded rich text editing seam for future content workflows.",
-      "premium": true
+      "description": "Deferred rich text seam kept parked until there is a real install path.",
+      "premium": true,
+      "minimumPlan": "premium",
+      "status": "deferred",
+      "capabilities": {
+        "free": [],
+        "premium": ["deferred"],
+        "business": []
+      },
+      "install": {
+        "requiredPackages": [],
+        "requiredRoutes": [],
+        "frameworks": []
+      }
     },
     {
       "id": "seo",
       "name": "SEO",
       "packageName": "@shandapha/module-seo",
-      "description": "Scaffolded SEO helpers for metadata, sitemap, and schema support.",
-      "premium": false
+      "description": "Metadata, sitemap, robots, and structured data helpers.",
+      "premium": false,
+      "minimumPlan": "free",
+      "status": "installable",
+      "capabilities": {
+        "free": ["metadata", "json-ld", "canonical", "sitemap", "robots"],
+        "premium": [],
+        "business": []
+      },
+      "install": {
+        "requiredPackages": [],
+        "requiredRoutes": ["/sitemap.xml", "/robots.txt"],
+        "frameworks": []
+      }
     }
   ]
 }

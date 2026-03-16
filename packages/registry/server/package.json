@@ -1,0 +1,22 @@
+{
+  "name": "@shandapha/registry-server",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "description": "Server-side registry manifest loading and file-backed catalog resolution.",
+  "sideEffects": false,
+  "scripts": {
+    "build": "node ../../../tools/scripts/generate-registry.mjs && tsc --project tsconfig.json",
+    "typecheck": "tsc --project tsconfig.json",
+    "lint": "biome check --config-path ../../../configs/biome.json src",
+    "test": "vitest run"
+  },
+  "dependencies": {
+    "@shandapha/contracts": "workspace:*",
+    "@shandapha/packs": "workspace:*",
+    "@shandapha/templates": "workspace:*"
+  },
+  "exports": {
+    ".": "./src/index.ts"
+  }
+}

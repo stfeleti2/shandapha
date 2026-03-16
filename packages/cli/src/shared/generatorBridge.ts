@@ -15,7 +15,7 @@ import type {
   GenerationExecutionOptions,
   GenerationExecutionResult,
   ThemeOnlyInput,
-} from "@shandapha/generator";
+} from "@shandapha/generator-core";
 import { evaluateCatalogPolicies } from "@shandapha/registry";
 import type {
   RegistryBridgeOptions,

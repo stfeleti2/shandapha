@@ -3,7 +3,7 @@ import type {
   CatalogPolicy,
   CatalogSourceManifest,
 } from "@shandapha/contracts";
-import { resolveRegistryCatalog } from "@shandapha/registry";
+import { resolveRegistryCatalog } from "@shandapha/registry-server";
 import { getPlatformStore } from "../../../db/store";
 
 export function registryRepository() {

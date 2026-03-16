@@ -1,0 +1,394 @@
+{
+  "kind": "starter",
+  "plan": {
+    "version": 1,
+    "input": {
+      "version": 1,
+      "framework": "react-vite",
+      "intent": "new-project",
+      "packId": "normal",
+      "planId": "free",
+      "templates": [
+        "dashboard-home"
+      ],
+      "modules": []
+    },
+    "frameworkTarget": {
+      "version": 1,
+      "framework": "react-vite",
+      "projectManager": "pnpm",
+      "projectManifestPath": "package.json",
+      "routesRoot": "src/pages/generated",
+      "themePath": "src/theme.css",
+      "tokensPath": "src/tokens.json",
+      "providerPath": "src/main.tsx",
+      "verificationPath": "src/pages/generated/shandapha-verification.tsx",
+      "supportsRuntimeBootstrap": true
+    },
+    "selectedPack": {
+      "version": 1,
+      "id": "normal",
+      "slug": "normal",
+      "name": "Normal",
+      "tier": "free",
+      "tagline": "Neutral, editorial, and calm. The clearest expression of the shared Shandapha baseline.",
+      "description": "Normal is the default premium-feeling baseline with restrained contrast, balanced spacing, and the full shared UI surface.",
+      "knobs": [
+        "neutral surface depth",
+        "balanced radii",
+        "steady motion"
+      ]
+    },
+    "selectedTemplates": [
+      {
+        "version": 1,
+        "slug": "dashboard-home",
+        "name": "Dashboard Home",
+        "group": "saas",
+        "shell": "AdminShell",
+        "summary": "Overview shell with KPI rails, chart cards, activity cards, and action slots.",
+        "states": [
+          "loading",
+          "empty",
+          "error",
+          "success",
+          "no access"
+        ],
+        "variants": [
+          "executive",
+          "ops",
+          "support"
+        ],
+        "blocks": [
+          "dashboard-01",
+          "dashboard-sidebar",
+          "chart-area",
+          "datatable-basic"
+        ],
+        "related": [
+          "list-filters",
+          "billing-plans-starter",
+          "team-roles-starter"
+        ],
+        "surfaces": [
+          "chart container",
+          "data table baseline",
+          "sidebar shell",
+          "section cards"
+        ],
+        "featuredPackIds": [
+          "normal",
+          "glass",
+          "neon"
+        ],
+        "dataContract": {
+          "entities": [
+            "workspace",
+            "usageMetric",
+            "member",
+            "auditEntry"
+          ],
+          "slots": [
+            "heroActions",
+            "kpiRail",
+            "chartRegion",
+            "tableRegion"
+          ],
+          "outputs": [
+            "dashboard overview",
+            "trend summary",
+            "team activity"
+          ],
+          "samples": [
+            "workspace-summary.json",
+            "usage-timeseries.json"
+          ]
+        },
+        "frameworks": [
+          {
+            "adapter": "react-vite",
+            "support": "supported",
+            "notes": "Reference adapter and fastest path for local starters.",
+            "requiredCapabilities": []
+          },
+          {
+            "adapter": "next-app-router",
+            "support": "supported",
+            "notes": "Reference SSR-capable adapter for product starters.",
+            "requiredCapabilities": [
+              "server-components"
+            ]
+          },
+          {
+            "adapter": "wc-universal",
+            "support": "experimental",
+            "notes": "Portable surface area is still being rebuilt around the WC baseline.",
+            "requiredCapabilities": [
+              "custom-elements"
+            ]
+          },
+          {
+            "adapter": "blazor-wc",
+            "support": "experimental",
+            "notes": "Blazor currently installs through the WC bridge rather than a native adapter.",
+            "requiredCapabilities": [
+              "custom-elements",
+              "wc-interop"
+            ]
+          }
+        ],
+        "install": {
+          "requiredPackages": [],
+          "requiredRoutes": [],
+          "themeDependencies": [
+            "theme.css",
+            "tokens.json"
+          ],
+          "sampleDataBindings": [
+            "workspace-summary.json",
+            "usage-timeseries.json"
+          ]
+        }
+      }
+    ],
+    "selectedModules": [],
+    "starterRecipe": {
+      "version": 1,
+      "framework": "react-vite",
+      "intent": "new-project",
+      "targetRoot": "src/pages/generated",
+      "templates": [
+        "dashboard-home"
+      ],
+      "modules": [],
+      "requiredPackages": [
+        "react",
+        "react-dom",
+        "vite"
+      ],
+      "requiredRoutes": [
+        "/dashboard-home",
+        "/generated/shandapha-verification"
+      ],
+      "themeDependencies": [
+        "theme.css",
+        "tokens.json"
+      ],
+      "sampleDataBindings": [
+        "workspace-summary.json",
+        "usage-timeseries.json"
+      ]
+    },
+    "patchOperations": [
+      {
+        "version": 1,
+        "id": "theme-asset",
+        "kind": "create",
+        "targetPath": "src/theme.css",
+        "ownerPackage": "@shandapha/generator",
+        "reason": "Apply Normal theme variables.",
+        "reversible": true,
+        "framework": "react-vite"
+      },
+      {
+        "version": 1,
+        "id": "token-asset",
+        "kind": "create",
+        "targetPath": "src/tokens.json",
+        "ownerPackage": "@shandapha/generator",
+        "reason": "Write deterministic tokens for Normal.",
+        "reversible": true,
+        "framework": "react-vite"
+      },
+      {
+        "version": 1,
+        "id": "verification",
+        "kind": "create",
+        "targetPath": "src/pages/generated/shandapha-verification.tsx",
+        "ownerPackage": "@shandapha/generator",
+        "reason": "Create a generated verification surface.",
+        "reversible": true,
+        "framework": "react-vite"
+      },
+      {
+        "version": 1,
+        "id": "template:dashboard-home:index.tsx",
+        "kind": "create",
+        "targetPath": "src/pages/generated/dashboard-home/index.tsx",
+        "ownerPackage": "@shandapha/templates",
+        "reason": "Install Dashboard Home asset from catalog/dashboard-home/files/react-vite/index.tsx.",
+        "reversible": true,
+        "framework": "react-vite"
+      }
+    ],
+    "fileTransforms": [
+      {
+        "version": 1,
+        "path": "src/theme.css",
+        "operation": "create",
+        "source": "generator",
+        "description": "Apply Normal theme variables."
+      },
+      {
+        "version": 1,
+        "path": "src/tokens.json",
+        "operation": "create",
+        "source": "generator",
+        "description": "Write deterministic tokens for Normal."
+      },
+      {
+        "version": 1,
+        "path": "src/pages/generated/shandapha-verification.tsx",
+        "operation": "create",
+        "source": "generator",
+        "description": "Create a generated verification surface."
+      },
+      {
+        "version": 1,
+        "path": "src/pages/generated/dashboard-home/index.tsx",
+        "operation": "create",
+        "source": "template",
+        "description": "Install Dashboard Home asset from catalog/dashboard-home/files/react-vite/index.tsx."
+      }
+    ],
+    "diff": {
+      "version": 1,
+      "mode": "starter",
+      "targetRoot": ".",
+      "entries": [
+        {
+          "path": "src/theme.css",
+          "operation": "create",
+          "ownerPackage": "@shandapha/generator",
+          "reason": "Apply Normal theme variables.",
+          "checksum": "c9031052ac506c78",
+          "existedBefore": false
+        },
+        {
+          "path": "src/tokens.json",
+          "operation": "create",
+          "ownerPackage": "@shandapha/generator",
+          "reason": "Write deterministic tokens for Normal.",
+          "checksum": "39772654344881de",
+          "existedBefore": false
+        },
+        {
+          "path": "src/pages/generated/shandapha-verification.tsx",
+          "operation": "create",
+          "ownerPackage": "@shandapha/generator",
+          "reason": "Create a generated verification surface.",
+          "checksum": "a649253ef5dedd6b",
+          "existedBefore": false
+        },
+        {
+          "path": "src/pages/generated/dashboard-home/index.tsx",
+          "operation": "create",
+          "ownerPackage": "@shandapha/templates",
+          "reason": "Install Dashboard Home asset from catalog/dashboard-home/files/react-vite/index.tsx.",
+          "checksum": "a89c45a3ff28931f",
+          "existedBefore": false
+        }
+      ]
+    },
+    "uninstall": {
+      "version": 1,
+      "steps": [
+        {
+          "action": "remove-file",
+          "path": "src/theme.css",
+          "detail": "Rollback Apply Normal theme variables."
+        },
+        {
+          "action": "remove-file",
+          "path": "src/tokens.json",
+          "detail": "Rollback Write deterministic tokens for Normal."
+        },
+        {
+          "action": "remove-file",
+          "path": "src/pages/generated/shandapha-verification.tsx",
+          "detail": "Rollback Create a generated verification surface."
+        },
+        {
+          "action": "remove-file",
+          "path": "src/pages/generated/dashboard-home/index.tsx",
+          "detail": "Rollback Install Dashboard Home asset from catalog/dashboard-home/files/react-vite/index.tsx."
+        }
+      ]
+    },
+    "doctor": {
+      "version": 1,
+      "status": "pass",
+      "summary": "Generator assumptions are aligned with the current workspace.",
+      "checks": [
+        {
+          "id": "theme-loaded",
+          "label": "Theme loaded",
+          "status": "pass",
+          "detail": "tokens.json and theme variables are present."
+        },
+        {
+          "id": "provider-wrapped",
+          "label": "Provider wrapped",
+          "status": "pass",
+          "detail": "Expected bootstrap file is present."
+        },
+        {
+          "id": "styles-present",
+          "label": "Styles present",
+          "status": "pass",
+          "detail": "Theme CSS is available."
+        },
+        {
+          "id": "drift-clean",
+          "label": "Drift clean",
+          "status": "pass",
+          "detail": "Pack and entitlements stay aligned."
+        }
+      ]
+    },
+    "checklist": [
+      "Install packages: react, react-dom, vite",
+      "Provision theme assets: theme.css, tokens.json",
+      "Create starter routes: /dashboard-home, /generated/shandapha-verification",
+      "Verify src/pages/generated/shandapha-verification.tsx"
+    ],
+    "diffReport": [
+      "CREATE src/theme.css: Apply Normal theme variables.",
+      "CREATE src/tokens.json: Write deterministic tokens for Normal.",
+      "CREATE src/pages/generated/shandapha-verification.tsx: Create a generated verification surface.",
+      "CREATE src/pages/generated/dashboard-home/index.tsx: Install Dashboard Home asset from catalog/dashboard-home/files/react-vite/index.tsx."
+    ],
+    "uninstallManifest": [
+      "REMOVE-FILE src/theme.css: Rollback Apply Normal theme variables.",
+      "REMOVE-FILE src/tokens.json: Rollback Write deterministic tokens for Normal.",
+      "REMOVE-FILE src/pages/generated/shandapha-verification.tsx: Rollback Create a generated verification surface.",
+      "REMOVE-FILE src/pages/generated/dashboard-home/index.tsx: Rollback Install Dashboard Home asset from catalog/dashboard-home/files/react-vite/index.tsx."
+    ],
+    "doctorChecks": [
+      {
+        "id": "theme-loaded",
+        "label": "Theme loaded",
+        "status": "pass",
+        "detail": "tokens.json and theme variables are present."
+      },
+      {
+        "id": "provider-wrapped",
+        "label": "Provider wrapped",
+        "status": "pass",
+        "detail": "Expected bootstrap file is present."
+      },
+      {
+        "id": "styles-present",
+        "label": "Styles present",
+        "status": "pass",
+        "detail": "Theme CSS is available."
+      },
+      {
+        "id": "drift-clean",
+        "label": "Drift clean",
+        "status": "pass",
+        "detail": "Pack and entitlements stay aligned."
+      }
+    ]
+  }
+}

@@ -18,8 +18,9 @@
   "dependencies": {
     "@shandapha/contracts": "workspace:*",
     "@shandapha/entitlements": "workspace:*",
-    "@shandapha/generator": "workspace:*",
-    "@shandapha/registry": "workspace:*"
+    "@shandapha/generator-core": "workspace:*",
+    "@shandapha/registry": "workspace:*",
+    "@shandapha/registry-server": "workspace:*"
   },
   "devDependencies": {},
   "exports": {

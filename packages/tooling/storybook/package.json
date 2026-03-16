@@ -1,0 +1,33 @@
+{
+  "name": "@shandapha/tooling-storybook",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "description": "Story catalog workspace for foundations, templates, modules, and packs.",
+  "sideEffects": false,
+  "scripts": {
+    "dev": "storybook dev -p 6006 --ci",
+    "build": "storybook build",
+    "typecheck": "tsc --project tsconfig.json",
+    "lint": "biome check --config-path ../../../configs/biome.json src .storybook",
+    "test": "vitest run"
+  },
+  "dependencies": {
+    "@shandapha/core": "workspace:*",
+    "@shandapha/layouts": "workspace:*",
+    "@shandapha/module-datatable": "workspace:*",
+    "@shandapha/packs": "workspace:*",
+    "@shandapha/templates": "workspace:*",
+    "react": "^19.2.4",
+    "react-dom": "^19.2.4"
+  },
+  "devDependencies": {
+    "@storybook/addon-docs": "^10.2.19",
+    "@storybook/react-vite": "^10.2.19",
+    "storybook": "^10.2.19",
+    "vite": "^7.3.1"
+  },
+  "exports": {
+    ".": "./src/index.ts"
+  }
+}

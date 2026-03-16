@@ -1,5 +1,5 @@
 import { defineGenerationInput } from "@shandapha/contracts";
-import { createGenerationPlan } from "@shandapha/generator";
+import { createGenerationPlan } from "@shandapha/generator-core";
 import { summarizeExportBuildJobs } from "../../../jobs/export-builds/export-build.job";
 import { PlatformHttpError } from "../../../server/middleware/errors";
 import { workspacesRepository } from "../../workspaces/infrastructure/workspaces.repository";
